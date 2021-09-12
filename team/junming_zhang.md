@@ -1,6 +1,8 @@
 # Junming Zhang
 
-![Junming Zhang Profile](./Junming_Zhang.jpeg)
+<div align="center">
+  <img src="Junming_Zhang.jpeg"/ width=50% height=50%>
+</div>
 
 - Data analyzer and AI algorithm engineer (CS spec focus on AI & stat maj)
 - junmingpeter.zhang@mail.utoronto.ca
