@@ -10,4 +10,4 @@ About our team
 Team leader
 ---
 
-Our team leader is [Zhuoheng (Angelo) Huang](./zhuoheng_huang.md), a experienced developer in backend and cloud computing.
+Our team leader is [Zhuoheng (Angelo) Huang](./zhuoheng_huang.md), an experienced developer in backend and cloud computing.
