@@ -1,6 +1,6 @@
 # Junming Zhang
 
-![Junming Zhang Profile](./generic_woman.jpg)
+![Junming Zhang Profile](./Junming_Zhang.jpeg)
 
 - Data analyzer and AI algorithm engineer (CS spec focus on AI & stat maj)
 - junmingpeter.zhang@mail.utoronto.ca
