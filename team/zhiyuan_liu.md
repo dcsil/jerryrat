@@ -1,6 +1,6 @@
 # Zhiyuan (John) Liu
 
-<div align="center">
+<div align="left">
   <img src="./zhiyuan_liu.jpg"/ width=20% height=20%>
 </div>
 
