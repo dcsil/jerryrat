@@ -20,8 +20,14 @@
 
 ## Work:
 
-- Tea members should form a support net for one another to address issue together.
+- Team members should form a support net for one another to address issue together.
 - Work delegation should be documented and discussed in the first team meeting.
 - The project should be broken down into few milestones and work tasks will be confirmed by phases.
 - We will use Zenhub to create new work tickets, do the work assignment and track the progress.
 - In case of critical issues or extremely time-consuming tasks, non-responsible teammates could intervene and provide assistance, and the milestone should be changed accordingly.
+
+## Other issues
+
+- Team members may not be able to work with each other face-to-face due to the potential pandemic issues, so we need frequent meetings with each other
+- We may have a high workload during November, so we might need to consider completing something prior
+- It is important to take some time to understand what is a marketing campaign, and different methods (such as A/B test) to design a marketing campaign, since this is our goal for this project.
