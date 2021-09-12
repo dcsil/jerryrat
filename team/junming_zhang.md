@@ -1,4 +1,4 @@
-# Jane Doe
+# Junming Zhang
 
 ![Junming Zhang Profile](./generic_woman.jpg)
 
@@ -7,24 +7,23 @@
 
 ## Links
 
-- [GitHub](#)
-- [LinkedIn](#)
-- [Twitter](#)
-- [Website](#)
-- [Resume](#)
+- [GitHub](https://github.com/JunmingZhang)
+- [LinkedIn](https://www.linkedin.com/in/junming-zhang-41ab6715b/)
 
 ## About Jane
 
-Jane is from Canada where she has experience as a full stack Ruby on Rails engineer and WordPress hosting for creatives. She has also worked in infrastructure work. She moved from South America to Canada when she was 9. In her spare time she is an avid long reader, lover of Netflix, and loves corgis.
+Junming has knowledge background in Computer Science and Statistics. He has worked in a company for big data development (but mainly focused on demo but not the real projects) during summer in 2021, and now he is quite interested in software development and algorithms about data processing. He wants to integrate the ML algorithms in his project. He did a research before but failed, and now he is kind of regretting not to find a PEY. Now he tries to develop his skills in backend development.
 
 ## Strengths
 
-- Data analysis
-- Building ML models
-- willing to talk
+- Willing to self-learn many skills: including Ai, data science, backend development, etc.
+- Passionate at building own projects and solving problems
+- Willing to talk with teammates and manage some team logistics
+- Strong time management in group work
 
 ## Weaknesses
 
-- one
-- two
-- three
+- Always stay up late and get up late
+- Lazy when work individually
+- Limited experience in software development (not good at many frameworks, design pattern etc.)
+- Little knowledge about project management
