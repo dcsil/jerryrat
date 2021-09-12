@@ -1,9 +1,9 @@
 # Jane Doe
 
-![Jane Doe Profile](./generic_woman.jpg)
+![Junming Zhang Profile](./generic_woman.jpg)
 
-- Software Developer
-- email@example.com
+- Data analyzer
+- junmingpeter.zhang@mail.utoronto.ca
 
 ## Links
 
