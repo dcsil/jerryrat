@@ -1,6 +1,6 @@
 # Zhiyuan (John) Liu
 
-![zhiyuan Liu Profile](./zhiyuan_liu.jpg)
+![zhiyuan Liu Profile](./zhiyuan_liu.jpg){:height="20%" width="20%"}
 
 - Data analyzer and AI algorithm engineer (CS spec @ UofT)
 - zhiy.liu@mail.utoronto.ca
