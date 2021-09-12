@@ -1,20 +1,11 @@
-# Team Repo Template
-
-This Repository includes a template for your Team's Repository. https://github.com/dcsil/klutch is a good example of an implementation of this!
-
-**README template starts below this line 👇👇👇 Delete above this line :)**
-
-# COMPANY NAME
+# JerryCat
 
 ![Team Logo](./logo.png)
 
-COMPANY NAME is a company founded in the THEME industry. COMPANY NAME aims to VISION STATEMENT.
+JerryCat provides marketing solutions to various industry unicorns across the globe. Your products matter and clients are also important to us, why not kick-start the journey with us in furthering enchanting campaigns that best fit to your blueprint? It's our duty to be with you, on the road to success! 
 
-Table of Contents
+Introduction
 ---
 
 - [People](./team/)
-- [Diversity](./team/diversity.md)
-- [Product & Research](./product_research/)
-    - [Market](./product_research/market.md)
-    - [Roadmap](./product_research/roadmap.md)
+- [Team Principles](./team_principles.md)
