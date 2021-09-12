@@ -2,7 +2,7 @@
 
 ![Junming Zhang Profile](./generic_woman.jpg)
 
-- Data analyzer
+- Data analyzer and AI algorithm engineer (CS spec focus on AI & stat maj)
 - junmingpeter.zhang@mail.utoronto.ca
 
 ## Links
@@ -19,9 +19,9 @@ Jane is from Canada where she has experience as a full stack Ruby on Rails engin
 
 ## Strengths
 
-- one
-- two
-- three
+- Data analysis
+- Building ML models
+- willing to talk
 
 ## Weaknesses
 
