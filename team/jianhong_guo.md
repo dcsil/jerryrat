@@ -7,7 +7,7 @@
 
 ## Links
 
-- [GitHub](#https://github.com/Jianhong-Guo)
+- [GitHub](https://github.com/Jianhong-Guo)
 
 ## About Jianhong
 
@@ -24,4 +24,4 @@ Jianhong is a fourth-year student specializing in computer science and data scie
 ## Weaknesses
 
 - Poor in English speaking
-- Limited experience in software development and data analysis in real world 
+- Limited experience of software development and data analysis in real world 
