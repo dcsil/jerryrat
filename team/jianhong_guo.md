@@ -1,30 +1,27 @@
-# Jane Doe
+# Jianhong Guo
 
-![Jane Doe Profile](./generic_woman.jpg)
+![Jianhong Guo Profile](./Jianhong_Guo.jpg)
 
-- Software Developer
-- email@example.com
+- Software Developer and Data Analyst
+- jianhong.guo@mail.utoronto.ca
 
 ## Links
 
-- [GitHub](#)
-- [LinkedIn](#)
-- [Twitter](#)
-- [Website](#)
-- [Resume](#)
+- [GitHub](#https://github.com/Jianhong-Guo)
 
-## About Jane
+## About Jianhong
 
-Jane is from Canada where she has experience as a full stack Ruby on Rails engineer and WordPress hosting for creatives. She has also worked in infrastructure work. She moved from South America to Canada when she was 9. In her spare time she is an avid long reader, lover of Netflix, and loves corgis.
+Jianhong is a fourth-year student specializing in computer science and data science at University of Toronto, and she has extensive working experience in customer service and teaching over the recent years as a manicurist and geography teacher, separately. However, she hasn't yet had a chance to participate in actual projects in the industry, therefore, she is seeking an opportunity to gain experience in software application development and data analysis. In her spare time, she likes to read or hike.
 
 ## Strengths
 
-- one
-- two
-- three
+- Strong sense of responsibility in group work
+- Self learner
+- Excellent people skill
+- Passion in building projects
+
 
 ## Weaknesses
 
-- one
-- two
-- three
+- Poor in English speaking
+- Limited experience in software development and data analysis in real world 
