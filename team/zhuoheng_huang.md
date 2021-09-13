@@ -1,6 +1,7 @@
 # Zhuoheng (Angelo) Huang
 
-![Zhuoheng Huang Profile](./zhuoheng_huang.jpg)
+<!-- ![Zhuoheng Huang Profile](./zhuoheng_huang.jpg) -->
+<img src="./zhuoheng_huang.jpg" width="300" height="475" />
 
 - Cloud Software Developer @ IBM
 - angeloschachter.huang@mail.utoronto.ca
