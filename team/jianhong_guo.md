@@ -8,6 +8,7 @@
 ## Links
 
 - [GitHub](https://github.com/Jianhong-Guo)
+- [Linkedin](https://www.linkedin.com/in/jianhong-guo-737212220/)
 
 ## About Jianhong
 
