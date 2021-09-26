@@ -17,7 +17,15 @@ Although we have complementary skillsets to launch a project in a startup settin
 
 # Subject Matter Experts
 
-To solve these issues, we will arrange to meet up with professionals from the banks and those working in the marketing/public advertising industries, or credit card specialties. They are the field experts in either marketing science or credit cards, and will be more familiar with the Canadian market. Apart from these, we will also talk to more entrpreneurers to consult about the 
+To solve these issues, we will arrange to meet up with professionals from the banks and those working in the marketing/public advertising industries, or credit card specialties. They are the field experts in either marketing science or credit cards, and will be more familiar with the Canadian market. Apart from these, we will also talk to more entrpreneurers to consult about the how to figure out the problems, the approcahes to them and how to effectively run a business from scratch.
+
+# Cilent Diversity
+
+Our financial status has limited us from broadening the views onto those within totally different economic stance. There are a considerable portion of population earning below-averaged annual salaries, and they are not supposed to represent those majority who have normal affordability. If we are drafting campaigning strategies that embrace higher level of diversity, it entails to cover and consider the images among multiple economic classes. Jerryrat is therefore managing to diversifying our customer base by most socio-economic demographics are included.
+
+# Impact of being undiverse
+
+The lack of enough representation of one social class may lead to under-performance of the campaigning process and biasedness in the optimization model. We are focusing on the credit card product and the card benefits are major concerns while evaluating the data obtained from some biased process. Our app also analyses the data and re-adjusts weights related to products, offers, and variables related to the whole process, in order to reach an optimized objective function for further campaign. If the bias continues exits, it will be detrimental to campanies that use the app and affect the decision-making routines.
 
 
 
