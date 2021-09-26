@@ -10,4 +10,5 @@ Introduction
 ---
 
 - [People](./team/)
+- [Diversity](./diversity)
 - [Team Principles](./team_principles.md)
