@@ -19,7 +19,7 @@ Except for the lack of diversity in hard and soft skills, we realize the lack of
 
 # Subject Matter Experts
 
-To solve these issues, we will arrange to meet up with professionals from the banks and those working in the marketing/public advertising industries, or credit card specialties. They are the field experts in either marketing science or credit cards, and will be more familiar with the Canadian market. Apart from these, we will also talk to more entrpreneurers to consult about how to figure out the problems, the approcahes to them and how to effectively run a business from scratch.
+To solve these issues, we will arrange to meet up with professionals from the banks and those working in the marketing/public advertising industries, or credit card specialties. They are the field experts in either marketing science or credit cards, and will be more familiar with the Canadian market. Apart from these, we will also talk to more entrpreneurers to consult about how to figure out the problems, the approcahes to them and how to effectively run a business from scratch. We will consult researchers and experienced engineers for technical advice during developping our product.
 
 # Cilent Diversity
 
