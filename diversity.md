@@ -1,7 +1,7 @@
 
 # Jerryrat - A rich collection of uniqueness
 
-People are experiencing various passages of lives and have finally shaped what they are today, so did us, each one of us at Jerryrat. This year, we will be down to explore the application of marketing science in the banking industry, where there is a large pool of diverse client individuals. Therefore, it is crucially important to have capable cooperators, like us, who share common goals to reach further in the product perfectness while bring in diverse perspectives and viewpoints from our unique mindsets and varying backgrounds.
+People are experiencing various passages of lives and have finally shaped what they are today, so did us, each one of us at Jerryrat. This year, we will be down to explore the application of marketing science in the banking industry, where there is a large pool of diverse client individuals. Therefore, it is crucially important to have capable cooperators, like us, who share common goals to reach further in the product perfectness while bring in diverse perspectives and viewpoints from our unique mindsets and varying backgrounds. In this README document we will discuss our strength in terms of diversity. We will also state where our team lacks knowledge backgroud and diversity and the impacts. We will expand on how to tackle the problems by subject matter experts, and how people from distinct diverse groups may contribute our team.
 
 # Team Backgrounds & Our Strengths
 
