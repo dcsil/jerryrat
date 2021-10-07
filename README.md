@@ -23,4 +23,4 @@ The app will output prospective clients to be called but will only generate the 
 Roadmap
 ---
 
-The short, medium, and long term goals for project development are written in the Milestone of GitHub issues.
+The short, medium, and long term goals for project development are written in the [Milestone](https://github.com/dcsil/jerryrat/milestones) of GitHub issues.
