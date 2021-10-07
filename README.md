@@ -19,3 +19,8 @@ Introduction
 Our web app will be deployed on ***Heroku*** and is going to use ***Django*** as the framework. *Apache Spark* will be used to process and analyze the data that will be fed to the ML model. Since the user may change their campaign plan frequently, we are going to use ***Redis*** to save this data while saving personnel info (which is used to train the ML model) in ***Amazon Aurora***. We will use ***XGBoost*** to train a model which takes processed personal information as input and outputs whether this person is worth calling for a promotion. The trained model will be updated regularly based on the most recent data from the database. 
 
 The app will output prospective clients to be called but will only generate the list in CSV. The task dispatching should be done by the companies to their call centers offline
+
+Roadmap
+---
+
+The short, medium, and long term goals for project development are written in the Milestone of GitHub issues.
