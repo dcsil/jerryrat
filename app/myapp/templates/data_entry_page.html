@@ -1,3 +1,6 @@
+{%  extends 'main.html' %}
+{% block content %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +21,7 @@
             <p>No documents.</p>
         {% endif %}
 
-        <form action="{% url "my-view" %}" method="post" enctype="multipart/form-data">
+        <form action="{% url "data_entry_page" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ notice|linebreaksbr }}</p>
             <p>{{ message }}</p>
@@ -35,3 +38,5 @@
         </form>
     </body>
 </html>
+
+{% endblock %}

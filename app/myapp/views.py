@@ -5,7 +5,7 @@ from .models import Document
 from .forms import DocumentForm
 
 
-def my_view(request):
+def data_entry_page(request):
     bold_start, bold_end = "\033[1m", "\033[0;0m"
     message = 'Please upload your files'
     notice = "Allowing file types: xlsx, xlsm, xlsb, xls, xlt, xla, csv\n\n" + \
@@ -32,4 +32,20 @@ def my_view(request):
     documents = Document.objects.all()
 
     context = {'documents': documents, 'form': form, 'message': message, 'notice': notice}
-    return render(request, 'list.html', context)
+    return render(request, 'data_entry_page.html', context)
+
+def campaign_customization_page(request):
+    context = {}
+    return render(request, 'campaign_customization_page.html', context)
+
+def analytics_dashboard_page(request):
+    context = {}
+    return render(request, 'analytics_dashboard_page.html', context)
+
+def calling_operations_page(request):
+    context = {}
+    return render(request, 'calling_operations_page.html', context)
+
+def model_controlls_page(request):
+    context = {}
+    return render(request, 'model_controlls_page.html', context)
