@@ -1,5 +1,14 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<script  type="text/javascript">
+		function changeActive(e) {
+			var element = document.getElementsByClassName("active")[0];
+			var target = e.target || e.srcElement;
+			element.classList.remove("active");
+			target.classList.add("active");
+		}
+	</script>
+
 	<div class="container-fluid">
 		<img class="navbar-brand" src="{% static '/images/app_logo.png' %}">
 		<button
@@ -15,11 +24,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-				<a class="nav-link active" aria-current="page" href="">Data Entry</a>
-				<a class="nav-link" href="/analytics_dashboard_page">Analytics Dashboard</a>
-				<a class="nav-link" href="calling_operations_page">Calling Operations</a>
-        		<a class="nav-link" href="model_controlls_page">Model Controlls</a>
-				<a class="nav-link" href="campaign_customization_page">Campaign Customization</a>
+				<a class="nav-link active" aria-current="page" href="" onclick="changeActive(event)">Data Entry</a>
+				<a class="nav-link" href="/analytics_dashboard_page" onclick="changeActive(event)">Analytics Dashboard</a>
+				<a class="nav-link" href="calling_operations_page" onclick="changeActive(event)">Calling Operations</a>
+        		<a class="nav-link" href="model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
+				<a class="nav-link" href="campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
 			</div>
 		</div>
 	</div>
