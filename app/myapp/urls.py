@@ -10,6 +10,7 @@ from .views import (
 urlpatterns = [
     path('', data_entry_page, name='data_entry_page'),
     path('data_entry_page/', data_entry_page, name='data_entry_page'),
+    path('data_entry_page/', data_entry_page, name='data_entry_page'),
     path('analytics_dashboard_page/', analytics_dashboard_page, name='analytics_dashboard_page'),
     path('calling_operations_page/', calling_operations_page, name='calling_operations_page'),
     path('model_controlls_page/', model_controlls_page, name='model_controlls_page'),
