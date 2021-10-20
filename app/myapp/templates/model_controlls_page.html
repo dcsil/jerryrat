@@ -9,11 +9,24 @@
     </head>
 
     <body>
-       <div style="margin-left: 25pt;">
+        <div style="margin-left: 25pt;">
            <h4>
                <strong>Models</strong>
            </h4>
-       </div>
+        </div>
+        {% for mod in models %}
+            <div style="margin-left: 25pt; display: inline-block; width: 30%; padding-top: 30px;">
+                <h5>
+                    <a href="#">
+                    {{ mod.model_name }}
+                    </a>
+                </h5>
+                <div style="margin-left: 30px;">
+                    <img src="../static/images/model_icon.png" style="width: 60%; height: auto">
+                </div>
+            </div>
+
+        {% endfor %}
     </body>
 </html>
 

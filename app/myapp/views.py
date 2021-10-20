@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.safestring import mark_safe
 
-from .models import Document, CampaignComboCentent
+from .models import Document, CampaignComboCentent, PredictionModel
 from .forms import DocumentForm
 
 
@@ -51,5 +51,8 @@ def calling_operations_page(request):
     return render(request, 'calling_operations_page.html', context)
 
 def model_controlls_page(request):
-    context = {'current': 'model_controlls_page'}
+    m1 = PredictionModel(name="Worthy Client Prediction")
+    m2 = PredictionModel(name="Campaign Result Prediction")
+    m3 = PredictionModel(name="Cost Efficiency Prediction")
+    context = {'current': 'model_controlls_page', 'models': [m1, m2, m3]}
     return render(request, 'model_controlls_page.html', context)
