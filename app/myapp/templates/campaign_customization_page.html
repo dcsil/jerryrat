@@ -43,7 +43,10 @@
 
     <body>
         <div class="products-area" style="margin-left: 25pt;">
-            <p><strong>Products</strong></p>
+            <h4 style="margin-bottom: 13pt;">
+                <strong>Products</strong>
+                <button type="button" class="btn btn-outline-success btn-sm" style="margin-left: 0.7em;"><strong>Add Product</strong></button>
+            </h4>
             {% for combo in combos %}
                 <div class="card text-dark bg-light mb-3">
                     <div class="card-header bg-light">
@@ -53,6 +56,7 @@
                         <div class="close">
                             <a class="closebutton" href="#"></a>
                         </div>
+                        <br/>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ combo.title }}</h5>
@@ -61,28 +65,13 @@
                 </div>
             {% endfor %}
         </div>
+        <!-- <br/> -->
 
         <div class="offers-area" style="margin-left: 25pt;">
-            <p><strong>Offers</strong></p>
-            {% for combo in combos %}
-                <div class="card text-dark bg-light mb-3" style="width: 15rem; height: 15rem; display: inline-block; margin: 0rem;">
-                    <div class="card-header bg-light"></div>
-                        <div class="group">
-                            <a class="groupbutton" href="#"></a>
-                        </div>
-                        <div class="close">
-                            <a class="closebutton" href="#"></a>
-                        </div>
-                    <div class="card-body">
-                    <h5 class="card-title">{{ combo.title }}</h5>
-                    <p class="card-text">{{ combo.description }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        <div class="contents-area" style="margin-left: 25pt;">
-            <p><strong>Contents & Placements</strong></p>
+            <h4 style="margin-bottom: 13pt;">
+                <strong>Offers</strong>
+                <button type="button" class="btn btn-outline-success btn-sm" style="margin-left: 0.7em;"><strong>Add Offer</strong></button>
+            </h4>
             {% for combo in combos %}
                 <div class="card text-dark bg-light mb-3" style="width: 15rem; height: 15rem; display: inline-block; margin: 0rem;">
                     <div class="card-header bg-light">
@@ -92,6 +81,7 @@
                         <div class="close">
                             <a class="closebutton" href="#"></a>
                         </div>
+                        <br/>
                     </div>
                     <div class="card-body">
                     <h5 class="card-title">{{ combo.title }}</h5>
@@ -100,6 +90,33 @@
                 </div>
             {% endfor %}
         </div>
+        <!-- <br/> -->
+
+        <div class="contents-area" style="margin-left: 25pt;">
+            <h4 style="margin-bottom: 13pt;">
+                <strong>Contents & Placements</strong>
+                <button type="button" class="btn btn-outline-success btn-sm" style="margin-left: 0.7em;"><strong>Add Content & Placement</strong></button>
+            </h4>
+            <!-- <br/> -->
+            {% for combo in combos %}
+                <div class="card text-dark bg-light mb-3" style="width: 15rem; height: 15rem; display: inline-block; margin: 0rem;">
+                    <div class="card-header bg-light">
+                        <div class="group">
+                            <a class="groupbutton" href="#"></a>
+                        </div>
+                        <div class="close">
+                            <a class="closebutton" href="#"></a>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title">{{ combo.title }}</h5>
+                    <p class="card-text">{{ combo.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- <br/> -->
         
         
     </body>
