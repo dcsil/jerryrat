@@ -29,7 +29,7 @@ def data_entry_page(request):
         form = DocumentForm()
 
     documents = Document.objects.all()
-    context = {'documents': documents, 'form': form, 'message': message, 'notice': notice}
+    context = {'documents': documents, 'form': form, 'message': message, 'notice': notice, 'current': 'data_entry_page'}
     return render(request, 'data_entry_page.html', context)
 
 def campaign_customization_page(request):
@@ -38,17 +38,17 @@ def campaign_customization_page(request):
     combo3 = CampaignComboCentent(title="P3", description="P3 desc")
     combo4 = CampaignComboCentent(title="P4", description="P4 desc")
     combos = [combo1, combo2, combo3, combo4]
-    context = {"combos": combos}
+    context = {"combos": combos, 'current': 'campaign_customization_page'}
     return render(request, 'campaign_customization_page.html', context)
 
 def analytics_dashboard_page(request):
-    context = {}
+    context = {'current': 'analytics_dashboard_page'}
     return render(request, 'analytics_dashboard_page.html', context)
 
 def calling_operations_page(request):
-    context = {}
+    context = {'current': 'calling_operations_page'}
     return render(request, 'calling_operations_page.html', context)
 
 def model_controlls_page(request):
-    context = {}
+    context = {'current': 'model_controlls_page'}
     return render(request, 'model_controlls_page.html', context)

@@ -27,11 +27,35 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-				<a class="nav-link active" href="/data_entry_page" onclick="changeActive(event)">Data Entry</a>
-				<a class="nav-link" href="/analytics_dashboard_page" onclick="changeActive(event)">Analytics Dashboard</a>
-				<a class="nav-link" href="/calling_operations_page" onclick="changeActive(event)">Calling Operations</a>
-        <a class="nav-link" href="/model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
-				<a class="nav-link" href="/campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
+				{% if current == 'data_entry_page' %}
+					<a class="nav-link active" href="/data_entry_page" onclick="changeActive(event)">Data Entry</a>
+				{% else %}
+					<a class="nav-link" href="/data_entry_page" onclick="changeActive(event)">Data Entry</a>
+				{% endif %}
+
+				{% if current == 'analytics_dashboard_page' %}
+					<a class="nav-link active" href="/analytics_dashboard_page" onclick="changeActive(event)">Analytics Dashboard</a>
+				{% else %}
+					<a class="nav-link" href="/analytics_dashboard_page" onclick="changeActive(event)">Analytics Dashboard</a>
+				{% endif %}
+
+				{% if current == 'calling_operations_page' %}
+					<a class="nav-link active" href="/calling_operations_page" onclick="changeActive(event)">Calling Operations</a>
+				{% else %}
+					<a class="nav-link" href="/calling_operations_page" onclick="changeActive(event)">Calling Operations</a>
+				{% endif %}
+
+				{% if current == 'model_controlls_page' %}
+					<a class="nav-link active" href="/model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
+				{% else %}
+					<a class="nav-link" href="/model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
+				{% endif %}
+
+				{% if current == 'campaign_customization_page' %}
+					<a class="nav-link active" href="/campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
+				{% else %}
+					<a class="nav-link" href="/campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>
