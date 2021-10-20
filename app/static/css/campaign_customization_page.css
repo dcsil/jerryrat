@@ -17,7 +17,7 @@
     height: 3rem;
 }
 
-.close {
+.exit {
     background: #ff5c5c;
     font-size: 9pt;
     width: 19px;
@@ -26,6 +26,14 @@
     border-radius: 50%;
     display: inline-block;
     float: right;
+    cursor: pointer;
+}
+
+.exit:hover {
+    background: #fc9e9e;
+    border: 2px solid #e4a6a7;
+    box-shadow: 5px 5px 8px #D8D8D8;
+    transition: background 0.5s ease-in-out;
 }
 
 .group {
@@ -33,10 +41,18 @@
     font-size: 9pt;
     width: 20px;
     height: 20px;
-    border: 1px solid #f8dc3e;
+    border: 1px solid #f0cf17;
     border-radius: 50%;
     display: inline-block;
     float: left;
+    cursor: pointer;
+}
+
+.group:hover {
+    background: #fff5bb;
+    border: 2px solid #f7e99b;
+    box-shadow: 5px 5px 8px #D8D8D8;
+    transition: background 0.5s ease-in-out;
 }
 
 .card-body {
