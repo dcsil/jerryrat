@@ -1,6 +1,6 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<script  type="text/javascript">
+	<!-- <script  type="text/javascript">
 		function changeActive(e) {
 			event.preventDefault();
 
@@ -8,9 +8,9 @@
 			var target = e.target || e.srcElement;
 			element.classList.remove("active");
 			target.classList.add("active");
-<!--			window.location.href = "/analytics_dashboard_page";-->
+      // window.location.href = "/analytics_dashboard_page";
 		}
-	</script>
+	</script> -->
 
 	<div class="container-fluid">
 		<img class="navbar-brand" src="{% static '/images/app_logo.png' %}">
@@ -30,7 +30,7 @@
 				<a class="nav-link active" href="/data_entry_page" onclick="changeActive(event)">Data Entry</a>
 				<a class="nav-link" href="/analytics_dashboard_page" onclick="changeActive(event)">Analytics Dashboard</a>
 				<a class="nav-link" href="/calling_operations_page" onclick="changeActive(event)">Calling Operations</a>
-        		<a class="nav-link" href="/model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
+        <a class="nav-link" href="/model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
 				<a class="nav-link" href="/campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
 			</div>
 		</div>

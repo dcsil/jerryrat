@@ -8,3 +8,7 @@ class User(models.Model):
     user = models.CharField(max_length=32)
     email = models.EmailField(max_length=32)
     pwd = models.CharField(max_length=32)
+
+class CampaignComboCentent(models.Model):
+    title = models.TextField()
+    description = models.TextField()

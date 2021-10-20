@@ -1,0 +1,8 @@
+.thick {
+  font-weight: bold;
+}
+
+.card {
+  margin-left: 35pt;
+  display: inline-block;
+}

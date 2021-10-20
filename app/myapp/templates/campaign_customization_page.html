@@ -1,15 +1,107 @@
 {%  extends 'main.html' %}
 {% block content %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Data Entry</title>
+        <title>Campaign Customization</title>
+        <link rel="stylesheet" href="{% static '/css/campaign_customization_page.css' %} "/>
     </head>
 
+    <style>
+        .close {
+            background: #ff5c5c;
+            font-size: 9pt;
+            width: 19px;
+            height: 19px;
+            border: 1px solid #e33e41;
+            border-radius: 50%;
+            display: inline-block;
+            float: right;
+        }
+
+        .group {
+            background: #f8dc3e;
+            font-size: 9pt;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #f8dc3e;
+            border-radius: 50%;
+            display: inline-block;
+            float: left;
+        }
+
+        .card {
+            width: 15rem; 
+            height: 15rem; 
+            display: inline-block; 
+            margin: 0rem;
+        }
+    </style>
+
     <body>
-       
+        <div class="products-area" style="margin-left: 25pt;">
+            <p><strong>Products</strong></p>
+            {% for combo in combos %}
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-header bg-light">
+                        <div class="group">
+                            <a class="groupbutton" href="#"></a>
+                        </div>
+                        <div class="close">
+                            <a class="closebutton" href="#"></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ combo.title }}</h5>
+                        <p class="card-text">{{ combo.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="offers-area" style="margin-left: 25pt;">
+            <p><strong>Offers</strong></p>
+            {% for combo in combos %}
+                <div class="card text-dark bg-light mb-3" style="width: 15rem; height: 15rem; display: inline-block; margin: 0rem;">
+                    <div class="card-header bg-light"></div>
+                        <div class="group">
+                            <a class="groupbutton" href="#"></a>
+                        </div>
+                        <div class="close">
+                            <a class="closebutton" href="#"></a>
+                        </div>
+                    <div class="card-body">
+                    <h5 class="card-title">{{ combo.title }}</h5>
+                    <p class="card-text">{{ combo.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="contents-area" style="margin-left: 25pt;">
+            <p><strong>Contents & Placements</strong></p>
+            {% for combo in combos %}
+                <div class="card text-dark bg-light mb-3" style="width: 15rem; height: 15rem; display: inline-block; margin: 0rem;">
+                    <div class="card-header bg-light">
+                        <div class="group">
+                            <a class="groupbutton" href="#"></a>
+                        </div>
+                        <div class="close">
+                            <a class="closebutton" href="#"></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title">{{ combo.title }}</h5>
+                    <p class="card-text">{{ combo.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        
     </body>
 </html>
 

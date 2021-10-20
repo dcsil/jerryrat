@@ -1,20 +1,19 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.safestring import mark_safe
 
-from .models import Document
+from .models import Document, CampaignComboCentent
 from .forms import DocumentForm
 
 
 def data_entry_page(request):
-    bold_start, bold_end = "\033[1m", "\033[0;0m"
     message = 'Please upload your files'
     notice = "Allowing file types: xlsx, xlsm, xlsb, xls, xlt, xla, csv\n\n" + \
              "File must be in specific formats, please see the following for the column specifications:\n" + \
-             "<strong>Contact[String]</strong>: The mobile/other phone number of the client\n" + \
-             "<span class='thick'>First Name[String](Optional)</span>: The first name of the client\n" + \
-             "Last Name[String](Optional): The last name of the client\n" + \
-             "Age[int]: The numeric integer to represent the client's age\n" + \
-             "Job[String]: The categorical label to mark the position/employment status of the client, available values:\n" + \
+             "<strong>Contact<i> [String]</i></strong>: The mobile/other phone number of the client\n" + \
+             "<span class='thick'>First Name <i>[String](Optional)</i></span>: The first name of the client\n" + \
+             "<strong>Last Name <i>[String](Optional)</i></strong>: The last name of the client\n" + \
+             "<strong>Age <i>[int]</i></strong>: The numeric integer to represent the client's age\n" + \
+             "<strong>Job <i>[String]</i></strong>: The categorical label to mark the position/employment status of the client, available values:\n" + \
              "......"
     notice = mark_safe(notice)
     if request.method == 'POST':
@@ -23,19 +22,23 @@ def data_entry_page(request):
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
 
-            return redirect('my-view')
+            return redirect('data_entry_page')
         else:
             message = 'The form is not valid. Fix the following error:'
     else:
         form = DocumentForm()
 
     documents = Document.objects.all()
-
     context = {'documents': documents, 'form': form, 'message': message, 'notice': notice}
     return render(request, 'data_entry_page.html', context)
 
 def campaign_customization_page(request):
-    context = {}
+    combo1 = CampaignComboCentent(title="P1", description="P1 desc")
+    combo2 = CampaignComboCentent(title="P2", description="P2 desc")
+    combo3 = CampaignComboCentent(title="P3", description="P3 desc")
+    combo4 = CampaignComboCentent(title="P4", description="P4 desc")
+    combos = [combo1, combo2, combo3, combo4]
+    context = {"combos": combos}
     return render(request, 'campaign_customization_page.html', context)
 
 def analytics_dashboard_page(request):
