@@ -37,7 +37,8 @@ def campaign_customization_page(request):
     combo2 = CampaignComboCentent(title="P2", description="P2 desc")
     combo3 = CampaignComboCentent(title="P3", description="P3 desc")
     combo4 = CampaignComboCentent(title="P4", description="P4 desc")
-    combos = [combo1, combo2, combo3, combo4]
+    combo5 = CampaignComboCentent(title="P5", description="P5 desc")
+    combos = [combo1, combo2, combo3, combo4, combo5]
     context = {"combos": combos, 'current': 'campaign_customization_page'}
     return render(request, 'campaign_customization_page.html', context)
 

@@ -3,6 +3,62 @@
 }
 
 .card {
-  margin-left: 35pt;
-  display: inline-block;
+    width: 15rem;
+    height: 15rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+    margin-right: 5pt;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.card-header {
+    height: 3rem;
+}
+
+.close {
+    background: #ff5c5c;
+    font-size: 9pt;
+    width: 19px;
+    height: 19px;
+    border: 1px solid #e33e41;
+    border-radius: 50%;
+    display: inline-block;
+    float: right;
+}
+
+.group {
+    background: #f8dc3e;
+    font-size: 9pt;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #f8dc3e;
+    border-radius: 50%;
+    display: inline-block;
+    float: left;
+}
+
+.card-body {
+    overflow: "scroll";
+}
+
+.card-line {
+    height: 18rem;;
+    width: 65rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space:nowrap;
+}
+
+.products-area {
+    margin-bottom: 15pt;
+}
+
+.offers-area {
+    margin-bottom: 15pt;
+}
+
+.contents-area {
+    margin-bottom: 15pt;
 }
