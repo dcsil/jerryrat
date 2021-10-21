@@ -16,6 +16,8 @@ jobs:
   tests:
 
     runs-on: ubuntu-20.04
+    container:
+      options: --user dbadmin
     strategy:
       max-parallel: 4
       matrix:
