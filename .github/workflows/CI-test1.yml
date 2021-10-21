@@ -15,7 +15,7 @@ on:
 jobs:
   tests:
 
-    runs-on: runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04
     strategy:
       max-parallel: 4
       matrix:
