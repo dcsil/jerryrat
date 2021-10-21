@@ -1,2 +1,4 @@
 django>=3.0,<4.0
--adminvere.py
+python>=3.6
+
+mysqlclient>=2.0.3
