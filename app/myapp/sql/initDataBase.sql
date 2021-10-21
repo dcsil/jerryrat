@@ -1,15 +1,6 @@
-DROP DATABASE IF EXISTS jerryratdb;
-CREATE DATABASE jerryratdb
-    DEFAULT CHARACTER SET utf8
-    DEFAULT COLLATE utf8_general_ci;
-
-DROP USER IF EXISTS 'dbadmin'@'%';
-CREATE USER dbadmin IDENTIFIED BY '12345';
-GRANT ALL ON jerryratdb.* TO 'dbadmin'@'%';
-FLUSH PRIVILEGES;
-
 USE jerryratdb;
-CREATE TABLE userdata (
+CREATE TABLE IF NOT EXISTS userdata (
+    dataid INT AUTO_INCREMENT PRIMARY KEY,
     age INT NOT NULL,
     job VARCHAR(255) NOT NULL DEFAULT 'unknown'
         CONSTRAINT jobContent CHECK (
@@ -71,4 +62,3 @@ CREATE TABLE userdata (
     euribor3m DECIMAL(4, 3) NOT NULL,
     `nr.employed` DECIMAL(5, 1) NOT NULL
 );
-

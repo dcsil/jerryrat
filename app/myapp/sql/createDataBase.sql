@@ -1,0 +1,7 @@
+CREATE DATABASE IF NOT EXISTS jerryratdb
+    DEFAULT CHARACTER SET utf8
+    DEFAULT COLLATE utf8_general_ci;
+
+CREATE USER IF NOT EXISTS dbadmin IDENTIFIED BY '12345';
+    GRANT ALL ON jerryratdb.* TO 'dbadmin'@'%';
+    FLUSH PRIVILEGES;
