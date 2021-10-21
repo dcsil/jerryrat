@@ -42,4 +42,5 @@ jobs:
         python manage.py migrate
     - name: Run Tests
       run: |
+        cd app
         python manage.py test
