@@ -7,6 +7,13 @@ from .views import (
     model_controlls_page
 )
 
+# for the purpose of testing page integrity
+page_names = ['data_entry_page',
+              'analytics_dashboard_page',
+              'calling_operations_page',
+              'model_controlls_page',
+              'campaign_customization_page']
+
 urlpatterns = [
     path('', data_entry_page, name='data_entry_page'),
     path('data_entry_page/', data_entry_page, name='data_entry_page'),

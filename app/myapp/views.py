@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.safestring import mark_safe
 
-from .models import Document, CampaignComboCentent, PredictionModel
+from .models import Document, CampaignComboContent, PredictionModel
 from .forms import DocumentForm
 
 
@@ -33,11 +33,11 @@ def data_entry_page(request):
     return render(request, 'data_entry_page.html', context)
 
 def campaign_customization_page(request):
-    combo1 = CampaignComboCentent(title="P1", description="P1 desc")
-    combo2 = CampaignComboCentent(title="P2", description="P2 desc")
-    combo3 = CampaignComboCentent(title="P3", description="P3 desc")
-    combo4 = CampaignComboCentent(title="P4", description="P4 desc")
-    combo5 = CampaignComboCentent(title="P5", description="P5 desc")
+    combo1 = CampaignComboContent(title="P1", description="P1 desc")
+    combo2 = CampaignComboContent(title="P2", description="P2 desc")
+    combo3 = CampaignComboContent(title="P3", description="P3 desc")
+    combo4 = CampaignComboContent(title="P4", description="P4 desc")
+    combo5 = CampaignComboContent(title="P5", description="P5 desc")
     combos = [combo1, combo2, combo3, combo4, combo5]
     context = {"combos": combos, 'current': 'campaign_customization_page'}
     return render(request, 'campaign_customization_page.html', context)

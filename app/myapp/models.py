@@ -11,7 +11,7 @@ class User(models.Model):
     pwd = models.CharField(max_length=32)
 
 
-class CampaignComboCentent(models.Model):
+class CampaignComboContent(models.Model):
     title = models.TextField()
     description = models.TextField()
 
