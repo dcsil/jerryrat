@@ -1,10 +1,10 @@
 name: Django CI
 
 env:
-  DB_HOST: '%'
+  DB_HOST: localhost
   DB_DATABASE: jerryratdb
-  DB_USER: dbadmin
-  DB_PASSWORD: 12345
+  DB_USER: root
+  DB_PASSWORD: root
 
 on:
   push:
