@@ -1,7 +1,7 @@
 name: Django CI
 
 env:
-  DB_HOST: localhost
+  DB_HOST: %
   DB_DATABASE: jerryratdb
   DB_USER: dbadmin
   DB_PASSWORD: 12345
