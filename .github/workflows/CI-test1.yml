@@ -37,6 +37,7 @@ jobs:
         pip install -r requirements.txt
     - name: Migrations
       run: |
+        cd app
         python manage.py makemigrations
         python manage.py migrate
     - name: Run Tests
