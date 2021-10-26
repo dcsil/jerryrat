@@ -40,6 +40,7 @@ jobs:
         mysql user: dbadmin
         # MYSQL_PASSWORD - specified superuser password which user is power for created database
         mysql password: 12345
+        mysql host: localhost
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
