@@ -1,4 +1,4 @@
 django>=3.0
 mysqlclient>=2.0.3
 pymysql
-sentry_sdk
+sentry-sdk
