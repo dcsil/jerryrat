@@ -84,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'jerryratdb',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'dbadmin',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '3306',
     }
