@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'jerryratdb',
         'USER': 'dbadmin',
         'PASSWORD': '12345',
-        'HOST': 'localhost',
+        'HOST': '%',
         'PORT': '3306',
     }
 }
