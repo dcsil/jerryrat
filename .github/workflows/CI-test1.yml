@@ -32,6 +32,9 @@ jobs:
         mysql -e "GRANT ALL ON *.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e 'FLUSH PRIVILEGES' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
     - uses: actions/checkout@v2
+    - uses: shogo82148/actions-setup-mysql@v1
+      with:
+        mysql-version: '8.0'
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
