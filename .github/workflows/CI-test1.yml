@@ -24,21 +24,20 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          # The port of host
-          host port: 3306
-          # The port of container
-          container port: 3306
-          # --character-set-server - The character set of MySQL server
-          character set server: utf8
-          # --collation-server - The character collation of MySQL server
-          collation server: utf8_general_ci
-          # Version of MySQL to use
-          mysql version: 8.0
-          # MYSQL_ROOT_PASSWORD - root superuser password
-          mysql root password: root
-
+    - uses: mirromutth/mysql-action@v1.1
+      with:
+        # The port of host
+        host port: 3306
+        # The port of container
+        container port: 3306
+        # --character-set-server - The character set of MySQL server
+        character set server: utf8
+        # --collation-server - The character collation of MySQL server
+        collation server: utf8_general_ci
+        # Version of MySQL to use
+        mysql version: 8.0
+        # MYSQL_ROOT_PASSWORD - root superuser password
+        mysql root password: root
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
