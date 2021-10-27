@@ -26,6 +26,7 @@ jobs:
       run: |
         sudo /etc/init.d/mysql start
         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+        mysql -e "GRANT ALL ON ${{ env.DB_DATABASE }}.* TO '${{ env.DB_USER }}'@'localhost' IDENTIFIED BY ${{ env.DB_PASSWORD }};"
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
