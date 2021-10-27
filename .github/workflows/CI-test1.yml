@@ -6,6 +6,7 @@ env:
   DB_USER: dbadmin
   DB_PASSWORD: 12345
   MYSQL_ROOT_PASSWORD: root
+  MYSQL_ROOT_USER: root
 
 on:
   push:
@@ -26,10 +27,10 @@ jobs:
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
-        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u root -p${{ env.MYSQL_ROOT_PASSWORD }}
-        mysql -e "CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -u root -p${{ env.MYSQL_ROOT_PASSWORD }}
-        mysql -e "GRANT ALL ON ${{ env.DB_DATABASE }}.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;"
-        mysql -e 'FLUSH PRIVILEGES'
+        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
+        mysql -e "CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
+        mysql -e "GRANT ALL ON ${{ env.DB_DATABASE }}.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
+        mysql -e 'FLUSH PRIVILEGES' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
