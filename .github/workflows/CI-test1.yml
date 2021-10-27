@@ -27,9 +27,9 @@ jobs:
       run: |
         sudo /etc/init.d/mysql start
         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u root -p${{ env.MYSQL_ROOT_PASSWORD }}
-        mysql -e 'CREATE USER IF NOT EXISTS ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';'
-        mysql -e "GRANT ALL ON ${{ env.DB_DATABASE }}.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;"
-        mysql -e 'FLUSH PRIVILEGES'
+        mysql -e 'CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';' -u root -p${{ env.MYSQL_ROOT_PASSWORD }}
+#        mysql -e "GRANT ALL ON ${{ env.DB_DATABASE }}.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;"
+#        mysql -e 'FLUSH PRIVILEGES'
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
