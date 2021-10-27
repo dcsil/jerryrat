@@ -48,4 +48,4 @@ jobs:
     - name: Run Tests
       run: |
         cd app
-        python manage.py test -k
+        python manage.py test --keepdb
