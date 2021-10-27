@@ -25,7 +25,9 @@ jobs:
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
-        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+        mysql -u root -p < app/myapp/sql/createDataBase.sql
+        mysql -u root -p < app/myapp/sql/initDataBase.sql
+#        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
