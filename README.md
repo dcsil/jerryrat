@@ -1,6 +1,6 @@
 # JerryRat
 
-![Team Logo](./imgs/logo.png)
+![Team Logo](docs/imgs/logo.png)
 
 JerryRat provides marketing solutions to various industry unicorns across the globe. Your products matter and clients are also important to us, why not kick-start the journey with us in furthering enchanting campaigns that best fit to your blueprint? It's our duty to be with you, on the road to success! 
 
@@ -14,7 +14,7 @@ Introduction
 - [Team Principles](./docs/team_principles.md)
 - Architecture
 
-<img src=".\imgs\architecture.png" alt="architecture"  />
+<img src=".\docs\imgs\architecture.png" alt="architecture"  />
 
 Our web app will be deployed on ***Heroku*** and is going to use ***Django*** as the framework. *Apache Spark* will be used to process and analyze the data that will be fed to the ML model. Since the user may change their campaign plan frequently, we are going to use ***Redis*** to save this data while saving personnel info (which is used to train the ML model) in ***Amazon Aurora***. We will use ***XGBoost*** to train a model which takes processed personal information as input and outputs whether this person is worth calling for a promotion. The trained model will be updated regularly based on the most recent data from the database. 
 
