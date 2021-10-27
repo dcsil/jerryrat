@@ -23,7 +23,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
-          - '3306:3306'
+          - '8888:3306'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       max-parallel: 4
@@ -32,7 +32,6 @@ jobs:
     steps:
     - name: Set up MySQL
       run: |
-        sudo /etc/init.d/mysql start
         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "GRANT ALL ON *.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
