@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `jerryratdb.userdata` (
     dataid INT AUTO_INCREMENT PRIMARY KEY,
-    age INT NOT NULL,
+    age INT NOT NULL
+        CONSTRAINT ageLimit CHECK (age >= 0),
     job VARCHAR(255) NOT NULL DEFAULT 'unknown'
         CONSTRAINT jobContent CHECK (
             job = 'admin.' OR job = 'blue-collar' OR job = 'entrepreneur' OR

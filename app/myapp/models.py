@@ -48,15 +48,11 @@ class Userdata(models.Model):
     pdays = models.IntegerField()
     previous = models.IntegerField()
     poutcome = models.CharField(max_length=255)
-    emp_var_rate = models.DecimalField(db_column='emp.var.rate', max_digits=4,
-                                       decimal_places=1)  # Field renamed to remove unsuitable characters.
-    cons_price_idx = models.DecimalField(db_column='cons.price.idx', max_digits=5,
-                                         decimal_places=3)  # Field renamed to remove unsuitable characters.
-    cons_conf_idx = models.DecimalField(db_column='cons.conf.idx', max_digits=3,
-                                        decimal_places=1)  # Field renamed to remove unsuitable characters.
+    emp_var_rate = models.DecimalField(db_column='emp.var.rate', max_digits=4, decimal_places=1)  # Field renamed to remove unsuitable characters.
+    cons_price_idx = models.DecimalField(db_column='cons.price.idx', max_digits=5, decimal_places=3)  # Field renamed to remove unsuitable characters.
+    cons_conf_idx = models.DecimalField(db_column='cons.conf.idx', max_digits=3, decimal_places=1)  # Field renamed to remove unsuitable characters.
     euribor3m = models.DecimalField(max_digits=4, decimal_places=3)
-    nr_employed = models.DecimalField(db_column='nr.employed', max_digits=5,
-                                      decimal_places=1)  # Field renamed to remove unsuitable characters.
+    nr_employed = models.DecimalField(db_column='nr.employed', max_digits=5, decimal_places=1)  # Field renamed to remove unsuitable characters.
 
     class Meta:
         managed = False
