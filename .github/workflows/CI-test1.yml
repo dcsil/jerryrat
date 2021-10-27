@@ -16,31 +16,22 @@ on:
 
 jobs:
   tests:
-
     runs-on: ubuntu-20.04
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - '3306:3306'
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.7, 3.8, 3.9]
-
     steps:
-    - uses: mirromutth/mysql-action@v1.1
-      with:
-        # The port of host
-        host port: 3306
-        # The port of container
-        container port: 3306
-        # --character-set-server - The character set of MySQL server
-        character set server: utf8
-        # --collation-server - The character collation of MySQL server
-        collation server: utf8_general_ci
-        # Version of MySQL to use
-        mysql version: 8.0
-        # MYSQL_ROOT_PASSWORD - root superuser password
-        mysql root password: root
     - name: Set up MySQL
       run: |
-        sudo /etc/init.d/mysql start
         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "GRANT ALL ON *.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
