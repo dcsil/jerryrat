@@ -1,4 +1,3 @@
-USE jerryratdb;
 CREATE TABLE IF NOT EXISTS `userdata` (
     dataid INT AUTO_INCREMENT PRIMARY KEY,
     age INT NOT NULL,
