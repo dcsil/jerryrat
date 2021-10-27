@@ -48,5 +48,4 @@ jobs:
     - name: Run Tests
       run: |
         cd app
-#        python manage.py test --testrunner=myapp.tests.test_no_db.NoDbTestRunner
         python manage.py test
