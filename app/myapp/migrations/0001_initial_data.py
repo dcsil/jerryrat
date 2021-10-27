@@ -15,7 +15,7 @@ initial_data = lambda: load_data_from_sql('initDataBase.sql')
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_name', '0001_initial'),
+        ('myapp', '0001_initial'),
     ]
 
     operations = [
