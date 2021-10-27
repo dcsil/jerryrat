@@ -7,7 +7,6 @@ from django.urls import reverse, resolve
 
 
 class TestPageIntegrity(TestCase, Client):
-    databases = []
     page_names = urls.page_names
 
     def test_page(self):
