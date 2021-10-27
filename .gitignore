@@ -2,3 +2,6 @@
 491 architecture.pdf
 /app/.vs/
 /app/.idea/
+/app/myapp/__pycache__/
+.idea/
+.DS_Store
