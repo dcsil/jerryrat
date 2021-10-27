@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunSQL("USE jerryratdb;"),
+        # migrations.RunSQL("USE jerryratdb;"),
         migrations.RunPython(initial_data),
     ]
