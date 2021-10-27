@@ -48,6 +48,7 @@ jobs:
         pip install -r app/requirements.txt
     - name: Migrations
       run: |
+        mysql --version
         cd app
         python manage.py makemigrations
         python manage.py migrate
