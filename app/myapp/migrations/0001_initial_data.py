@@ -9,7 +9,7 @@ def load_data_from_sql(filename):
     with connection.cursor() as c:
         c.execute(sql_statement)
 
-initial_data = lambda: load_data_from_sql('initDataBase.sql')
+initial_data = lambda apps, schema_editor: load_data_from_sql('initDataBase.sql')
 
 
 class Migration(migrations.Migration):
