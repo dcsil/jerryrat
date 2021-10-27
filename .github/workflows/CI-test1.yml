@@ -29,7 +29,6 @@ jobs:
         sudo /etc/init.d/mysql start
         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
-        mysql -e 'ALTER USER ${{ env.DB_USER }} CREATEDB;' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "GRANT ALL ON ${{ env.DB_DATABASE }}.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e 'FLUSH PRIVILEGES' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
     - uses: actions/checkout@v2
@@ -49,4 +48,4 @@ jobs:
     - name: Run Tests
       run: |
         cd app
-        python manage.py test
+        python manage.py test -k
