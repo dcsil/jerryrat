@@ -47,5 +47,6 @@ jobs:
         python manage.py migrate
     - name: Run Tests
       run: |
+        export DJANGO_SETTINGS_MODULE=app.myproject.no_db_settings
         cd app
-        python manage.py test -settings='app/myproject/no_db_settings.py'
+        python manage.py test
