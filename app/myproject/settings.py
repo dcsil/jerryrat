@@ -162,4 +162,4 @@ sentry_sdk.init(
 # DATABASES['default'].update(prod_db)
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
