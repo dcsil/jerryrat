@@ -1,1 +1,1 @@
-web: gunicorn jerryrat.wsgi --log-file -
+web: gunicorn myproject.wsgi --log-file -
