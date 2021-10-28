@@ -1,1 +1,1 @@
-web: gunicorn herokujerryrat.wsgi --log-file -
+web: gunicorn herokujerryratapp.wsgi --log-file -
