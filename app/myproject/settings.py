@@ -11,7 +11,6 @@ import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 import dj_database_url
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -158,5 +157,14 @@ sentry_sdk.init(
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
+
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+def dj_heroku():
+    try:
+        import django_heroku
+        django_heroku.settings(locals())
+    except ImportError:
+        pass
+
+
+dj_heroku()
