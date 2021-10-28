@@ -1,0 +1,10 @@
+# install requirements
+echo "Installing Requirments..."
+pip install requirements.txt
+
+cd app
+# make migrations before running server
+echo "Starting Server..."
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver
