@@ -10,5 +10,5 @@ docs:
   
 commands:
   bootstrap: script/bootstrap
-  database: TBD
+  database: 
   server: cd app; python3 manage.py runserver

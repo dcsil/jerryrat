@@ -2,7 +2,7 @@
 echo "Installing Requirments..."
 pip install requirements.txt
 
-cd app
+cd ../app
 # make migrations before running server
 echo "Starting Server..."
 python3 manage.py makemigrations
