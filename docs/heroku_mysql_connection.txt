@@ -1,0 +1,3 @@
+Username:	b4ae3f86c79984
+Password:	4c81af71
+connection_host_name: us-cdbr-east-04.cleardb.com
