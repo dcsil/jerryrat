@@ -165,6 +165,8 @@ def dj_heroku():
         django_heroku.settings(locals())
     except ImportError:
         pass
+    except KeyError:
+        pass
 
 
 dj_heroku()
