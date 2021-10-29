@@ -90,6 +90,15 @@ DATABASES = {
         'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '3306',
+    },
+
+    'heroku': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jerryratdb',
+        'USER': 'b4ae3f86c79984',
+        'PASSWORD': '4c81af71',
+        'HOST': 'us-cdbr-east-04.cleardb.com',
+        'PORT': '3306',
     }
 }
 
