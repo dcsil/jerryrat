@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATABASES = {
-    'default': {
+    'local': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'jerryratdb',
         'USER': 'dbadmin',
@@ -92,14 +92,15 @@ DATABASES = {
         'PORT': '3306',
     },
 
-    'heroku': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jerryratdb',
+        'NAME': 'heroku_09b7fcc683860e5',
         'USER': 'b4ae3f86c79984',
         'PASSWORD': '4c81af71',
         'HOST': 'us-cdbr-east-04.cleardb.com',
         'PORT': '3306',
     }
+
 }
 
 # Password validation

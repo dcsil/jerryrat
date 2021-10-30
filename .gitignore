@@ -5,3 +5,9 @@
 /app/myapp/__pycache__/
 .idea/
 .DS_Store
+app/myapp/migrations/__pycache__/0001_initial.cpython-39.pyc
+app/myapp/migrations/__pycache__/__init__.cpython-39.pyc
+app/myproject/__pycache__/__init__.cpython-39.pyc
+app/myproject/__pycache__/settings.cpython-39.pyc
+app/myproject/__pycache__/urls.cpython-39.pyc
+app/myproject/__pycache__/wsgi.cpython-39.pyc
