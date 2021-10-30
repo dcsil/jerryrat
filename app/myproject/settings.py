@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATABASES = {
+    # local database for testing
     'local': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'jerryratdb',
@@ -90,6 +91,9 @@ DATABASES = {
         'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8'},
     },
     # jawsdb
     'default': {
@@ -99,6 +103,9 @@ DATABASES = {
         'PASSWORD': 'p23it7lf9zqfh3yd',
         'HOST': 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8'},
     }
 
 }

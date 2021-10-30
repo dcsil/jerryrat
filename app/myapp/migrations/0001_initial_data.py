@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
     operations = [
         # migrations.RunSQL("USE jerryratdb;"),
         migrations.RunPython(initial_data),
-        migrations.RunSQL("SELECT COLUMN_NAME " +
-                          "FROM INFORMATION_SCHEMA.COLUMNS " +
-                          "WHERE TABLE_SCHEMA = 'jerryratdb' AND TABLE_NAME = 'userdata';")
+        # migrations.RunSQL("SELECT COLUMN_NAME " +
+        #                   "FROM INFORMATION_SCHEMA.COLUMNS " +
+        #                   "WHERE TABLE_SCHEMA = 'jerryratdb' AND TABLE_NAME = 'userdata';")
     ]
