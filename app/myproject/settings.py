@@ -168,6 +168,7 @@ sentry_sdk.init(
 
 # Setup django cleardb (MySQL database)
 # Register database schemes in URLs.
+'''
 urlparse.uses_netloc.append('mysql')
 
 try:
@@ -197,7 +198,7 @@ try:
             DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 except Exception:
     print('Unexpected error:', sys.exc_info())
-
+'''
 # prod_db = dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(prod_db)
 
