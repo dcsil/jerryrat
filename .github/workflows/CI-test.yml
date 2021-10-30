@@ -53,6 +53,7 @@ jobs:
         mysql --version
         cd app
         python manage.py makemigrations
+        python manage.py migrate contenttypes
         python manage.py migrate --database=local
     - name: Run Tests
       run: |
