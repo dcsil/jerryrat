@@ -3,6 +3,7 @@ name: Django CI
 env:
   DB_HOST: localhost
   DB_DATABASE: jerryratdb
+  DB_REMOTEDATABASE: syh25csvjgoetrln
   DB_USER: dbadmin
   DB_PASSWORD: 12345
   MYSQL_ROOT_PASSWORD: root
@@ -34,6 +35,7 @@ jobs:
       run: |
         sudo service mysql start
         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
+        mysql -e 'CREATE DATABASE ${{ env.DB_REMOTEDATABASE }};' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "CREATE USER ${{ env.DB_USER }} IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e "GRANT ALL ON *.* TO '${{ env.DB_USER }}'@'%' WITH GRANT OPTION;" -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
         mysql -e 'FLUSH PRIVILEGES' -u${{ env.MYSQL_ROOT_PASSWORD }} -p${{ env.MYSQL_ROOT_PASSWORD }}
