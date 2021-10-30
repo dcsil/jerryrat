@@ -3,6 +3,7 @@
 import os
 import sys
 import django.db.utils
+from django.db import connection
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
