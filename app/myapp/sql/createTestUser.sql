@@ -1,3 +1,4 @@
 CREATE USER IF NOT EXISTS dbadmin IDENTIFIED BY '12345';
 GRANT ALL ON jerryratdb.* TO 'dbadmin'@'%' WITH GRANT OPTION;
+GRANT ALL ON test_jerryratdb.* TO 'dbadmin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;

@@ -4,7 +4,9 @@ import os
 from django.db import connection, migrations
 from django.conf import settings
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 def load_data_from_sql(filename):
     file_path = os.path.join(os.path.dirname(__file__), '../sql/', filename)
@@ -12,18 +14,11 @@ def load_data_from_sql(filename):
     with connection.cursor() as c:
         c.execute(sql_statement)
 
-def initial_data(apps, schema_editor):
-    logger.setLevel(logging.INFO)
-    settings.LOGGING['loggers']['django'] = {
-        'level': 'INFO',
-        'handlers': ['console']
-    }
-    logger.info("Test")
-    load_data_from_sql('initDataBase.sql')
+
+initial_data = lambda apps, schema_editor: load_data_from_sql('initDataBase.sql')
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('myapp', '0001_initial'),
     ]

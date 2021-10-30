@@ -94,6 +94,9 @@ DATABASES = {
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8'},
+        'TEST': {
+            'NAME': 'test_jerryratdb',
+        },
     },
     # jawsdb
     'default': {
@@ -222,3 +225,7 @@ def dj_heroku():
 
 
 dj_heroku()
+
+# use local database to test
+if 'test' in sys.argv:
+    DATABASES['default'] = DATABASES['local']

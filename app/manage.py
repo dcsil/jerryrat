@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+import django.db.utils
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
@@ -14,7 +14,14 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         )
-    execute_from_command_line(sys.argv)
+
+    try:
+        execute_from_command_line(sys.argv)
+    except django.db.utils.OperationalError as dbError:
+        if str(dbError) != str((1050, "Table 'userdata' already exists")):
+            raise dbError
+        else:
+            pass
 
 
 if __name__ == '__main__':
