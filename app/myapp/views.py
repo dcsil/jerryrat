@@ -7,7 +7,7 @@ from .forms import DocumentForm
 
 def data_entry_page(request):
     message = 'Please upload your files'
-    notice = "Allowing file types: xlsx, xlsm, xlsb, xls, xlt, xla, csv\n\n" + \
+    notice = "Allowing file types: xlsx, xlsm, xlsb, xls, csv\n\n" + \
              "File must be in specific formats, please see the following for the column specifications:\n" + \
              "<strong>Contact<i> [String]</i></strong>: The mobile/other phone number of the client\n" + \
              "<span class='thick'>First Name <i>[String](Optional)</i></span>: The first name of the client\n" + \
