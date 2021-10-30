@@ -91,13 +91,13 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
     },
-
+    # jawsdb
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_09b7fcc683860e5',
-        'USER': 'b4ae3f86c79984',
-        'PASSWORD': '4c81af71',
-        'HOST': 'us-cdbr-east-04.cleardb.com',
+        'NAME': 'syh25csvjgoetrln',
+        'USER': 'dv9wgfh46sgcyiil',
+        'PASSWORD': 'p23it7lf9zqfh3yd',
+        'HOST': 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 
