@@ -53,7 +53,8 @@ class Userdata(models.Model):
     cons_conf_idx = models.DecimalField(db_column='cons.conf.idx', max_digits=3, decimal_places=1)  # Field renamed to remove unsuitable characters.
     euribor3m = models.DecimalField(max_digits=4, decimal_places=3)
     nr_employed = models.DecimalField(db_column='nr.employed', max_digits=5, decimal_places=1)  # Field renamed to remove unsuitable characters.
+    y = models.CharField(max_length=5, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'userdata'

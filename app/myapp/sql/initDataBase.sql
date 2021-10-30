@@ -60,5 +60,9 @@ CREATE TABLE IF NOT EXISTS `userdata` (
     `cons.price.idx` DECIMAL(5, 3) NOT NULL,
     `cons.conf.idx` DECIMAL(3, 1) NOT NULL,
     euribor3m DECIMAL(4, 3) NOT NULL,
-    `nr.employed` DECIMAL(5, 1) NOT NULL
+    `nr.employed` DECIMAL(5, 1) NOT NULL,
+    y VARCHAR(5)
+        CONSTRAINT predictionTarget CHECK (
+            y = 'yes' OR y = 'no' OR y = NULL
+        )
 );
