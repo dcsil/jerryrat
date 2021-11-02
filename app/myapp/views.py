@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.safestring import mark_safe
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 from .models import Document, CampaignComboContent, PredictionModel
 from .forms import DocumentForm
@@ -43,6 +45,7 @@ def campaign_customization_page(request):
     return render(request, 'campaign_customization_page.html', context)
 
 def analytics_dashboard_page(request):
+    x1, y1 = [i for i in range(2000)], []
     context = {'current': 'analytics_dashboard_page'}
     return render(request, 'analytics_dashboard_page.html', context)
 

@@ -1,4 +1,30 @@
 from django.db import models
+from plotly.offline import plot
+import plotly.plotly as py
+import plotly.graph_objects as go
+
+class Linechart(models.Model):
+    x = models.IntegerField()
+    y = models.IntegerField()
+    title = models.CharField(max_length=32)
+
+    @property
+    def line_chart(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=self.x, y=self.y))
+        fig.update_layout(title=self.title)
+        fig.update_layout(
+            xaxis=dict(
+                rangeslider=dict(
+                    visible=True,
+                    autorange=True,
+                    range=[min(self.x), max(self.x)]
+                ),
+                type="linear"
+            )
+        )
+        plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+        return plot_div
 
 
 class Document(models.Model):
