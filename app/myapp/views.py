@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 
 from .models import Document, CampaignComboContent, PredictionModel
 from .forms import DocumentForm
-
+from .utils.tableUploader import *
 
 def data_entry_page(request):
     message = 'Please upload your files'
@@ -21,7 +21,7 @@ def data_entry_page(request):
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
-
+            uploadFileToDB(newdoc.get_file_path())
             return redirect('data_entry_page')
         else:
             message = 'The form is not valid. Fix the following error:'

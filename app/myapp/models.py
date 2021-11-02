@@ -3,7 +3,11 @@ from django.db import models
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    # docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    docfile = models.FileField(default='', null=True, blank=True)
+
+    def get_file_path(self):
+        return self.docfile.path
 
 
 class User(models.Model):

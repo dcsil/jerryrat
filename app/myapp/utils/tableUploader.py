@@ -1,8 +1,9 @@
 import pandas as pd
-from app.myapp.models import Userdata
+import os
+from myapp.models import Userdata
 
 
-def tableUploader(filePath):
+def uploadFileToDB(filePath):
     class FileNoneError(Exception):
         def __init__(self, file):
             self.file = file
@@ -21,8 +22,10 @@ def tableUploader(filePath):
     else:
         raise FileNoneError
 
+
     for i, line in enumerate(reader.values.tolist()):
-        Userdata.update_or_create(
+        userdata = Userdata(
+            # Bank client data
             age=line[0],
             job=line[1],
             marital=line[2],
@@ -30,18 +33,27 @@ def tableUploader(filePath):
             default=line[4],
             housing=line[5],
             loan=line[6],
+
+            # Related with the last contact of the current campaign
             contact=line[7],
             month=line[8],
             day_of_week=line[9],
             duration=line[10],
+
+            # Other attributes
             campaign=line[11],
             pdays=line[12],
             previous=line[13],
             poutcome=line[14],
+
+            # Social and economic context attributes
             emp_var_rate=line[15],
             cons_price_idx=line[16],
             cons_conf_idx=line[17],
             euribor3m=line[18],
             nr_employed=line[19],
+
             y=line[20],
         )
+    
+        userdata.save()
