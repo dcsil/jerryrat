@@ -65,5 +65,5 @@ jobs:
     - name: Run Tests
       run: |
         cd app
-        python manage.py test --keepdb
+        python manage.py test --keepdb --parallel
 
