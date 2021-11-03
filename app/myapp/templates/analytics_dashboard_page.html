@@ -11,13 +11,22 @@
     </head>
 
     <body>
-       {% if linechart %}
-           <div class="chart1">
-               <div class="linechart">{{ linechart | safe }}</div>
-               <button type="button" class="btn btn-outline-success btn-sm"><strong>Configure</strong></button>
-           </div>
-       {% endif %}
-
+        <div class="graph-container">
+            {% if linechart %}
+                <div class="wrapper">
+                    <div class="linechart">{{ linechart | safe }}</div>
+                    <button type="button" class="btn-config btn btn-outline-success btn-sm"><strong>Configure</strong></button>
+                    <button type="button" class="btn-delete btn btn-outline-danger btn-sm"><strong>Delete</strong></button>
+                </div>
+            {% else %}
+                <div class="wrapper-create">
+                    <button type="button" class="btn-add btn btn-outline-primary btn-lg"><strong>+</strong></button>
+                </div>
+            {% endif %}
+            <div class="wrapper-create">
+                <button type="button" class="btn-add btn btn-outline-secondary btn-lg"><strong>+</strong></button>
+            </div>
+        </div>
     </body>
 </html>
 
