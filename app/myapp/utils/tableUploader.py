@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 from myapp.models import Userdata
 
 
