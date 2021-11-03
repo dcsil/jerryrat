@@ -1,11 +1,13 @@
 {%  extends 'main.html' %}
 {% block content %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>Analytics Dashboard</title>
+        <link rel="stylesheet" href="{% static '/css/analytics_dashboard_page.css' %} "/>
     </head>
 
     <body>
@@ -14,9 +16,11 @@
                <strong>Dashboard</strong>
            </h4>
        </div>
-       <div style="padding-left: 25px;">
-           <img src="../static/images/dashboard-demo.jpg">
-       </div>
+       {% if linechart %}
+           <div class="chart1">
+               {{ linechart | safe }}
+           </div>
+       {% endif %}
 
     </body>
 </html>

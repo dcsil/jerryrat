@@ -2,8 +2,9 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.safestring import mark_safe
 import plotly.plotly as py
 import plotly.graph_objs as go
+from random import uniform
 
-from .models import Document, CampaignComboContent, PredictionModel
+from .models import Document, CampaignComboContent, PredictionModel, Linechart
 from .forms import DocumentForm
 from .utils.tableUploader import *
 
@@ -45,8 +46,9 @@ def campaign_customization_page(request):
     return render(request, 'campaign_customization_page.html', context)
 
 def analytics_dashboard_page(request):
-    x1, y1 = [i for i in range(2000)], []
-    context = {'current': 'analytics_dashboard_page'}
+    x1, y1 = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
+    linechart = Linechart(x=x1, y=y1, title="Random Shit")
+    context = {'linechart': linechart.line_chart}
     return render(request, 'analytics_dashboard_page.html', context)
 
 def calling_operations_page(request):

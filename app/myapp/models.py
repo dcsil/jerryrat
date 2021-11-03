@@ -1,7 +1,7 @@
 from django.db import models
 from plotly.offline import plot
 import plotly.plotly as py
-import plotly.graph_objects as go
+import plotly.graph_objs as go
 
 class Linechart(models.Model):
     x = models.IntegerField()
@@ -12,8 +12,12 @@ class Linechart(models.Model):
     def line_chart(self):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=self.x, y=self.y))
-        fig.update_layout(title=self.title)
-        fig.update_layout(
+        fig.layout.update(title=self.title)
+        fig.layout.update(
+            title={
+                'text': self.title,
+                'x': 0.1
+            },
             xaxis=dict(
                 rangeslider=dict(
                     visible=True,
@@ -21,9 +25,16 @@ class Linechart(models.Model):
                     range=[min(self.x), max(self.x)]
                 ),
                 type="linear"
+            ),
+            xaxis_title="some random x",
+            yaxis_title="some random y",
+            font=dict(
+                size=12,
+                color="gray"
             )
+
         )
-        plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+        plot_div = plot(fig, output_type='div', auto_open=False)
         return plot_div
 
 
