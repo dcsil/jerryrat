@@ -1,7 +1,33 @@
 .chart1 {
+  /* position: abosulte; */
   width: 700px;
-  height: 300px;
-  margin-left: 40px;
-  margin-top: 40px;
+  height: 450px;
+  margin: 40px;
   border-radius: 25px;
+  transition: box-shadow .3s;
+  overflow: hidden;
+}
+
+.linechart {
+  position: absolute;
+}
+
+.chart1:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+}
+
+.btn {
+  position: absolute;
+  z-index: 1;
+  margin-left: 540px;
+  margin-top: 40px;
+}
+
+.js-plotly-plot .plotly .modebar {
+  margin-top: 382px;
+  transform: translateX(-135%);
+}
+
+.js-plotly-plot .plotly .modebar .modebar-group:nth-of-type(4) {
+  transform: translateX(370%);
 }

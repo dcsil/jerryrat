@@ -6,7 +6,9 @@ import plotly.graph_objs as go
 class Linechart(models.Model):
     x = models.IntegerField()
     y = models.IntegerField()
-    title = models.CharField(max_length=32)
+    xaxis = models.CharField(max_length=32)
+    yaxis = models.CharField(max_length=32)
+    title = models.CharField(max_length=64)
 
     @property
     def line_chart(self):
@@ -14,8 +16,14 @@ class Linechart(models.Model):
         fig.add_trace(go.Scatter(x=self.x, y=self.y))
         fig.layout.update(title=self.title)
         fig.layout.update(
+            xaxis_title=self.xaxis,
+            yaxis_title=self.yaxis,
+            # config=dict(
+            #     displaylogo=False
+            # ),
             title={
-                'text': self.title,
+                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
+                        'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
                 'x': 0.1
             },
             xaxis=dict(
@@ -26,15 +34,17 @@ class Linechart(models.Model):
                 ),
                 type="linear"
             ),
-            xaxis_title="some random x",
-            yaxis_title="some random y",
             font=dict(
                 size=12,
                 color="gray"
             )
-
         )
-        plot_div = plot(fig, output_type='div', auto_open=False)
+        plot_div = plot(fig, output_type='div', auto_open=False, 
+                        config=dict(
+                            displayModeBar=True,
+                            displaylogo=False,
+                        )
+                    )
         return plot_div
 
 

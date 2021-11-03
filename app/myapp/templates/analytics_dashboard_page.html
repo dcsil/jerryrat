@@ -11,14 +11,10 @@
     </head>
 
     <body>
-       <div style="margin-left: 25pt;">
-           <h4>
-               <strong>Dashboard</strong>
-           </h4>
-       </div>
        {% if linechart %}
            <div class="chart1">
-               {{ linechart | safe }}
+               <div class="linechart">{{ linechart | safe }}</div>
+               <button type="button" class="btn btn-outline-success btn-sm"><strong>Configure</strong></button>
            </div>
        {% endif %}
 

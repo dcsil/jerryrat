@@ -47,7 +47,13 @@ def campaign_customization_page(request):
 
 def analytics_dashboard_page(request):
     x1, y1 = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
-    linechart = Linechart(x=x1, y=y1, title="Random Shit")
+    linechart = Linechart(
+        x=x1, 
+        y=y1,
+        xaxis='some random x',
+        yaxis='some random y',
+        title="Random Shit"
+    )
     context = {'linechart': linechart.line_chart}
     return render(request, 'analytics_dashboard_page.html', context)
 
