@@ -1,6 +1,6 @@
 from django.db import models
 from plotly.offline import plot
-import plotly.plotly as py
+# import plotly.plotly as py
 import plotly.graph_objs as go
 
 class Linechart(models.Model):

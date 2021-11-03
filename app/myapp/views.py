@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.safestring import mark_safe
-import plotly.plotly as py
-import plotly.graph_objs as go
+# import plotly.plotly as py
+# import plotly.graph_objs as go
 from random import uniform
 
 from .models import Document, CampaignComboContent, PredictionModel, Linechart
