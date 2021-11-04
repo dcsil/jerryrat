@@ -1,26 +1,39 @@
 from django.db import models
 from plotly.offline import plot
+from django.contrib.postgres.fields import ArrayField
 # import plotly.plotly as py
 import plotly.graph_objs as go
+from random import uniform
+
+class Graph(models.Model):
+    created_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("created_at",)
+    
+    def count(self):
+        return self.graphs.count()
+
 
 class Linechart(models.Model):
-    x = models.IntegerField()
-    y = models.IntegerField()
     xaxis = models.CharField(max_length=32)
     yaxis = models.CharField(max_length=32)
     title = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now=True)
+    graphs = models.ForeignKey(Graph, null=True, related_name="graphs", on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ("created_at",)
 
     @property
     def line_chart(self):
+        x1, y1 = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=self.x, y=self.y))
+        fig.add_trace(go.Scatter(x=x1, y=y1))
         fig.layout.update(title=self.title)
         fig.layout.update(
             xaxis_title=self.xaxis,
             yaxis_title=self.yaxis,
-            # config=dict(
-            #     displaylogo=False
-            # ),
             title={
                 'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
                         'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
@@ -30,14 +43,11 @@ class Linechart(models.Model):
                 rangeslider=dict(
                     visible=True,
                     autorange=True,
-                    range=[min(self.x), max(self.x)]
+                    range=[min(x1), max(x1)]
                 ),
                 type="linear"
             ),
-            font=dict(
-                size=12,
-                color="gray"
-            )
+            font=dict(size=12, color="gray")
         )
         plot_div = plot(fig, output_type='div', auto_open=False, 
                         config=dict(

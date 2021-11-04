@@ -12,19 +12,20 @@
 
     <body>
         <div class="graph-container">
-            {% if linechart %}
-                <div class="wrapper">
-                    <div class="linechart">{{ linechart | safe }}</div>
-                    <button type="button" class="btn-config btn btn-outline-success btn-sm"><strong>Configure</strong></button>
-                    <button type="button" class="btn-delete btn btn-outline-danger btn-sm"><strong>Delete</strong></button>
-                </div>
-            {% else %}
-                <div class="wrapper-create">
-                    <button type="button" class="btn-add btn btn-outline-primary btn-lg"><strong>+</strong></button>
-                </div>
+            {% if graphs %}
+                {% for graph in all_graphs.graphs.all %}
+                    <div class="wrapper">
+                        <div class="linechart">{{ graph | safe }}</div>
+                        <button type="button" class="btn-config btn btn-outline-success btn-sm"><strong>Configure</strong></button>
+                        <button type="button" class="btn-delete btn btn-outline-danger btn-sm"><strong>Delete</strong></button>
+                    </div>
+                {% endfor %}
             {% endif %}
             <div class="wrapper-create">
-                <button type="button" class="btn-add btn btn-outline-secondary btn-lg"><strong>+</strong></button>
+                <form action="{% url 'add_graph' %}" method=post>
+                    {% csrf_token %}
+                    <button type="button submit" class="btn-add btn btn-outline-secondary btn-lg"><strong>+</strong></button>
+                </form>
             </div>
         </div>
     </body>

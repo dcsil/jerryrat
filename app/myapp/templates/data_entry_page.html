@@ -28,7 +28,7 @@
                 <p>No documents.</p>
             {% endif %}
 
-            <form action="{% url "data_entry_page" %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'data_entry_page' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>{{ notice|linebreaksbr }}</p>
                 <p>{{ message }}</p>
