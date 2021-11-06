@@ -7,20 +7,13 @@ from django.forms import ModelForm
 import plotly.graph_objs as go
 from random import uniform
 
-# class Graph(models.Model):
-#     created_at = models.DateTimeField(auto_now=True)
-
-#     class Meta:
-#         ordering = ("created_at",)
-    
-#     def count(self):
-#         return self.graphs.count()
 AXES = (('age', 'age'), ('month', 'month'), ('day_of_week', 'day_of_week'), 
         ('duration', 'duration'), ('campaign', 'campaign'), ('pdays', 'pdays'), 
         ('previous', 'previous'))
 CHART_TYPES = (('Line Chart', 'Line Chart'), ('Bar Chart', 'Bar Chart'), ('Pie Chart', 'Pie Chart'))
 
 class Linechart(models.Model):
+    id = models.AutoField(primary_key=True)
     xaxis = models.CharField(max_length=32, choices=AXES, default=AXES[0][0])
     yaxis = models.CharField(max_length=32, choices=AXES, default=AXES[0][0])
     title = models.CharField(max_length=64)

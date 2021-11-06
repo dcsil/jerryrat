@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.utils.safestring import mark_safe
 # import plotly.plotly as py
 # import plotly.graph_objs as go
@@ -54,17 +54,9 @@ def analytics_dashboard_page(request):
     all_graphs = Linechart.objects.all()
     return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs})
 
-
-# def add_graph(request):
-#     if request.method == "POST":
-#         chart = Linechart(
-#             xaxis='some random x',
-#             yaxis='some random y',
-#             title="Random Shit"
-#         )
-#         chart.save()
-#         return redirect('analytics_dashboard_page')
-#     return render('')
+def delete_graph(request, id):
+    Linechart.objects.filter(id=id).delete()
+    return redirect(reverse('analytics_dashboard_page'))
 
 
 def calling_operations_page(request):

@@ -1,9 +1,16 @@
+.graph-container {
+  padding-left: 45px;
+  padding-top: 30px;
+}
+
 .wrapper {
   /* position: abosulte; */
   display: inline-block;
   width: 700px;
   height: 450px;
-  margin: 40px;
+  /* margin-left: 40px; */
+  margin-right: 40px;
+  margin-bottom: 40px;
   border-radius: 25px;
   transition: box-shadow .3s;
   overflow: hidden;
@@ -14,7 +21,9 @@
   display: inline-block;
   width: 700px;
   height: 450px;
-  margin-left: 106px;
+  /* margin-left: 40px; */
+  margin-right: 40px;
+  margin-bottom: 40px;
   border-radius: 25px;
   border: 1px solid #BFBFBF;
 }

@@ -16,8 +16,13 @@
                 {% for graph in all_graphs %}
                     <div class="wrapper">
                         <div class="linechart">{{ graph.line_chart | safe }}</div>
-                        <button type="button" class="btn-config btn btn-outline-success btn-sm"><strong>Configure</strong></button>
-                        <button type="button" class="btn-delete btn btn-outline-danger btn-sm"><strong>Delete</strong></button>
+                        <button type="button" class="btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addGraph">
+                            {% csrf_token %}
+                            <strong>Configure</strong>
+                        </button>
+                        <a href="{% url 'delete_graph' graph.pk %}" type="button" class="btn-delete btn btn-outline-danger btn-sm">
+                            <strong>Delete</strong>
+                        </a>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -26,6 +31,8 @@
                 <button type="button" class="btn-add btn btn-outline-secondary btn-lg" data-toggle="modal" data-target="#addGraph"><strong>+</strong></button>
             </div>
         </div>
+
+        {% block add_graph_popout %} {% endblock %}
 
         <!-- Add graph Modal pop-out window-->
         <div class="modal fade" id="addGraph" tabindex="-1" role="dialog" aria-labelledby="addGraphTitle" aria-hidden="true">
@@ -43,11 +50,6 @@
                                     {{ add_graph_form.title }}
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="form-group col text-center">
-                                    {{ add_graph_form.graph_type }}
-                                </div>
-                            </div> -->
                             <div class="row">
                                 <div class="col-4">
                                     <p>x-axis</p>
@@ -60,7 +62,7 @@
                                 <div class="col-4">
                                     <div class="btn-group float-right" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Add</button>
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +75,17 @@
             </div>
         </div>
 
+        
     </body>
 </html>
 
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 {% endblock %}
 
