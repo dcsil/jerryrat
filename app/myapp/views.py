@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 # import plotly.plotly as py
 # import plotly.graph_objs as go
 
-from .models import Document, CampaignComboContent, PredictionModel, Linechart, Graph
+from .models import *
 from .forms import DocumentForm
 from .utils.tableUploader import *
 
@@ -46,21 +46,25 @@ def campaign_customization_page(request):
 
 
 def analytics_dashboard_page(request):
-    all_graphs = get_object_or_404(Graph)
+    add_graph_form = AddGraphForm()
     if request.method == "POST":
-        return redirect('analytics_dashboard_page.html', {'all_graphs': all_graphs})
-    return render(request, 'analytics_dashboard_page.html', {"all_graphs": all_graphs})
+        add_graph_form = AddGraphForm(request.POST or None)
+        if add_graph_form.is_valid():
+            add_graph_form.save()
+    all_graphs = Linechart.objects.all()
+    return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs})
 
-def add_graph(request):
-    if request.method == "POST":
-        chart = Linechart(
-            xaxis='some random x',
-            yaxis='some random y',
-            title="Random Shit"
-        )
-        chart.save()
-        return redirect('analytics_dashboard_page')
-    return render('')
+
+# def add_graph(request):
+#     if request.method == "POST":
+#         chart = Linechart(
+#             xaxis='some random x',
+#             yaxis='some random y',
+#             title="Random Shit"
+#         )
+#         chart.save()
+#         return redirect('analytics_dashboard_page')
+#     return render('')
 
 
 def calling_operations_page(request):

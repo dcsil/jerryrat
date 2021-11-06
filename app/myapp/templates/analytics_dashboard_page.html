@@ -12,23 +12,69 @@
 
     <body>
         <div class="graph-container">
-            {% if graphs %}
-                {% for graph in all_graphs.graphs.all %}
+            {% if all_graphs %}
+                {% for graph in all_graphs %}
                     <div class="wrapper">
-                        <div class="linechart">{{ graph | safe }}</div>
+                        <div class="linechart">{{ graph.line_chart | safe }}</div>
                         <button type="button" class="btn-config btn btn-outline-success btn-sm"><strong>Configure</strong></button>
                         <button type="button" class="btn-delete btn btn-outline-danger btn-sm"><strong>Delete</strong></button>
                     </div>
                 {% endfor %}
             {% endif %}
             <div class="wrapper-create">
-                <form action="{% url 'add_graph' %}" method=post>
-                    {% csrf_token %}
-                    <button type="button submit" class="btn-add btn btn-outline-secondary btn-lg"><strong>+</strong></button>
-                </form>
+                {% csrf_token %}
+                <button type="button" class="btn-add btn btn-outline-secondary btn-lg" data-toggle="modal" data-target="#addGraph"><strong>+</strong></button>
             </div>
         </div>
+
+        <!-- Add graph Modal pop-out window-->
+        <div class="modal fade" id="addGraph" tabindex="-1" role="dialog" aria-labelledby="addGraphTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                <div class="row">
+                    {% if add_graph_form %}
+                    <div class="col text-center" style="padding: 30px;">
+                        <form method="POST" action="{% url 'analytics_dashboard_page' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col text-center">
+                                    <p>Title</p>
+                                    {{ add_graph_form.title }}
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="form-group col text-center">
+                                    {{ add_graph_form.graph_type }}
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>x-axis</p>
+                                    {{ add_graph_form.xaxis }}
+                                </div>
+                                <div class="col-4">
+                                    <p>y-axis</p>
+                                    {{ add_graph_form.yaxis }}
+                                </div>
+                                <div class="col-4">
+                                    <div class="btn-group float-right" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
     </body>
 </html>
 
 {% endblock %}
+

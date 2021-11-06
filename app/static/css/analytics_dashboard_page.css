@@ -14,12 +14,9 @@
   display: inline-block;
   width: 700px;
   height: 450px;
-  margin: 40px;
-  margin-left: 6px;
+  margin-left: 106px;
   border-radius: 25px;
-  transition: box-shadow .3s;
   border: 1px solid #BFBFBF;
-  overflow: hidden;
 }
 
 .linechart {
