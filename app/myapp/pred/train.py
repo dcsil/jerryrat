@@ -9,38 +9,8 @@ from load_config import load_config
 from preprocess import numeralizeCategory
 
 
-def train(model_path="./models/exec/model_init.json", config_path="./configs/config_init.json",
-          useDataset=False, steps=20, model_init=False, savemodel=True, checkpoint=0):
-    model = None
-    params = None
-    if not os.path.exists("./checkpoint"):
-        os.makedirs("./checkpoint")
+def train(model=None, params=None, useDataset=False, steps=20, model_init=False, savemodel=True, checkpoint=0):
 
-    if os.path.exists(model_path):
-        model = load_model(model_path)
-
-    if os.path.exists(config_path):
-        # TODO: realize param customization page and functionality
-        # TODO: use mvpDatabase data
-        params = load_config(config_path)
-    else:
-        # default params for init
-        params = {
-            "eta": 0.3,  # learning_rate
-            "gamma": 0,  # min_split_loss
-            "objective": 'binary:logistic',  # loss function
-            "max_depth": 6,
-            "nthread": 4,
-            "eval_metric": 'auc',
-            "lambda": 1,  # L2 regularization
-        }
-
-        if not os.path.exists('./configs'):
-            os.makedirs('./configs')
-        with open('./configs/config_init.json', 'w') as fp:
-            json.dump(params, fp, indent=0)
-        with open('./configs/config.json', 'w') as fp:
-            json.dump(params, fp, indent=0)
     model = train_model(model, params, useDataset, steps)
 
     # save the init model
@@ -48,10 +18,6 @@ def train(model_path="./models/exec/model_init.json", config_path="./configs/con
     # xgb.dump_model: human readable schema but not loadable for train continuation
     if savemodel:
         if model_init:
-            if not os.path.exists("./models"):
-                os.makedirs("./models")
-                os.makedirs("./models/exec")
-                os.makedirs("./models/schema")
             model.save_model("./models/exec/model_init.json")
             model.dump_model("./models/schema/model_init_schema.json")
         else:
@@ -66,8 +32,7 @@ def train(model_path="./models/exec/model_init.json", config_path="./configs/con
     return model
 
 
-def train_model(model, params, useDataset=False, steps=100):
-    model = None
+def train_model(model=None, params=None, useDataset=False, steps=100):
     if not useDataset:
         model = train_database(model, params, steps)
     else:
@@ -134,7 +99,7 @@ def train_locally(model, params, steps):
 
 
 def train_database(model, params, steps):
-    # TODO: pass train data from the database
+    # TODO: pass train data from the database (mvpdataset data)
     return model
 
 
@@ -142,9 +107,19 @@ if __name__ == "__main__":
     import shutil
 
     dirpath = "../../static/dataset/mvptest"
+    params = {
+        "eta": 0.3,  # learning_rate
+        "gamma": 0,  # min_split_loss
+        "objective": 'binary:logistic',  # loss function
+        "max_depth": 6,
+        "nthread": 4,
+        "eval_metric": 'auc',
+        "lambda": 1,  # L2 regularization
+    }
     # test train func when dataset is not initialized
     if os.path.exists(dirpath) and os.path.isdir(dirpath):
         shutil.rmtree(dirpath)
-        train(useDataset=True, model_init=True)
+        train(params=params, useDataset=True, model_init=True)
     # test train func when dataset is initialized
-    train(useDataset=True)
+    model = load_model("./models/exec/model_init.json")
+    train(params=params, model=model, useDataset=True)
