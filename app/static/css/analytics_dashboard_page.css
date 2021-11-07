@@ -4,11 +4,9 @@
 }
 
 .wrapper {
-  /* position: abosulte; */
   display: inline-block;
   width: 700px;
   height: 450px;
-  /* margin-left: 40px; */
   margin-right: 40px;
   margin-bottom: 40px;
   border-radius: 25px;
@@ -17,11 +15,9 @@
 }
 
 .wrapper-create {
-  /* position: abosulte; */
   display: inline-block;
   width: 700px;
   height: 450px;
-  /* margin-left: 40px; */
   margin-right: 40px;
   margin-bottom: 40px;
   border-radius: 25px;

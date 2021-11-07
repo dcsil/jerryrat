@@ -23,11 +23,15 @@ class Linechart(models.Model):
     class Meta:
         ordering = ("created_at",)
 
+    def set_axis(self, x, y):
+        self.x, self.y = x, y
+
     @property
     def line_chart(self):
-        x1, y1 = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
+        x, y = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
+        self.set_axis(x, y)
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=x1, y=y1))
+        fig.add_trace(go.Scatter(x=self.x, y=self.y))
         fig.layout.update(title=self.title)
         fig.layout.update(
             xaxis_title=self.xaxis,
@@ -41,7 +45,7 @@ class Linechart(models.Model):
                 rangeslider=dict(
                     visible=True,
                     autorange=True,
-                    range=[min(x1), max(x1)]
+                    range=[min(self.x), max(self.x)]
                 ),
                 type="linear"
             ),
@@ -62,7 +66,7 @@ class AddGraphForm(ModelForm):
         fields = '__all__'
         exclude = ['created_at']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': "Please enter the title of the new graph"}),
+            'title': forms.TextInput(attrs={'placeholder': "Please enter the title of the new graph", 'style': 'width: 400px', 'class': 'form-control'})
             # 'graph_type': forms.TextInput(attrs={'placeholder': "Please enter the type of the new graph"})
         }
 
