@@ -57,6 +57,20 @@
   margin-top: 200px;
 }
 
+label {
+  float: left
+}
+
+span {
+  display: block;
+  overflow: hidden;
+  padding: 0 4px 0 6px
+}
+
+#title, #x-axis, #y-axis {
+  width: 100%
+}
+
 .js-plotly-plot .plotly .modebar {
   margin-top: 382px;
   transform: translateX(-135%);

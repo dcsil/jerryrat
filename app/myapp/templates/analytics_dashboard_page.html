@@ -38,44 +38,74 @@
         <div class="modal fade" id="addGraph" tabindex="-1" role="dialog" aria-labelledby="addGraphTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Graph Options</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-                <div class="row">
                     {% if add_graph_form %}
-                    <div class="col text-center" style="padding: 30px;">
                         <form method="POST" action="{% url 'analytics_dashboard_page' %}">
                             {% csrf_token %}
-                            <div class="row">
-                                <div class="form-group col text-center">
-                                    <p>Title</p>
-                                    {{ add_graph_form.title }}
+                            <div class="form-group">
+                                <label for="title" class="col-form-label">Title:</label>
+                                <span><div id="title">{{ add_graph_form.title }}</div></span>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="x-axis" class="col-form-label">X-axis:</label>
+                                    <span><div id="x-axis">{{ add_graph_form.xaxis }}</div></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="y-axis" class="col-form-label">Y-axis:</label>
+                                    <span><div id="y-axis">{{ add_graph_form.yaxis }}</div></span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <p>x-axis</p>
-                                    {{ add_graph_form.xaxis }}
-                                </div>
-                                <div class="col-4">
-                                    <p>y-axis</p>
-                                    {{ add_graph_form.yaxis }}
-                                </div>
-                                <div class="col-4">
-                                    <div class="btn-group float-right" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                            
+                        </form>
+                    {% endif %}
+
+
+
+                    <!-- <div class="row">
+                        {% if add_graph_form %}
+                        <div class="col text-center" style="padding: 30px;">
+                            <form method="POST" action="{% url 'analytics_dashboard_page' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col text-center">
+                                        <p>Title</p>
+                                        {{ add_graph_form.title }}
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    {% endif %}
+                                <div class="row">
+                                    <div class="xaxis">
+                                        <p>x-axis</p>
+                                        {{ add_graph_form.xaxis }}
+                                    </div>
+                                    <div class="yaxis">
+                                        <p>y-axis</p>
+                                        {{ add_graph_form.yaxis }}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div> -->
                 </div>
+
+                <div class="modal-footer">
+                    <div class="btn-group float-right" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
                 </div>
             </div>
             </div>
         </div>
 
-        
+
     </body>
 </html>
 
