@@ -4,8 +4,7 @@ import xgboost as xgb
 from load_model import load_model
 from preprocess import numeralizeCategory, binarizePrediction
 
-def predict(model_path="./models/exec/model_init.json", usedataset=False, threshold=0.5):
-    model = load_model(model_path)
+def predict(model, usedataset=False, threshold=0.5):
     result = None
     if not usedataset:
         result = predict_database(model, threshold)
@@ -29,5 +28,7 @@ def predict_database(model, threshold):
 
 
 if __name__ == "__main__":
-    result = predict(usedataset=True)
+    from load_model import load_model
+    model = load_model("./models/exec/model_init.json")
+    result = predict(model, usedataset=True)
     print(result)
