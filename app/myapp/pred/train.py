@@ -10,7 +10,7 @@ from preprocess import numeralizeCategory
 
 
 def train(model_path="./models/exec/model_init.json", config_path="./configs/config_init.json",
-          customized_params={}, useDataset=False, steps=20, model_init=False, savemodel=True, checkpoint=0):
+          useDataset=False, steps=20, model_init=False, savemodel=True, checkpoint=0):
     model = None
     params = None
     if not os.path.exists("./checkpoint"):
@@ -22,7 +22,7 @@ def train(model_path="./models/exec/model_init.json", config_path="./configs/con
     if os.path.exists(config_path):
         # TODO: realize param customization page and functionality
         # TODO: use mvpDatabase data
-        params = load_config(config_path, customized_params)
+        params = load_config(config_path)
     else:
         # default params for init
         params = {
@@ -37,7 +37,9 @@ def train(model_path="./models/exec/model_init.json", config_path="./configs/con
 
         if not os.path.exists('./configs'):
             os.makedirs('./configs')
-        with open('configs/config_init.json', 'w') as fp:
+        with open('./configs/config_init.json', 'w') as fp:
+            json.dump(params, fp, indent=0)
+        with open('./configs/config.json', 'w') as fp:
             json.dump(params, fp, indent=0)
     model = train_model(model, params, useDataset, steps)
 
@@ -145,4 +147,4 @@ if __name__ == "__main__":
         shutil.rmtree(dirpath)
         train(useDataset=True, model_init=True)
     # test train func when dataset is initialized
-    train(useDataset=True, savemodel=True)
+    train(useDataset=True)
