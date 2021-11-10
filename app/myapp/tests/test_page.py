@@ -21,9 +21,11 @@ class TestIntegrity(TestCase, Client):
     def test_fileupload(self):
         raised = False
         try:
-            uploadFileToDB("app/static/dataset/testdatabase.csv")
-            uploadFileToDB("app/static/dataset/testdatabase.xlsx")
-        except:
+            uploadFileToDB("./static/dataset/testdatabase.csv")
+            uploadFileToDB("./static/dataset/testdatabase.xlsx")
+        except Exception as e:
+            print("@fileUpload")
+            print(e)
             raised = True
         finally:
             self.assertEqual(raised, False)
@@ -31,8 +33,10 @@ class TestIntegrity(TestCase, Client):
     def test_filetransfer(self):
         raised = False
         try:
-            csvToXlsx("app/static/dataset/testdatabase.csv", True)
-        except:
+            csvToXlsx("./static/dataset/testdatabase.csv", True)
+        except Exception as e:
+            print("@fileTransfer")
+            print(e)
             raised = True
         finally:
             self.assertEqual(raised, False)
