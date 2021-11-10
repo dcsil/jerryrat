@@ -3,6 +3,7 @@ from django.views import *
 from myapp.models import *
 from myapp import urls
 from myapp.utils.tableUploader import uploadFileToDB
+from myapp.utils.csvToXlsx import csvToXlsx
 from django.urls import reverse, resolve
 # Create your tests here.
 
@@ -22,6 +23,15 @@ class TestIntegrity(TestCase, Client):
         try:
             uploadFileToDB("app/static/dataset/testdatabase.csv")
             uploadFileToDB("app/static/dataset/testdatabase.xlsx")
+        except:
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
+    def test_filetransfer(self):
+        raised = False
+        try:
+            csvToXlsx("app/static/dataset/testdatabase.csv", True)
         except:
             raised = True
         finally:
