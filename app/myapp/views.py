@@ -1,11 +1,20 @@
-from django.shortcuts import redirect, render, get_object_or_404, reverse
+from django.shortcuts import redirect, render, get_object_or_404, reverse, HttpResponseRedirect
 from django.utils.safestring import mark_safe
-# import plotly.plotly as py
-# import plotly.graph_objs as go
 
 from .models import *
 from .forms import DocumentForm
 from .utils.tableUploader import *
+
+from django.views.generic.base import View
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import EmailMultiAlternatives
+
+from django.contrib.auth import authenticate, login, logout
+from django.conf import settings
 
 def data_entry_page(request):
     message = 'Please upload your files'
@@ -69,3 +78,32 @@ def model_controlls_page(request):
     m3 = PredictionModel(name="Cost Efficiency Prediction")
     context = {'current': 'model_controlls_page', 'models': [m1, m2, m3]}
     return render(request, 'model_controlls_page.html', context)
+
+
+
+# ============================================= User Account Pages =============================================
+
+class LoginView(View):
+    def get(self, request, *args, **kwargs):
+        is_login = request.session.get('is_login')
+        if is_login:
+            return HttpResponseRedirect('/')
+        else:
+            return render(request, 'login.html')
+
+    @csrf_exempt
+    def post(self, request, *args, **kwargs):
+        try:
+
+            input_email = request.POST.get('inputEmail')
+            username = input_email.split('@')[0]
+            password = request.POST.get('inputPassword')
+            user = authenticate(username=username, password=password)
+            if user is None:
+                raise Exception("Authenticate failed: invalid Email or Password")
+
+        except Exception as e:
+            print(e)
+
+        login(request, user)
+        return HttpResponseRedirect('/')
