@@ -10,6 +10,7 @@ page_names = ['data_entry_page',
 
 urlpatterns = [
     path('', data_entry_page, name='data_entry_page'),
+    path('signup/', SignUpView.as_view(), name='signup'),
     path('data_entry_page/', data_entry_page, name='data_entry_page'),
     path('data_entry_page/', data_entry_page, name='data_entry_page'),
     path('analytics_dashboard_page/', analytics_dashboard_page, name='analytics_dashboard_page'),

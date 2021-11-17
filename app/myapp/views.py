@@ -1,20 +1,30 @@
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (
+    LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
+    PasswordResetDoneView as BasePasswordResetDoneView, PasswordResetConfirmView as BasePasswordResetConfirmView,
+)
+
 from django.shortcuts import redirect, render, get_object_or_404, reverse, HttpResponseRedirect
 from django.utils.safestring import mark_safe
+from django.utils.crypto import get_random_string
+from django.utils.decorators import method_decorator
+from django.utils.http import is_safe_url
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.generic import View, FormView
+from django.conf import settings
 
 from .models import *
-from .forms import DocumentForm
+from .forms import *
 from .utils.tableUploader import *
 
-from django.views.generic.base import View
-from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.core.mail import EmailMultiAlternatives
-
-from django.contrib.auth import authenticate, login, logout
-from django.conf import settings
 
 def data_entry_page(request):
     message = 'Please upload your files'
@@ -53,7 +63,6 @@ def campaign_customization_page(request):
     context = {"combos": combos, 'current': 'campaign_customization_page'}
     return render(request, 'campaign_customization_page.html', context)
 
-
 def analytics_dashboard_page(request):
     add_graph_form = AddGraphForm()
     if request.method == "POST":
@@ -67,7 +76,6 @@ def delete_graph(request, id):
     Linechart.objects.filter(id=id).delete()
     return redirect(reverse('analytics_dashboard_page'))
 
-
 def calling_operations_page(request):
     context = {'current': 'calling_operations_page'}
     return render(request, 'calling_operations_page.html', context)
@@ -80,30 +88,38 @@ def model_controlls_page(request):
     return render(request, 'model_controlls_page.html', context)
 
 
-
 # ============================================= User Account Pages =============================================
 
-class LoginView(View):
-    def get(self, request, *args, **kwargs):
-        is_login = request.session.get('is_login')
-        if is_login:
-            return HttpResponseRedirect('/')
+class SignUpView(FormView):
+    template_name = 'signup.html'
+    form_class = SignUpForm
+
+    def form_valid(self, form):
+        request = self.request
+        user = form.save(commit=False)
+
+        if settings.DISABLE_USERNAME:
+            # Set a temporary username
+            user.username = get_random_string()
         else:
-            return render(request, 'login.html')
+            user.username = form.cleaned_data['username']
 
-    @csrf_exempt
-    def post(self, request, *args, **kwargs):
-        try:
+        if settings.ENABLE_USER_ACTIVATION:
+            user.is_active = False
 
-            input_email = request.POST.get('inputEmail')
-            username = input_email.split('@')[0]
-            password = request.POST.get('inputPassword')
-            user = authenticate(username=username, password=password)
-            if user is None:
-                raise Exception("Authenticate failed: invalid Email or Password")
+        # Create a user record
+        user.save()
 
-        except Exception as e:
-            print(e)
+        # Change the username to the "user_ID" form
+        if settings.DISABLE_USERNAME:
+            user.username = f'user_{user.id}'
+            user.save()
 
+        raw_password = form.cleaned_data['password1']
+        user = authenticate(username=user.username, password=raw_password)
         login(request, user)
-        return HttpResponseRedirect('/')
+
+        messages.success(request, _('You are successfully signed up!'))
+
+        return redirect('index')
+

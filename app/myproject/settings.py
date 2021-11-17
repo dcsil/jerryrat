@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'bootstrap4',
     'myapp',
 ]
 
@@ -137,6 +139,29 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# ======================= User Accounts Settings =======================
+
+ENABLE_USER_ACTIVATION = False
+DISABLE_USERNAME = False
+LOGIN_VIA_EMAIL = True
+LOGIN_VIA_EMAIL_OR_USERNAME = False
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'accounts:log_in'
+USE_REMEMBER_ME = True
+
+RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
+ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE = True
+
+SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+if DISABLE_USERNAME:
+    SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+# ======================================================================
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -244,17 +269,16 @@ TEMPLATES = [
 
 
 # Activate Django-Heroku.
-def dj_heroku():
-    try:
-        import django_heroku
-        django_heroku.settings(locals())
-    except ImportError:
-        pass
-    except KeyError:
-        pass
+# def dj_heroku():
+#     try:
+#         import django_heroku
+#         django_heroku.settings(locals())
+#     except ImportError:
+#         pass
+#     except KeyError:
+#         pass
 
-
-dj_heroku()
+# dj_heroku()
 
 # use local database to test
 if 'test' in sys.argv:
