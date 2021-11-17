@@ -147,8 +147,8 @@ ENABLE_USER_ACTIVATION = False
 DISABLE_USERNAME = False
 LOGIN_VIA_EMAIL = True
 LOGIN_VIA_EMAIL_OR_USERNAME = False
-LOGIN_REDIRECT_URL = 'index'
-LOGIN_URL = 'accounts:log_in'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'log_in'
 USE_REMEMBER_ME = True
 
 RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
@@ -269,16 +269,16 @@ TEMPLATES = [
 
 
 # Activate Django-Heroku.
-# def dj_heroku():
-#     try:
-#         import django_heroku
-#         django_heroku.settings(locals())
-#     except ImportError:
-#         pass
-#     except KeyError:
-#         pass
+def dj_heroku():
+    try:
+        import django_heroku
+        django_heroku.settings(locals())
+    except ImportError:
+        pass
+    except KeyError:
+        pass
 
-# dj_heroku()
+dj_heroku()
 
 # use local database to test
 if 'test' in sys.argv:

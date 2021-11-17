@@ -122,7 +122,7 @@ class SignUp(FormView):
 
         messages.success(request, _('You are successfully signed up!'))
 
-        return redirect('index')
+        return redirect('/')
 
 class LogIn(FormView):
     template_name = 'login.html'
