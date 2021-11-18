@@ -13,6 +13,11 @@ from django.utils.translation import gettext_lazy as _
 class DocumentForm(forms.Form):
     docfile = forms.FileField(label='Select a file')
 
+
+class UserCacheMixin:
+    user_cache = None
+
+
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
@@ -29,11 +34,8 @@ class SignUpForm(UserCreationForm):
 
         return email
 
-class UserCacheMixin:
-    user_cache = None
 
-
-class SignIn(UserCacheMixin, forms.Form):
+class SignInForm(UserCacheMixin, forms.Form):
     password = forms.CharField(label=_('Password'), strip=False, widget=forms.PasswordInput)
 
     def __init__(self, *args, **kwargs):
@@ -54,7 +56,7 @@ class SignIn(UserCacheMixin, forms.Form):
         return password
 
 
-class SignInViaUsernameForm(SignIn):
+class SignInViaUsernameForm(SignInForm):
     username = forms.CharField(label=_('Username'))
 
     @property
@@ -78,7 +80,7 @@ class SignInViaUsernameForm(SignIn):
         return username
 
 
-class SignInViaEmailForm(SignIn):
+class SignInViaEmailForm(SignInForm):
     email = forms.EmailField(label=_('Email'))
 
     @property
@@ -86,6 +88,42 @@ class SignInViaEmailForm(SignIn):
         if settings.USE_REMEMBER_ME:
             return ['email', 'password', 'remember_me']
         return ['email', 'password']
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        user = User.objects.filter(email__iexact=email).first()
+        if not user:
+            raise ValidationError(_('You entered an invalid email address.'))
+
+        if not user.is_active:
+            raise ValidationError(_('This account is not active.'))
+
+        self.user_cache = user
+
+        return email
+
+
+class RestorePasswordForm(UserCacheMixin, forms.Form):
+    email = forms.EmailField(label=_('Email'))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        user = User.objects.filter(email__iexact=email).first()
+        if not user:
+            raise ValidationError(_('You entered an invalid email address.'))
+
+        if not user.is_active:
+            raise ValidationError(_('This account is not active.'))
+
+        self.user_cache = user
+
+        return email
+
+
+class RemindUsernameForm(UserCacheMixin, forms.Form):
+    email = forms.EmailField(label=_('Email'))
 
     def clean_email(self):
         email = self.cleaned_data['email']

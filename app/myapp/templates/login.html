@@ -22,9 +22,9 @@
         </form>
         <hr>
         <ul>
-            <li><a href="">{% trans 'Forgot your password?' %}</a></li>
-            <li><a href="">{% trans 'Forgot your username?' %}</a></li>
-            <li><a href="">{% trans 'Resend an activation code' %}</a></li>
+            <li><a href="{% url 'retrieve_password' %}">{% trans 'Forgot password' %}</a></li>
+            <li><a href="{% url 'remind_username' %}">{% trans 'Forgot username' %}</a></li>
+            <!-- <li><a href="">{% trans 'Resend the activation code' %}</a></li> -->
         </ul>
       </body>
 </html>
