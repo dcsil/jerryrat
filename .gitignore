@@ -1,5 +1,6 @@
 ### OSX ###
 .DS_Store
+<<<<<<< HEAD
 .AppleDouble
 .LSOverride
 
@@ -88,3 +89,19 @@ local_settings.py
 db.sqlite3
 /.vs/
 /.idea/
+=======
+app/myapp/migrations/__pycache__/0001_initial.cpython-39.pyc
+app/myapp/migrations/__pycache__/__init__.cpython-39.pyc
+app/myproject/__pycache__/__init__.cpython-39.pyc
+app/myproject/__pycache__/settings.cpython-39.pyc
+app/myproject/__pycache__/urls.cpython-39.pyc
+app/myproject/__pycache__/wsgi.cpython-39.pyc
+app/myapp/migrations/__pycache__/0001_initial.cpython-39.pyc
+app/myapp/migrations/__pycache__/__init__.cpython-39.pyc
+app/myproject/__pycache__/__init__.cpython-39.pyc
+app/myproject/__pycache__/settings.cpython-39.pyc
+app/myproject/__pycache__/urls.cpython-39.pyc
+app/myproject/__pycache__/wsgi.cpython-39.pyc
+*.pyc
+*.xlsx
+>>>>>>> aa0012f2349fbf87f579a88bc490ea52b7601333
