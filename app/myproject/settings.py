@@ -25,8 +25,9 @@ SECRET_KEY = '@2tcr%p+je0h#+ujlqu*s%ax!$s2%^w9rh%=eg2jv270o3p0+b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['herokujerryratapp.herokuapp.com', 'localhost', '127.0.0.1']
+
+SITE_ID = 1
 
 # Application definition
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'bootstrap4',
     'myapp',
 ]
 
@@ -73,13 +76,6 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATABASES = {
@@ -138,17 +134,36 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# ======================= User Accounts Settings =======================
+
+ENABLE_USER_ACTIVATION = False
+DISABLE_USERNAME = False
+LOGIN_VIA_EMAIL = True
+LOGIN_VIA_EMAIL_OR_USERNAME = False
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+USE_REMEMBER_ME = True
+
+RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
+ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE = True
+
+SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+if DISABLE_USERNAME:
+    SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+# ======================================================================
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -157,7 +172,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #  Add configuration for static files storage using whitenoise
@@ -252,7 +266,6 @@ def dj_heroku():
         pass
     except KeyError:
         pass
-
 
 dj_heroku()
 
