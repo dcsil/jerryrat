@@ -105,3 +105,10 @@ app/myproject/__pycache__/wsgi.cpython-39.pyc
 *.pyc
 *.xlsx
 >>>>>>> aa0012f2349fbf87f579a88bc490ea52b7601333
+app/.idea/vcs.xml
+app/.idea/app.iml
+app/.idea/inspectionProfiles/profiles_settings.xml
+app/.idea/inspectionProfiles/Project_Default.xml
+app/.idea/misc.xml
+app/.idea/modules.xml
+app/static/results/testUser1/testPred.csv
