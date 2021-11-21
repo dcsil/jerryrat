@@ -58,6 +58,7 @@ jobs:
       if: matrix.os == 'ubuntu-20.04'
     - name: Migrations
       run: |
+        python -m pip install tblib
         mysql --version
         cd app
         python manage.py makemigrations
