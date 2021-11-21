@@ -1,12 +1,11 @@
 import numpy as np
 import pandas as pd
 
-from predict import predict
-from preprocess import numeralizeCategory
-
+from myapp.pred.preprocess import numeralizeCategory
+import myapp.pred as pred
 
 def test(model, usedataset=False, threshold=0.5):
-    result = predict(model, usedataset, threshold)
+    result = pred.predict.predict(model, usedataset, threshold)
     acc = 0.0
     if usedataset:  # test on local dataset
         labels = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/testTarget.csv")).to_numpy()
