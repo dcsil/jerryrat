@@ -6,7 +6,8 @@ from django.contrib.auth.views import (
     LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
     PasswordResetDoneView as BasePasswordResetDoneView, PasswordResetConfirmView as BasePasswordResetConfirmView,
 )
-
+from django.core.files.storage import default_storage
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import redirect, render, get_object_or_404, reverse, HttpResponseRedirect
 from django.utils.safestring import mark_safe
 from django.utils.crypto import get_random_string
@@ -26,8 +27,14 @@ from .forms import *
 from .utils.tableUploader import *
 from .utils.userAccountUtils import *
 
+import os
 
 def data_entry_page(request):
+    # get into the user's folder
+    path = './users/' + request.user.get_username()
+    if not os.path.exists(path):
+        os.makedirs(path)
+    documents = os.listdir(path)
     message = 'Please upload your files'
     notice = "Allowing file types: xlsx, xlsm, xlsb, xls, csv\n\n" + \
              "File must be in specific formats, please see the following for the column specifications:\n" + \
@@ -43,16 +50,33 @@ def data_entry_page(request):
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
+            # upload to db for future training
             uploadFileToDB(newdoc.get_file_path())
+
+            # save to personal folder
+            newdoc = request.FILES['docfile']
+            fs = FileSystemStorage(location=path)
+            filename = fs.save(newdoc.name, newdoc)
+            uploaded_file_url = fs.url(filename)
+
+
+
+
+            print("=====================")
+            print(filename)
+            print("=====================")
+
+
+
             return redirect('data_entry_page')
         else:
             message = 'The form is not valid. Fix the following error:'
     else:
         form = DocumentForm()
-
-    documents = Document.objects.all()
+    # get this user's documents
     context = {'documents': documents, 'form': form, 'message': message, 'notice': notice, 'current': 'data_entry_page'}
     return render(request, 'data_entry_page.html', context)
+
 
 def campaign_customization_page(request):
     combo1 = CampaignComboContent(title="P1", description="P1 desc")
@@ -64,6 +88,7 @@ def campaign_customization_page(request):
     context = {"combos": combos, 'current': 'campaign_customization_page'}
     return render(request, 'campaign_customization_page.html', context)
 
+
 def analytics_dashboard_page(request):
     add_graph_form = AddGraphForm()
     if request.method == "POST":
@@ -73,13 +98,16 @@ def analytics_dashboard_page(request):
     all_graphs = Linechart.objects.all()
     return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs})
 
+
 def delete_graph(request, id):
     Linechart.objects.filter(id=id).delete()
     return redirect(reverse('analytics_dashboard_page'))
 
+
 def calling_operations_page(request):
     context = {'current': 'calling_operations_page'}
     return render(request, 'calling_operations_page.html', context)
+
 
 def model_controlls_page(request):
     m1 = PredictionModel(name="Worthy Client Prediction")
@@ -125,6 +153,7 @@ class SignUp(FormView):
 
         return redirect('/')
 
+
 class LogIn(FormView):
     template_name = 'login.html'
 
@@ -167,8 +196,10 @@ class LogIn(FormView):
 
         return redirect(settings.LOGIN_REDIRECT_URL)
 
+
 class LogOut(LoginRequiredMixin, BaseLogoutView):
     template_name = 'logout.html'
+
 
 class ChangePassword(BasePasswordChangeView):
     template_name = 'change_password.html'
@@ -183,6 +214,7 @@ class ChangePassword(BasePasswordChangeView):
         messages.success(self.request, _('Your password was changed.'))
         return redirect('change_password')
 
+
 class RemindUsername(FormView):
     template_name = 'remind_username.html'
     form_class = RemindUsernameForm
@@ -192,6 +224,7 @@ class RemindUsername(FormView):
         send_forgotten_username_email(user.email, user.username)
         messages.success(self.request, _('Your username has been successfully sent to your email.'))
         return redirect('remind_username')
+
 
 class RetrievePassword(FormView):
     template_name = 'retrieve_password.html'
@@ -212,6 +245,7 @@ class RetrievePassword(FormView):
 
         return redirect('retrieve_password')
 
+
 class RestorePasswordConfirm(BasePasswordResetConfirmView):
     template_name = 'retrieve_password_confirm.html'
 
@@ -221,6 +255,7 @@ class RestorePasswordConfirm(BasePasswordResetConfirmView):
         messages.success(self.request, _('Your password has been set. You may go ahead and log in now.'))
 
         return redirect('login')
+
 
 class RetrievePasswordDone(BasePasswordResetDoneView):
     template_name = 'retrieve_password_done.html'
