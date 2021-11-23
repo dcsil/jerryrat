@@ -31,7 +31,7 @@ import os
 
 def data_entry_page(request):
     # get into the user's folder
-    path = '../users/' + request.user.get_username()
+    path = './users/' + request.user.get_username()
     if not os.path.exists(path):
         os.makedirs(path)
     documents = os.listdir(path)
@@ -55,7 +55,7 @@ def data_entry_page(request):
 
             # save to personal folder
             newdoc = request.FILES['docfile']
-            fs = FileSystemStorage(location='../users/' + request.user.get_username())
+            fs = FileSystemStorage(location=path)
             filename = fs.save(newdoc.name, newdoc)
             uploaded_file_url = fs.url(filename)
 
