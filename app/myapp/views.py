@@ -54,6 +54,7 @@ def data_entry_page(request):
     context = {'documents': documents, 'form': form, 'message': message, 'notice': notice, 'current': 'data_entry_page'}
     return render(request, 'data_entry_page.html', context)
 
+
 def campaign_customization_page(request):
     combo1 = CampaignComboContent(title="P1", description="P1 desc")
     combo2 = CampaignComboContent(title="P2", description="P2 desc")
@@ -64,6 +65,7 @@ def campaign_customization_page(request):
     context = {"combos": combos, 'current': 'campaign_customization_page'}
     return render(request, 'campaign_customization_page.html', context)
 
+
 def analytics_dashboard_page(request):
     add_graph_form = AddGraphForm()
     if request.method == "POST":
@@ -73,13 +75,16 @@ def analytics_dashboard_page(request):
     all_graphs = Linechart.objects.all()
     return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs})
 
+
 def delete_graph(request, id):
     Linechart.objects.filter(id=id).delete()
     return redirect(reverse('analytics_dashboard_page'))
 
+
 def calling_operations_page(request):
     context = {'current': 'calling_operations_page'}
     return render(request, 'calling_operations_page.html', context)
+
 
 def model_controlls_page(request):
     m1 = PredictionModel(name="Worthy Client Prediction")
@@ -125,6 +130,7 @@ class SignUp(FormView):
 
         return redirect('/')
 
+
 class LogIn(FormView):
     template_name = 'login.html'
 
@@ -167,8 +173,10 @@ class LogIn(FormView):
 
         return redirect(settings.LOGIN_REDIRECT_URL)
 
+
 class LogOut(LoginRequiredMixin, BaseLogoutView):
     template_name = 'logout.html'
+
 
 class ChangePassword(BasePasswordChangeView):
     template_name = 'change_password.html'
@@ -183,6 +191,7 @@ class ChangePassword(BasePasswordChangeView):
         messages.success(self.request, _('Your password was changed.'))
         return redirect('change_password')
 
+
 class RemindUsername(FormView):
     template_name = 'remind_username.html'
     form_class = RemindUsernameForm
@@ -192,6 +201,7 @@ class RemindUsername(FormView):
         send_forgotten_username_email(user.email, user.username)
         messages.success(self.request, _('Your username has been successfully sent to your email.'))
         return redirect('remind_username')
+
 
 class RetrievePassword(FormView):
     template_name = 'retrieve_password.html'
@@ -212,6 +222,7 @@ class RetrievePassword(FormView):
 
         return redirect('retrieve_password')
 
+
 class RestorePasswordConfirm(BasePasswordResetConfirmView):
     template_name = 'retrieve_password_confirm.html'
 
@@ -221,6 +232,7 @@ class RestorePasswordConfirm(BasePasswordResetConfirmView):
         messages.success(self.request, _('Your password has been set. You may go ahead and log in now.'))
 
         return redirect('login')
+
 
 class RetrievePasswordDone(BasePasswordResetDoneView):
     template_name = 'retrieve_password_done.html'
