@@ -9,7 +9,7 @@ page_names = ['data_entry_page',
               'campaign_customization_page']
 
 urlpatterns = [
-    path('', data_entry_page, name='data_entry_page'),
+    path('', LogIn.as_view(), name='login'),
     path('signup/', SignUp.as_view(), name='signup'),
     path('login/', LogIn.as_view(), name='login'),
     path('logout/', LogOut.as_view(), name='logout'),
