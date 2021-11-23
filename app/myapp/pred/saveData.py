@@ -5,11 +5,13 @@ import os
 # result has the potential user's info and corresponding result
 # takes in userID and taskname to create new prediction result file
 
-def saveData(userId='testUser1', predName='testPred', predictList='../../static/dataset/testdatabase.csv', predictResult=np.array([1, 1, 0])):
+
+def saveData(request, predName='testPred', predictList='../../static/dataset/testdatabase.csv', predictResult=np.array([1, 1, 0])):
+    userId = request.user.get_username()
     df = pandas.read_csv(predictList)
     for i in range(len(df['y'])):
         df.at[i, 'y'] = predictResult[i]
-    path = "../../static/results/" + userId
+    path = "../../users/" + userId + "/result"
     try:
         os.makedirs(path)
     except FileExistsError:

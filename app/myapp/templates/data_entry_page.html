@@ -18,10 +18,10 @@
        </div>
         <div class="content">
             {% if documents %}
-                All documents in the database:
+                All of User {{request.user.get_username}}'s data in DataBase:
                 <ul>
                     {% for document in documents %}
-                        <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                        <li><a href="/media/{{document}}">{{ document}}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}
