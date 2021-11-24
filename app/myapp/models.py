@@ -7,15 +7,14 @@ from django.forms import ModelForm
 import plotly.graph_objs as go
 from random import uniform
 
-AXES = (('age', 'age'), ('month', 'month'), ('day_of_week', 'day_of_week'), 
-        ('duration', 'duration'), ('campaign', 'campaign'), ('pdays', 'pdays'), 
-        ('previous', 'previous'))
+X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'), ('housing', 'housing'), ('loan', 'loan'))
+Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
 CHART_TYPES = (('Line Chart', 'Line Chart'), ('Bar Chart', 'Bar Chart'), ('Pie Chart', 'Pie Chart'))
 
 class Linechart(models.Model):
     id = models.AutoField(primary_key=True)
-    xaxis = models.CharField(max_length=32, choices=AXES, default=AXES[0][0])
-    yaxis = models.CharField(max_length=32, choices=AXES, default=AXES[0][0])
+    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+    yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
     title = models.CharField(max_length=64)
     created_at = models.DateTimeField(auto_now=True)
     # graphs = models.ForeignKey(Graph, null=True, related_name="graphs", on_delete=models.CASCADE)
