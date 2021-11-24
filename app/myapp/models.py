@@ -79,6 +79,33 @@ class Barchart(models.Model):
         fig = go.Figure(data=[
             go.Bar(name=k, x=x_data, y=[info[k]]) for i, k in enumerate(info)
         ])
+        fig.layout.update(title=self.title)
+        fig.layout.update(
+            xaxis_title=self.xaxis,
+            yaxis_title=self.yaxis,
+            title={
+                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
+                        'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+                'x': 0.1
+            },
+            xaxis=dict(
+                rangeslider=dict(
+                    visible=True,
+                    autorange=True,
+                    range=[min(self.x), max(self.x)]
+                ),
+                type="linear"
+            ),
+            font=dict(size=12, color="gray")
+        )
+        plot_div = plot(fig, output_type='div', auto_open=False, 
+                        config=dict(
+                            displayModeBar=True,
+                            displaylogo=False,
+                        )
+                    )
+        return plot_div
+
 
 
 

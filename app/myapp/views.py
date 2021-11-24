@@ -95,7 +95,7 @@ def analytics_dashboard_page(request):
         add_graph_form = AddGraphForm(request.POST or None)
         if add_graph_form.is_valid():
             add_graph_form.save()
-    all_graphs = Linechart.objects.all()
+    all_graphs = Barchart.objects.all()
     return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs})
 
 
