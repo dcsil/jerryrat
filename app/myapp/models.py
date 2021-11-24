@@ -75,12 +75,8 @@ class Barchart(models.Model):
     def get_barchart(self):
         x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
         x_data, info = get_graph_data(x, y)
-        for i, k in enumerate(info):
-            print(str(k))
-            print(x_data)
-            print(info[k])
         fig = go.Figure(data=[
-            go.Bar(name=str(k), x=x_data, y=[info[k]]) for _, k in enumerate(info)
+            go.Bar(name=str(k), x=x_data, y=info[k]) for _, k in enumerate(info)
         ])
         fig.layout.update(title=self.title)
         fig.layout.update(barmode='stack')
