@@ -100,7 +100,7 @@ def analytics_dashboard_page(request):
 
 
 def delete_graph(request, id):
-    Linechart.objects.filter(id=id).delete()
+    Barchart.objects.filter(id=id).delete()
     return redirect(reverse('analytics_dashboard_page'))
 
 

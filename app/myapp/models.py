@@ -3,7 +3,6 @@ from django import forms
 from plotly.offline import plot
 from django.contrib.postgres.fields import ArrayField
 from django.forms import ModelForm
-# import plotly.plotly as py
 import plotly.graph_objs as go
 from random import uniform
 from.utils.graphUtils import *
@@ -74,28 +73,25 @@ class Barchart(models.Model):
 
     @property
     def get_barchart(self):
-        x, y = get_metric_idx(self.xaxis, self.yaxis)
+        x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
         x_data, info = get_graph_data(x, y)
+        for i, k in enumerate(info):
+            print(str(k))
+            print(x_data)
+            print(info[k])
         fig = go.Figure(data=[
-            go.Bar(name=k, x=x_data, y=[info[k]]) for i, k in enumerate(info)
+            go.Bar(name=str(k), x=x_data, y=[info[k]]) for _, k in enumerate(info)
         ])
         fig.layout.update(title=self.title)
+        fig.layout.update(barmode='stack')
         fig.layout.update(
             xaxis_title=self.xaxis,
             yaxis_title=self.yaxis,
             title={
                 'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
-                        'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+                        'Stack Bar Chart for ' + self.yaxis + ' vs ' + self.xaxis,
                 'x': 0.1
             },
-            xaxis=dict(
-                rangeslider=dict(
-                    visible=True,
-                    autorange=True,
-                    range=[min(self.x), max(self.x)]
-                ),
-                type="linear"
-            ),
             font=dict(size=12, color="gray")
         )
         plot_div = plot(fig, output_type='div', auto_open=False, 
@@ -105,19 +101,6 @@ class Barchart(models.Model):
                         )
                     )
         return plot_div
-
-
-
-
-class AddGraphForm(ModelForm):
-    class Meta:
-        model = Linechart
-        fields = '__all__'
-        exclude = ['created_at']
-        widgets = {
-            'title': forms.TextInput(attrs={'placeholder': "Please enter the title of the new graph", 'style': 'width: 400px', 'class': 'form-control'})
-            # 'graph_type': forms.TextInput(attrs={'placeholder': "Please enter the type of the new graph"})
-        }
 
 
 class Document(models.Model):

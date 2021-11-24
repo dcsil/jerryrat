@@ -1,13 +1,25 @@
 from django import forms
 from datetime import timedelta
+from myapp.models import Barchart, Linechart
 
-from django.forms import ValidationError
+from django.forms import ValidationError, ModelForm
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
+
+
+class AddGraphForm(ModelForm):
+    class Meta:
+        model = Barchart
+        fields = '__all__'
+        exclude = ['created_at']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': "Please enter the title of the new graph", 'style': 'width: 400px', 'class': 'form-control'})
+            # 'graph_type': forms.TextInput(attrs={'placeholder': "Please enter the type of the new graph"})
+        }
 
 
 class DocumentForm(forms.Form):

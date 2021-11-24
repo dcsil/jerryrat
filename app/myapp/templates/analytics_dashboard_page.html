@@ -17,7 +17,7 @@
             {% if all_graphs %}
                 {% for graph in all_graphs %}
                     <div class="wrapper">
-                        <div class="linechart">{{ graph.line_chart | safe }}</div>
+                        <div class="linechart">{{ graph.get_barchart | safe }}</div>
                         <button type="button" class="btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addGraph">
                             {% csrf_token %}
                             <strong>Configure</strong>
