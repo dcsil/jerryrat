@@ -6,6 +6,7 @@ from django.forms import ModelForm
 # import plotly.plotly as py
 import plotly.graph_objs as go
 from random import uniform
+from.utils.graphUtils import *
 
 X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'), ('housing', 'housing'), ('loan', 'loan'))
 Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
@@ -17,7 +18,6 @@ class Linechart(models.Model):
     yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
     title = models.CharField(max_length=64)
     created_at = models.DateTimeField(auto_now=True)
-    # graphs = models.ForeignKey(Graph, null=True, related_name="graphs", on_delete=models.CASCADE)
 
     class Meta:
         ordering = ("created_at",)
@@ -57,6 +57,27 @@ class Linechart(models.Model):
                         )
                     )
         return plot_div
+
+
+class Barchart(models.Model):
+    id = models.AutoField(primary_key=True)
+    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+    yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
+    title = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("created_at",)
+
+    def set_axis(self, x, y):
+        self.x, self.y = x, y
+
+    @property
+    def get_barchart(self):
+        x, y = get_metric_idx(self.xaxis, self.yaxis)
+        x_data, info = get_graph_data(x, y)
+
+
 
 
 class AddGraphForm(ModelForm):
