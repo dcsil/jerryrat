@@ -68,8 +68,8 @@ span {
 }
 
 .js-plotly-plot .plotly .modebar {
-  margin-top: 382px;
-  transform: translateX(-135%);
+  margin-top: 402px;
+  transform: translateX(-105%);
 }
 
 .js-plotly-plot .plotly .modebar .modebar-group:nth-of-type(4) {

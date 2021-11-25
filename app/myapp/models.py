@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.forms import ModelForm
 import plotly.graph_objs as go
 from random import uniform
-from.utils.graphUtils import *
+from .pred.readData import *
 
 X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'), ('housing', 'housing'), ('loan', 'loan'))
 Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
