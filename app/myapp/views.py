@@ -103,6 +103,22 @@ def delete_graph(request, id):
     Barchart.objects.filter(id=id).delete()
     return redirect(reverse('analytics_dashboard_page'))
 
+def configure_graph(request, id):
+    add_graph_form = AddGraphForm()
+    new_xaxis, new_yaxis, new_title = None, None, None
+    if request.method == "POST":
+        add_graph_form = AddGraphForm(request.POST or None)
+        if add_graph_form.is_valid():
+            new_xaxis = add_graph_form.cleaned_data.get('xaxis')
+            new_yaxis = add_graph_form.cleaned_data.get('yaxis')
+            new_title = add_graph_form.cleaned_data.get('title')
+    Barchart.objects.filter(id=id).update(
+        xaxis = new_xaxis,
+        yaxis = new_yaxis,
+        title = new_title
+    )
+    return redirect(reverse('analytics_dashboard_page'))
+
 
 def calling_operations_page(request):
     context = {'current': 'calling_operations_page'}

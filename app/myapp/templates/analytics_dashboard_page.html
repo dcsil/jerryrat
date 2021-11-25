@@ -18,10 +18,10 @@
                 {% for graph in all_graphs %}
                     <div class="wrapper">
                         <div class="linechart">{{ graph.get_barchart | safe }}</div>
-                        <button type="button" class="btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addGraph">
-                            {% csrf_token %}
-                            <strong>Configure</strong>
-                        </button>
+                            <button type="button" class="btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addGraph">
+                                {% csrf_token %}
+                                <strong>Configure</strong>
+                            </button>
                         <a href="{% url 'delete_graph' graph.pk %}" type="button" class="btn-delete btn btn-outline-danger btn-sm">
                             <strong>Delete</strong>
                         </a>
@@ -49,8 +49,8 @@
                     </div>
                     <div class="modal-body">
                         {% if add_graph_form %}
-                        <form method="POST" action="{% url 'analytics_dashboard_page' %}">
-                            {% csrf_token %}
+                        <!-- <form method="POST" action="{% url 'analytics_dashboard_page' %}"> -->
+                            <!-- {% csrf_token %} -->
                             <div class="form-group">
                                 <label for="title" class="col-form-label">Title:</label>
                                 <span><div id="title">{{ add_graph_form.title }}</div></span>
@@ -69,11 +69,11 @@
                             <div class="modal-footer">
                                 <div class="btn-group float-right" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                    <a href="{% url 'configure_graph' graph.pk %}"><button type="submit" class="btn btn-primary">Confirm</button></a>
                                 </div>
                             </div>
                             
-                        </form>
+                        <!-- </form> -->
                         {% endif %}
                     </div>
 
