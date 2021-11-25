@@ -18,10 +18,12 @@
                 {% for graph in all_graphs %}
                     <div class="wrapper">
                         <div class="linechart">{{ graph.get_barchart | safe }}</div>
+                        <a href="{% url 'configure_graph' graph.pk %}">
                             <button type="button" class="btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addGraph">
                                 {% csrf_token %}
                                 <strong>Configure</strong>
                             </button>
+                        </a>
                         <a href="{% url 'delete_graph' graph.pk %}" type="button" class="btn-delete btn btn-outline-danger btn-sm">
                             <strong>Delete</strong>
                         </a>
@@ -69,7 +71,7 @@
                             <div class="modal-footer">
                                 <div class="btn-group float-right" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <a href="{% url 'configure_graph' graph.pk %}"><button type="submit" class="btn btn-primary">Confirm</button></a>
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
                                 </div>
                             </div>
                             

@@ -11,6 +11,7 @@ X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 
 Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
 CHART_TYPES = (('Line Chart', 'Line Chart'), ('Bar Chart', 'Bar Chart'), ('Pie Chart', 'Pie Chart'))
 
+
 class Linechart(models.Model):
     id = models.AutoField(primary_key=True)
     xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
@@ -30,6 +31,8 @@ class Linechart(models.Model):
         self.set_axis(x, y)
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=self.x, y=self.y))
+
+
         fig.layout.update(title=self.title)
         fig.layout.update(
             xaxis_title=self.xaxis,
@@ -68,9 +71,6 @@ class Barchart(models.Model):
     class Meta:
         ordering = ("created_at",)
 
-    def set_axis(self, x, y):
-        self.x, self.y = x, y
-
     @property
     def get_barchart(self):
         x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
@@ -98,6 +98,54 @@ class Barchart(models.Model):
                     )
         return plot_div
 
+
+class DoubleBarChart(models.Model):
+    id = models.AutoField(primary_key=True)
+    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+    title = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("created_at",)
+
+    @property
+    def get_double_barchart(self):
+        x = get_metric_idx(self.xaxis)
+        x_data, info = get_graph_data(x, 21)
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            x=x_data,
+            y=info[0],
+            name='Yes',
+            marker_color='indianred'
+        ))
+        fig.add_trace(go.Bar(
+            x=x_data,
+            y=info[1],
+            name='No',
+            marker_color='lightsalmon'
+        ))
+        fig.layout.update(title=self.title)
+        fig.layout.update(barmode='group', xaxis_tickangle=-45)
+        fig.layout.update(
+            xaxis_title=self.xaxis,
+            yaxis_title=self.yaxis,
+            title={
+                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
+                        'Stack Bar Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+                'x': 0.1
+            },
+            font=dict(size=12, color="gray")
+        )
+        plot_div = plot(fig, output_type='div', auto_open=False, 
+                        config=dict(
+                            displayModeBar=True,
+                            displaylogo=False,
+                        )
+                    )
+        return plot_div
+
+        
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
