@@ -22,6 +22,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, FormView
 from django.conf import settings
 
+from .datapipe import customize_config
 from .models import *
 from .forms import *
 from .utils.tableUploader import *
@@ -110,10 +111,15 @@ def calling_operations_page(request):
 
 
 def model_controlls_page(request):
-    m1 = PredictionModel(name="Worthy Client Prediction")
-    m2 = PredictionModel(name="Campaign Result Prediction")
-    m3 = PredictionModel(name="Cost Efficiency Prediction")
-    context = {'current': 'model_controlls_page', 'models': [m1, m2, m3]}
+    user = request.user.get_username()
+    context = {'current': 'model_controlls_page'}
+    config = {}
+    print(request.user.get_username())
+    if request.method == 'POST':
+        for i in request.POST:
+            config[i] = request.POST[i]
+        customize_config.customize_config(config, request.user.get_username())
+
     return render(request, 'model_controlls_page.html', context)
 
 
