@@ -1,33 +1,58 @@
 {%  extends 'main.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
 {% block content %}
 
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Model Control</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Model Control</title>
+    <style>
+        .data-tab {
+            width: 400px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
 
-    <body>
-        <div style="margin-left: 25pt;">
-           <h4>
-               <strong>Models</strong>
-           </h4>
-        </div>
-        {% for mod in models %}
-            <div style="margin-left: 25pt; display: inline-block; width: 30%; padding-top: 30px;">
-                <h5>
-                    <a href="#">
-                    {{ mod.model_name }}
-                    </a>
-                </h5>
-                <div style="margin-left: 30px;">
-                    <img src="../static/images/model_icon.png" style="width: 60%; height: auto">
-                </div>
+<body>
+<div style="margin-left: 25pt;">
+    <h4>
+        <strong>Models Configurations</strong>
+    </h4>
+</div>
+<form method="post">
+    {% csrf_token %}
+        <div style="margin-left: 25pt;" class="form-group">
+            <div class="data-tab">
+                <label>Number of Rows Fetched</label>
+                <input type="number" class="form-control" name="numFetchRows" placeholder="Rows Fetched...">
             </div>
 
-        {% endfor %}
-    </body>
+            <div class="data-tab">
+                <label>Update Period</label>
+                <input type="number" class="form-control" name="period" placeholder="Period...">
+            </div>
+
+            <div class="data-tab">
+                <label>Starting Data ID</label>
+                <input type="number" class="form-control" name="startdataid" placeholder="Start From...">
+            </div>
+
+            <div class="data-tab">
+                <label>Learning Rate</label>
+                <input type="number" class="form-control" name="eta" placeholder="Learning Rate...">
+            </div>
+            <div class="data-tab">
+                <label>Max ML Network Depth</label>
+                <input type="number" class="form-control" name="max_depth" placeholder="Depth...">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
+        </div>
+    </form>
+
+</body>
 </html>
 
 {% endblock %}
