@@ -18,3 +18,7 @@ def readData(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 
     data = pandas.DataFrame(r)
     # return a numeralized data
     return preprocess.numeralizeCategory(data)
+
+if __name__ == "__main__":
+    df = readData(user="root", password="zjm19990118", host="localhost", database="jerryratdb")
+    print(df.dtypes)
