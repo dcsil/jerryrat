@@ -22,7 +22,6 @@ class Entity:
             self.model = load_model(model_path)
 
         if os.path.exists(config_path):
-            # TODO: realize param customization page and functionality
             self.params = load_config(config_path)
         else:
             # default params for init
@@ -63,7 +62,9 @@ class Entity:
         self.model = model
 
     def customize_config(self, configs={}):
-        #TODO: test when developing model configuration page
+        """
+        use this method to customize the model
+        """
         customize_config(configs)
 
     def predict(self, usedataset=False, threshold=0.5):
