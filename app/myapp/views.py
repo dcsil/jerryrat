@@ -96,7 +96,8 @@ def analytics_dashboard_page(request):
         if add_graph_form.is_valid():
             add_graph_form.save()
     all_graphs = Barchart.objects.all()
-    return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs})
+    dbc = DoubleBarChart(xaxis="education", title="test")
+    return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc': dbc})
 
 
 def delete_graph(request, id):

@@ -33,7 +33,8 @@ def readData(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 
     r = conn.fetchall()
     data = pandas.DataFrame(r)
     # return a numeralized data
-    return numeralizeCategory(data)
+    # return numeralizeCategory(data)
+    return data
 
 
 ref = {
@@ -43,6 +44,7 @@ ref = {
 
 def get_graph_data(x, y):
   data = readData()
+  print(data)
   x_data = data[x].unique()
   info = {}
   for e in data[y].unique():

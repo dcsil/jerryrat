@@ -32,7 +32,6 @@ class Linechart(models.Model):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=self.x, y=self.y))
 
-
         fig.layout.update(title=self.title)
         fig.layout.update(
             xaxis_title=self.xaxis,
@@ -115,13 +114,13 @@ class DoubleBarChart(models.Model):
         fig = go.Figure()
         fig.add_trace(go.Bar(
             x=x_data,
-            y=info[0],
+            y=info["yes"],
             name='Yes',
             marker_color='indianred'
         ))
         fig.add_trace(go.Bar(
             x=x_data,
-            y=info[1],
+            y=info["no"],
             name='No',
             marker_color='lightsalmon'
         ))
@@ -129,10 +128,10 @@ class DoubleBarChart(models.Model):
         fig.layout.update(barmode='group', xaxis_tickangle=-45)
         fig.layout.update(
             xaxis_title=self.xaxis,
-            yaxis_title=self.yaxis,
+            yaxis_title="results",
             title={
                 'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
-                        'Stack Bar Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+                        'Stack Bar Chart for ' + 'results' + ' vs ' + self.xaxis,
                 'x': 0.1
             },
             font=dict(size=12, color="gray")
