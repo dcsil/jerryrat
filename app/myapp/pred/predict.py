@@ -1,30 +1,36 @@
 import pandas as pd
 import xgboost as xgb
 
-from load_model import load_model
-from preprocess import numeralizeCategory, binarizePrediction
+from app.myapp.pred.preprocess import numeralizeCategory, binarizePrediction
 
-def predict(model, usedataset=False, threshold=0.5):
+def predict(model, usedataset=False, threshold=0.5, runtimePred=False, feedData=None):
     result = None
-    if not usedataset:
-        result = predict_database(model, threshold)
+    if runtimePred:
+        #TODO: predict on user's given data
+        pass
     else:
-        result = predict_locally(model, threshold)
+        if not usedataset:
+            result = predict_database(model, threshold, feedData)
+        else:
+            result = predict_locally(model, threshold)
     return result
 
 def predict_locally(model, threshold):
     testData = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/testData.csv"))
-    testTarget = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/testTarget.csv"))
 
-    D_test = xgb.DMatrix(testData, label=testTarget, enable_categorical=True)
+    D_test = xgb.DMatrix(testData, enable_categorical=True)
     result = model.predict(D_test)
     result = binarizePrediction(result, threshold)
 
     return result
 
-def predict_database(model, threshold):
-    # TODO: connect to data pipeline and feed data from database to model for prediction
-    pass
+def predict_database(model, threshold, feedData):
+    assert (not (feedData is None))
+
+    D_pred = xgb.DMatrix(feedData.drop(columns=["y"]), enable_categorical=True)
+    result = model.predict(D_pred)
+    result = binarizePrediction(result, threshold)
+    return result
 
 
 if __name__ == "__main__":

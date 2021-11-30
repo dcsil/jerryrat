@@ -1,22 +1,24 @@
 import os
 import json
 
-from checkpoint import getCheckpoint
 from customize_config import customize_config
-from load_model import load_model
-from load_config import load_config
-from predict import predict
-from test import test
-from train import train
+from app.myapp.pred.load_model import load_model
+from app.myapp.pred.load_config import load_config
+from app.myapp.pred.predict import predict
+from app.myapp.pred.test import test
+from app.myapp.pred.train import train
+from pathlib import Path
 
 # interface of the model
 class Entity:
-    def __init__(self, model_path="./models/exec/model_init.json", config_path="./configs/config_init.json"):
+    def __init__(self):
         self.model = None
         self.params = None
 
-        if not os.path.exists("./checkpoint"):
-            os.makedirs("./checkpoint")
+        # if not os.path.exists("../../../future/checkpoint"):
+        #     os.makedirs("../../../future/checkpoint")
+        model_path = Path.joinpath(Path(__file__).parent, Path("models/exec/model.json")).resolve()
+        config_path = Path.joinpath(Path(__file__).parent, Path("configs/config.json")).resolve()
 
         if os.path.exists(model_path):
             self.model = load_model(model_path)
@@ -35,30 +37,32 @@ class Entity:
                 "lambda": 1,  # L2 regularization
             }
 
-            if not os.path.exists('./configs'):
-                os.makedirs('./configs')
-            with open('./configs/config_init.json', 'w') as fp:
+            if not os.path.exists(Path.joinpath(Path(__file__).parent, Path("configs")).resolve()):
+                os.makedirs(Path.joinpath(Path(__file__).parent, Path("configs")).resolve())
+            with open(Path.joinpath(Path(__file__).parent, Path("configs/config_init.json")).resolve(), 'w') as fp:
                 json.dump(self.params, fp, indent=0)
-            with open('./configs/config.json', 'w') as fp:
+            with open(Path.joinpath(Path(__file__).parent, Path("configs/config.json")), 'w') as fp:
                 json.dump(self.params, fp, indent=0)
 
-        if not os.path.exists("./models"):
-            os.makedirs("./models")
-            os.makedirs("./models/exec")
-            os.makedirs("./models/schema")
+        if not os.path.exists(Path.joinpath(Path(__file__).parent, Path("models")).resolve()):
+            os.makedirs(Path.joinpath(Path(__file__).parent, Path("models")).resolve())
+            os.makedirs(Path.joinpath(Path(__file__).parent, Path("models/exec")).resolve())
+            os.makedirs(Path.joinpath(Path(__file__).parent, Path("models/schema")).resolve())
 
-        checkpoint_path = "checkpoint/checkpoint.json"
-        if not os.path.exists("checkpoint/checkpoint.json"):
-            with open(checkpoint_path, "w") as fp:
-                checkpoint = {"checkpoint": 0}
-                json.dump(checkpoint, fp, indent=0)
+        # deal with checkpoint
+        # checkpoint_path = "../../../future/checkpoint/checkpoint.json"
+        # if not os.path.exists("../../../future/checkpoint/checkpoint.json"):
+        #     with open(checkpoint_path, "w") as fp:
+        #         checkpoint = {"checkpoint": 0}
+        #         json.dump(checkpoint, fp, indent=0)
 
         if not self.model:
             self.model = self.train(useDataset=True, model_init=True)
 
-    def train(self, useDataset=False, steps=20, model_init=False, savemodel=True):
-        checkpoint = getCheckpoint()
-        model = train(self.model, self.params, useDataset, steps, model_init, savemodel, checkpoint)
+    def train(self, useDataset=False, steps=20, model_init=False, savemodel=True, feedData=None):
+        # checkpoint = getCheckpoint()
+        model = train(self.model, self.params, useDataset, steps, model_init, savemodel, feedData)
+        # setCheckpoint(checkpoint + 1)
         self.model = model
 
     def customize_config(self, configs={}):
@@ -67,12 +71,12 @@ class Entity:
         """
         customize_config(configs)
 
-    def predict(self, usedataset=False, threshold=0.5):
-        result = predict(self.model, usedataset, threshold)
+    def predict(self, usedataset=False, threshold=0.5, runtimePred=False, feedData=None):
+        result = predict(self.model, usedataset, threshold, runtimePred, feedData)
         return result
 
-    def test(self, usedataset=False, threshold=0.5):
-        acc = test(self.model, usedataset, threshold)
+    def test(self, usedataset=False, threshold=0.5, feedData=None):
+        acc = test(self.model, usedataset, threshold, feedData)
         return acc
 
 if __name__ == "__main__":

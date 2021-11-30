@@ -1,40 +1,50 @@
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
-import json
+# import json
 import os
 import pandas as pd
+from pathlib import Path
+import time
 
-from load_model import load_model
-from load_config import load_config
-from preprocess import numeralizeCategory
+from app.myapp.pred.load_model import load_model
+from app.myapp.pred.preprocess import numeralizeCategory
 
 
-def train(model=None, params=None, useDataset=False, steps=20, model_init=False, savemodel=True, checkpoint=0):
+def train(model=None, params=None, useDataset=False, steps=20, model_init=False, savemodel=True, feedData=None):
 
-    model = train_model(model, params, useDataset, steps)
+    model = train_model(model, params, useDataset, steps, feedData)
 
     # save the init model
     # xgb.save_model: not human readable but loadable for train continuation
     # xgb.dump_model: human readable schema but not loadable for train continuation
     if savemodel:
         if model_init:
-            model.save_model("./models/exec/model_init.json")
-            model.dump_model("./models/schema/model_init_schema.json")
-        else:
-            model.save_model("./models/exec/model_{}.json".format(checkpoint))
-            model.dump_model("./models/schema/model_{}_schema.json".format(checkpoint))
 
-            # continue training the modek and update by checkpoint + 1
-            checkpoint_path = "checkpoint/checkpoint.json"
-            with open(checkpoint_path, "w") as fp:
-                checkpoint = {"checkpoint": checkpoint}
-                json.dump(checkpoint, fp, indent=0)
+            model.save_model(Path.joinpath(Path(__file__).parent, Path("models/exec/model_init.json")).resolve())
+            model.dump_model(Path.joinpath(Path(__file__).parent,
+                                           Path("models/schema/model_init_schema.json.json")).resolve())
+        else:
+            model.save_model(Path.joinpath(Path(__file__).parent, Path("models/exec/model.json")).resolve())
+            model.dump_model(Path.joinpath(Path(__file__).parent,
+                                           Path("models/schema/model_schema.json.json")).resolve())
+
+            t = time.localtime()
+            current_time = time.strftime("%H:%M:%S", t)
+
+            # continue training the model and update by checkpoint + 1
+            # checkpoint_path = "../../../future/checkpoint/checkpoint.json"
+            # if not os.path.exists(checkpoint_path):
+            #     with open(checkpoint_path, "w") as fp:
+            #         checkpoint = {"checkpoint": checkpoint}
+            #         json.dump(checkpoint, fp, indent=0)
+        print("model saved at time {}".format(current_time))
     return model
 
 
-def train_model(model=None, params=None, useDataset=False, steps=100):
+def train_model(model=None, params=None, useDataset=False, steps=100, feedData=None):
     if not useDataset:
-        model = train_database(model, params, steps)
+        assert not (feedData is None)
+        model = train_database(model, params, steps, feedData)
     else:
         model = train_locally(model, params, steps)
     return model
@@ -43,9 +53,11 @@ def train_model(model=None, params=None, useDataset=False, steps=100):
 def train_locally(model, params, steps):
     # train the init model on local dataset
     # and split into train, test and validation set
-    if not os.path.exists("../../static/dataset/mvptest"):
-        df1 = pd.read_csv("../../static/dataset/bank-additional.csv")
-        df2 = pd.read_csv("../../static/dataset/bank-additional-full.csv")
+    dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
+
+    if not os.path.exists((dataset_path / Path("mvptest")).resolve()):
+        df1 = pd.read_csv((dataset_path / Path("bank-additional.csv")).resolve())
+        df2 = pd.read_csv((dataset_path / Path("bank-additional-full.csv")).resolve())
 
         df_all = pd.concat([df1, df2])
         trainValTest = df_all.iloc[0:25000]
@@ -66,15 +78,16 @@ def train_locally(model, params, steps):
         testTarget = testTarget.to_frame()
         valTarget = valTarget.to_frame()
 
-        os.makedirs("../../static/dataset/mvptest")
-        otherForDatabaseNoTarget.to_csv("../../static/dataset/mvptest/mvpDatabaseData.csv", index=False)
-        otherForDatabaseTarget.to_csv("../../static/dataset/mvptest/mvpDatabaseTarget.csv", index=False)
-        trainData.to_csv("../../static/dataset/mvptest/trainData.csv", index=False)
-        testData.to_csv("../../static/dataset/mvptest/testData.csv", index=False)
-        valData.to_csv("../../static/dataset/mvptest/valData.csv", index=False)
-        trainTarget.to_csv("../../static/dataset/mvptest/trainTarget.csv", index=False)
-        testTarget.to_csv("../../static/dataset/mvptest/testTarget.csv", index=False)
-        valTarget.to_csv("../../static/dataset/mvptest/valTarget.csv", index=False)
+        os.makedirs((dataset_path / Path("mvptest")).resolve())
+        otherForDatabaseNoTarget.to_csv((dataset_path / Path("mvptest/mvpDatabaseData.csv")).resolve(), index=False)
+        otherForDatabaseTarget.to_csv((dataset_path / Path("mvptest/mvpDatabaseTarget.csv")).resolve(),
+                                      index=False)
+        trainData.to_csv((dataset_path / Path("mvptest/trainData.csv")).resolve(), index=False)
+        testData.to_csv((dataset_path / Path("mvptest/testData.csv")).resolve(), index=False)
+        valData.to_csv((dataset_path / Path("mvptest/valData.csv")).resolve(), index=False)
+        trainTarget.to_csv((dataset_path / Path("mvptest/trainTarget.csv")).resolve(), index=False)
+        testTarget.to_csv((dataset_path / Path("mvptest/testTarget.csv")).resolve(), index=False)
+        valTarget.to_csv((dataset_path / Path("mvptest/valTarget.csv")).resolve(), index=False)
 
         trainData = numeralizeCategory(trainData)
         trainTarget = numeralizeCategory(trainTarget)
@@ -86,10 +99,10 @@ def train_locally(model, params, steps):
         model = xgb.train(params, D_train, steps, xgb_model=model, evals=[(D_train, "train"), (D_val, "validation")],
                           early_stopping_rounds=50)
     else:  # data for training, testing and validation have been split
-        trainData = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/trainData.csv"))
-        trainTarget = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/trainTarget.csv"))
-        valData = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/valData.csv"))
-        valTarget = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/valTarget.csv"))
+        trainData = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/trainData.csv")).resolve()))
+        trainTarget = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/trainTarget.csv")).resolve()))
+        valData = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valData.csv")).resolve()))
+        valTarget = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valTarget.csv")).resolve()))
 
         D_train = xgb.DMatrix(trainData, label=trainTarget, enable_categorical=True)
         D_val = xgb.DMatrix(valData, label=valTarget, enable_categorical=True)
@@ -98,15 +111,22 @@ def train_locally(model, params, steps):
     return model
 
 
-def train_database(model, params, steps):
-    # TODO: pass train data from the database (mvpdataset data)
+def train_database(model, params, steps, feedData):
+    dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
+    valData = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valData.csv")).resolve()))
+    valTarget = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valTarget.csv")).resolve()))
+
+    D_train = xgb.DMatrix(feedData.drop(columns=['y']), label=feedData["y"].to_frame(), enable_categorical=True)
+    D_val = xgb.DMatrix(valData, label=valTarget, enable_categorical=True)
+    model = xgb.train(params, D_train, steps, xgb_model=model, evals=[(D_train, "train"), (D_val, "validation")],
+                      early_stopping_rounds=50)
     return model
 
 
 if __name__ == "__main__":
     import shutil
 
-    dirpath = "../../static/dataset/mvptest"
+    dirpath = (Path(__file__).parent.parent.parent / Path("static/dataset/mvptest")).resolve()
     params = {
         "eta": 0.3,  # learning_rate
         "gamma": 0,  # min_split_loss
@@ -121,5 +141,5 @@ if __name__ == "__main__":
         shutil.rmtree(dirpath)
         train(params=params, useDataset=True, model_init=True)
     # test train func when dataset is initialized
-    model = load_model("./models/exec/model_init.json")
+    model = load_model((Path(__file__).parent / Path("models/exec/model_init.json")).resolve())
     train(params=params, model=model, useDataset=True)
