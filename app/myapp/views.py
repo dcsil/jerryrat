@@ -27,12 +27,12 @@ from .models import *
 from .forms import *
 from .utils.tableUploader import *
 from .utils.userAccountUtils import *
-
 import os
+
 
 def data_entry_page(request):
     # get into the user's folder
-    path = './users/' + request.user.get_username()
+    path = './users/' + request.user.get_username() + '/data'
     if not os.path.exists(path):
         os.makedirs(path)
     documents = os.listdir(path)
@@ -59,16 +59,6 @@ def data_entry_page(request):
             fs = FileSystemStorage(location=path)
             filename = fs.save(newdoc.name, newdoc)
             uploaded_file_url = fs.url(filename)
-
-
-
-
-            print("=====================")
-            print(filename)
-            print("=====================")
-
-
-
             return redirect('data_entry_page')
         else:
             message = 'The form is not valid. Fix the following error:'
