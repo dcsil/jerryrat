@@ -1,6 +1,6 @@
 import json
 import os
-from readData import readData
+from readData import readDataSpark, readDataMySQLConn
 
 class createBackBone:
     def __init__(self, init=False):
@@ -22,9 +22,12 @@ class createBackBone:
     def readData(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
              connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
-             driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocss=True):
-        df = readData(user, password, database, table, host, dbtype, connector, driver, port,
-                      self.numFetchRows, order, preprocss)
+             driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True, useSpark=False):
+        if useSpark:
+            df = readDataSpark(user, password, database, table, host, dbtype, connector, driver, port,
+                          self.numFetchRows, order, preprocess)
+        else:
+            df = readDataMySQLConn(host, user, password, database, self.numFetchRows, order, preprocess)
         return df
 
     def train_model_with_database(self):
@@ -35,5 +38,5 @@ class createBackBone:
 if __name__ == "__main__":
     backbone = createBackBone(init=True)
     df = backbone.readData(user="root", password="zjm19990118", host="localhost",
-                           database="jerryratdb", preprocss=True)
+                           database="jerryratdb", preprocess=True)
     print(df)
