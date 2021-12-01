@@ -3,22 +3,21 @@ from django import forms
 from plotly.offline import plot
 from django.contrib.postgres.fields import ArrayField
 from django.forms import ModelForm
-# import plotly.plotly as py
 import plotly.graph_objs as go
 from random import uniform
+from .pred.readData import *
 
-AXES = (('age', 'age'), ('month', 'month'), ('day_of_week', 'day_of_week'), 
-        ('duration', 'duration'), ('campaign', 'campaign'), ('pdays', 'pdays'), 
-        ('previous', 'previous'))
+X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'), ('housing', 'housing'), ('loan', 'loan'))
+Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
 CHART_TYPES = (('Line Chart', 'Line Chart'), ('Bar Chart', 'Bar Chart'), ('Pie Chart', 'Pie Chart'))
+
 
 class Linechart(models.Model):
     id = models.AutoField(primary_key=True)
-    xaxis = models.CharField(max_length=32, choices=AXES, default=AXES[0][0])
-    yaxis = models.CharField(max_length=32, choices=AXES, default=AXES[0][0])
+    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+    yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
     title = models.CharField(max_length=64)
     created_at = models.DateTimeField(auto_now=True)
-    # graphs = models.ForeignKey(Graph, null=True, related_name="graphs", on_delete=models.CASCADE)
 
     class Meta:
         ordering = ("created_at",)
@@ -32,6 +31,7 @@ class Linechart(models.Model):
         self.set_axis(x, y)
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=self.x, y=self.y))
+
         fig.layout.update(title=self.title)
         fig.layout.update(
             xaxis_title=self.xaxis,
@@ -60,16 +60,91 @@ class Linechart(models.Model):
         return plot_div
 
 
-class AddGraphForm(ModelForm):
-    class Meta:
-        model = Linechart
-        fields = '__all__'
-        exclude = ['created_at']
-        widgets = {
-            'title': forms.TextInput(attrs={'placeholder': "Please enter the title of the new graph", 'style': 'width: 400px', 'class': 'form-control'})
-            # 'graph_type': forms.TextInput(attrs={'placeholder': "Please enter the type of the new graph"})
-        }
+class Barchart(models.Model):
+    id = models.AutoField(primary_key=True)
+    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+    yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
+    title = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ("created_at",)
+
+    @property
+    def get_barchart(self):
+        x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
+        x_data, info = get_graph_data(x, y)
+        fig = go.Figure(data=[
+            go.Bar(name=str(k), x=x_data, y=info[k]) for _, k in enumerate(info)
+        ])
+        fig.layout.update(title=self.title)
+        fig.layout.update(barmode='stack')
+        fig.layout.update(
+            xaxis_title=self.xaxis,
+            yaxis_title=self.yaxis,
+            title={
+                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
+                        'Stack Bar Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+                'x': 0.1
+            },
+            font=dict(size=12, color="gray")
+        )
+        plot_div = plot(fig, output_type='div', auto_open=False, 
+                        config=dict(
+                            displayModeBar=True,
+                            displaylogo=False,
+                        )
+                    )
+        return plot_div
+
+
+class DoubleBarChart(models.Model):
+    id = models.AutoField(primary_key=True)
+    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+    title = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("created_at",)
+
+    @property
+    def get_double_barchart(self):
+        x = get_metric_idx(self.xaxis)
+        x_data, info = get_graph_data(x, 21)
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            x=x_data,
+            y=info["yes"],
+            name='Yes',
+            marker_color='indianred'
+        ))
+        fig.add_trace(go.Bar(
+            x=x_data,
+            y=info["no"],
+            name='No',
+            marker_color='lightsalmon'
+        ))
+        fig.layout.update(title=self.title)
+        fig.layout.update(barmode='group', xaxis_tickangle=-45)
+        fig.layout.update(
+            xaxis_title=self.xaxis,
+            yaxis_title="results",
+            title={
+                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
+                        'Stack Bar Chart for ' + 'results' + ' vs ' + self.xaxis,
+                'x': 0.1
+            },
+            font=dict(size=12, color="gray")
+        )
+        plot_div = plot(fig, output_type='div', auto_open=False, 
+                        config=dict(
+                            displayModeBar=True,
+                            displaylogo=False,
+                        )
+                    )
+        return plot_div
+
+        
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
