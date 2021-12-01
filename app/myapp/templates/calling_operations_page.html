@@ -6,6 +6,17 @@
 <head>
     <meta charset="utf-8">
     <title>Calling Operations</title>
+    <script>
+        document.addEventListener('click', function(event) {
+            id = event.target.getAttribute('class') + '_col4'
+            console.log(id)
+            if(document.getElementById(id).innerHTML.trim().slice(-1) === '✔'){
+                document.getElementById(id).innerHTML = '';
+            }else{
+                document.getElementById(id).innerHTML = '&#10004';
+            }
+        }, false);
+    </script>
 </head>
 <body>
 <div style="margin-left: 25pt;">
@@ -24,15 +35,17 @@
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Number</th>
+            <th scope="col">Checked</th>
         </tr>
         </thead>
         {% for p in info %}
         {% if p.1 == 1%}
         <tbody>
-            <th scope="row">{{ p.0 }}</th>
-                <td>{{ p.2 }}</td>
-                <td>{{ p.3 }}</td>
-                <td>{{ p.4 }}</td>
+            <th scope="row" class = "{{campaign}}_{{p.0}}">{{ p.0 }}</th>
+                <td class = "{{campaign}}_{{p.0}}">{{ p.2 }}</td>
+                <td class = "{{campaign}}_{{p.0}}">{{ p.3 }}</td>
+                <td class = "{{campaign}}_{{p.0}}">{{ p.4 }}</td>
+                <td class = "{{campaign}}_{{p.0}}" id = "{{campaign}}_{{p.0}}_col4"></td>
         </tbody>
         {% endif %}
         {% endfor %}
