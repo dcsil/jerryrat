@@ -1,7 +1,6 @@
 import mysql.connector
 from myapp.datapipe.readData import readDataSpark
 import pandas
-# import preprocess
 # import DB settings
 # or not, we can make it remain like it for now, it's enough for an MVP
 
