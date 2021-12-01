@@ -18,4 +18,8 @@ def readData(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 
     data = pandas.DataFrame(r)
     # return a numeralized data
     # return numeralizeCategory(data)
+<<<<<<< HEAD
     return data
+=======
+    return data
+>>>>>>> f85c81d78a877195876d7cad76f5e9b3423e9520
