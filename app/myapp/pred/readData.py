@@ -1,6 +1,5 @@
 import mysql.connector
 import pandas
-import preprocess
 # import DB settings
 # or not, we can make it remain like it for now, it's enough for an MVP
 
@@ -33,7 +32,7 @@ def readData(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 
     r = conn.fetchall()
     data = pandas.DataFrame(r)
     # return a numeralized data
-    return preprocess.numeralizeCategory(data)
+    return numeralizeCategory(data)
 
 ref = {
     'age': 1, 'job': 2, 'marital': 3, 'education': 4, 'default': 5, 'housing': 6, 'loan': 7,
