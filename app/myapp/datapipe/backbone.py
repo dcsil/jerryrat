@@ -32,7 +32,7 @@ class createBackBone:
             df = readDataSpark(user, password, database, table, host, dbtype, connector, driver, port,
                           self.numFetchRows, order, preprocess)
         else:
-            df = readDataMySQLConn(host, user, password, database, self.numFetchRows, order, preprocess)
+            df = readDataMySQLConn(host, user, password, database, table, self.numFetchRows, order, preprocess)
         return df
 
     def train_model_with_database(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',

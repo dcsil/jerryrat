@@ -1,7 +1,7 @@
 from django.db import models
 from django import forms
 from plotly.offline import plot
-from django.contrib.postgres.fields import ArrayField
+# from django.contrib.postgres.fields import ArrayField
 from django.forms import ModelForm
 import plotly.graph_objs as go
 from random import uniform
@@ -207,3 +207,13 @@ class Userdata(models.Model):
     class Meta:
         managed = True
         db_table = 'userdata'
+
+class Userinfo(models.Model):
+    dataid = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    numbers = models.CharField(max_length=255)
+
+    class Meta:
+        managed = True
+        db_table = 'userinfo'
