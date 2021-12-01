@@ -1,1 +1,0 @@
-{"numFetchRows": "13", "period": "13", "startdataid": "13", "eta": "13", "gamma": 0, "objective": "binary:logistic", "max_depth": "13", "nthread": 4, "eval_metric": "auc", "lambda": 1}
