@@ -1,5 +1,5 @@
 import pandas as pd
-from app.myapp.models import Userdata, Userinfo
+from myapp.models import Userdata, Userinfo
 
 
 def uploadFileToDB(filePath):

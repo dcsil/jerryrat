@@ -5,7 +5,7 @@ from plotly.offline import plot
 from django.forms import ModelForm
 import plotly.graph_objs as go
 from random import uniform
-from .pred.readData import *
+from .datapipe.readData import *
 
 X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'), ('housing', 'housing'), ('loan', 'loan'))
 Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
@@ -72,8 +72,8 @@ class Barchart(models.Model):
 
     @property
     def get_barchart(self):
-        x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
-        x_data, info = get_graph_data(x, y)
+        # x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
+        x_data, info = get_graph_data(self.xaxis, self.yaxis)
         fig = go.Figure(data=[
             go.Bar(name=str(k), x=x_data, y=info[k]) for _, k in enumerate(info)
         ])
@@ -109,21 +109,23 @@ class DoubleBarChart(models.Model):
 
     @property
     def get_double_barchart(self):
-        x = get_metric_idx(self.xaxis)
-        x_data, info = get_graph_data(x, 21)
+        # x = get_metric_idx(self.xaxis)
+        x_data, info = get_graph_data(self.xaxis, "y")
         fig = go.Figure()
-        fig.add_trace(go.Bar(
-            x=x_data,
-            y=info["yes"],
-            name='Yes',
-            marker_color='indianred'
-        ))
-        fig.add_trace(go.Bar(
-            x=x_data,
-            y=info["no"],
-            name='No',
-            marker_color='lightsalmon'
-        ))
+        if "yes" in info:
+            fig.add_trace(go.Bar(
+                x=x_data,
+                y=info["yes"],
+                name='Yes',
+                marker_color='indianred'
+            ))
+        if "no" in info:
+            fig.add_trace(go.Bar(
+                x=x_data,
+                y=info["no"],
+                name='No',
+                marker_color='lightsalmon'
+            ))
         fig.layout.update(title=self.title)
         fig.layout.update(barmode='group', xaxis_tickangle=-45)
         fig.layout.update(
@@ -148,7 +150,6 @@ class DoubleBarChart(models.Model):
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
-    # docfile = models.FileField(upload_to='documents/%Y/%m/%d')
     docfile = models.FileField(default='', null=True, blank=True)
 
     def get_file_path(self):
