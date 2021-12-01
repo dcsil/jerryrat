@@ -1,5 +1,5 @@
 import pandas as pd
-from myapp.models import Userdata
+from app.myapp.models import Userdata, Userinfo
 
 
 def uploadFileToDB(filePath):
@@ -20,7 +20,6 @@ def uploadFileToDB(filePath):
         reader = pd.read_excel(filePath)
     else:
         raise FileNoneError
-
 
     for i, line in enumerate(reader.values.tolist()):
         userdata = Userdata(
@@ -54,5 +53,12 @@ def uploadFileToDB(filePath):
 
             y=line[20],
         )
-    
+
+        userinfo = Userinfo(
+            first_name=line[21],
+            last_name=line[22],
+            numbers=line[23],
+        )
+
         userdata.save()
+        userinfo.save()
