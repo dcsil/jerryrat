@@ -18,7 +18,7 @@
            </h4>
         </div>
         <div class="graph-container">
-            {% if dbc_list %}]
+            {% if dbc_list %}
                 {% for dbc in dbc_list %}
                     <div class="dbc-wrapper">
                         {{ dbc.get_double_barchart | safe }}
