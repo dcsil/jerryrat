@@ -21,7 +21,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, FormView
 from django.conf import settings
-
+import pandas
 from .datapipe import customize_config
 from .models import *
 from .forms import *
@@ -96,7 +96,16 @@ def delete_graph(request, id):
 
 
 def calling_operations_page(request):
-    context = {'current': 'calling_operations_page'}
+    path = './users/' + request.user.get_username() + '/result'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    types = os.listdir(path)
+    data = {}
+    for i in types:
+        data[i] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
+
+    print(data)
+    context = {'current': 'calling_operations_page', 'data': data, 'types': types}
     return render(request, 'calling_operations_page.html', context)
 
 
