@@ -1,6 +1,6 @@
 import mysql.connector
 import pandas
-# import preprocess
+import preprocess
 # import DB settings
 # or not, we can make it remain like it for now, it's enough for an MVP
 
@@ -33,16 +33,7 @@ def readData(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 
     r = conn.fetchall()
     data = pandas.DataFrame(r)
     # return a numeralized data
-<<<<<<< HEAD
     return preprocess.numeralizeCategory(data)
-
-if __name__ == "__main__":
-    df = readData(user="root", password="zjm19990118", host="localhost", database="jerryratdb")
-    print(df.dtypes)
-=======
-    # return numeralizeCategory(data)
-    return data
-
 
 ref = {
     'age': 1, 'job': 2, 'marital': 3, 'education': 4, 'default': 5, 'housing': 6, 'loan': 7,
@@ -64,4 +55,8 @@ def get_graph_data(x, y):
 
 def get_metric_idx(metric):
   return ref[metric]
->>>>>>> angelo-dashboard-upgrade
+
+
+if __name__ == "__main__":
+    df = readData(user="root", password="zjm19990118", host="localhost", database="jerryratdb")
+    print(df.dtypes)
