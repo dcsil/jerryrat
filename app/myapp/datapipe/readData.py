@@ -24,19 +24,20 @@ def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database
     sparkdf = sparkdf.drop('index')
     df = sparkdf.toPandas()
 
-    df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
-    df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
-    df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
-    df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
-    df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+    if table == 'userdata':
+        df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
+        df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
+        df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
+        df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
+        df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
 
     if preprocess:
         df = numeralizeCategory(df)
     return df
 
 def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', user= 'dv9wgfh46sgcyiil',
-                      password= 'p23it7lf9zqfh3yd', database= 'syh25csvjgoetrln', numRows=5, order='desc',
-                      preprocess=True):
+                      password= 'p23it7lf9zqfh3yd', database= 'syh25csvjgoetrln', table="userdata",
+                      numRows=5, order='desc', preprocess=True):
 
     import mysql.connector
 
@@ -64,11 +65,12 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     df = pd.DataFrame(r)
     df.columns = field_names
 
-    df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
-    df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
-    df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
-    df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
-    df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+    if table == "userdata":
+        df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
+        df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
+        df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
+        df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
+        df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
 
     # return a numeralized data
     if preprocess:
