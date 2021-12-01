@@ -1,18 +1,23 @@
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
-from myapp.pred.preprocess import numeralizeCategory
-import myapp.pred as pred
+from app.myapp.pred.preprocess import numeralizeCategory
+from app.myapp.pred.predict import predict
 
-def test(model, usedataset=False, threshold=0.5):
-    result = pred.predict.predict(model, usedataset, threshold)
+def test(model, usedataset=False, threshold=0.5, feedData=None):
+    result = predict(model, usedataset, threshold, False, feedData)
+    labels = None
     acc = 0.0
-    if usedataset:  # test on local dataset
-        labels = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/testTarget.csv")).to_numpy()
-        acc = np.mean(result == labels)
-    else:  # test on data in database
-        #TODO: enable tests by database data
-        pass
+    if usedataset:
+        testset_path = Path("static/dataset/mvptest/testTarget.csv")
+        labels = numeralizeCategory(pd.read_csv(Path.joinpath(Path(__file__).parent.parent.parent,
+                                                              testset_path).resolve())).to_numpy()
+    else:
+        assert (not (feedData is None))
+        print()
+        labels = numeralizeCategory(feedData['y'].to_frame()).to_numpy()
+    acc = np.mean(result == labels)
     return acc
 
 

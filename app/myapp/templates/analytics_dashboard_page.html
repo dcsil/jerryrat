@@ -18,27 +18,35 @@
            </h4>
         </div>
         <div class="graph-container">
+            {% if dbc_list %}]
+                {% for dbc in dbc_list %}
+                    <div class="dbc-wrapper">
+                        {{ dbc.get_double_barchart | safe }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             {% if all_graphs %}
                 {% for graph in all_graphs %}
                     <div class="wrapper">
-                        <div class="linechart">{{ graph.line_chart | safe }}</div>
-                        <button type="button" class="btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addGraph">
+                        <div class="chart">{{ graph.get_barchart | safe }}</div>
+                        <!-- <button type="button" class="btn-change btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#configureGraph">
                             {% csrf_token %}
                             <strong>Configure</strong>
-                        </button>
+                        </button> -->
                         <a href="{% url 'delete_graph' graph.pk %}" type="button" class="btn-delete btn btn-outline-danger btn-sm">
-                            <strong>Delete</strong>
+                            <strong>X</strong>
                         </a>
                     </div>
                 {% endfor %}
             {% endif %}
+
             <div class="wrapper-create">
                 {% csrf_token %}
-                <button type="button" class="btn-add btn btn-outline-secondary btn-lg" data-toggle="modal" data-target="#addGraph"><strong>+</strong></button>
+                <button type="button" class="btn-change btn-add btn btn-outline-secondary btn-lg" data-toggle="modal" data-target="#addGraph" id="-1"><strong>+</strong></button>
             </div>
         </div>
 
-        {% block add_graph_popout %} {% endblock %}
 
         <!-- Add graph Modal pop-out window-->
         <div class="modal fade" id="addGraph" tabindex="-1" role="dialog" aria-labelledby="addGraphTitle" aria-hidden="true">
@@ -53,31 +61,31 @@
                     </div>
                     <div class="modal-body">
                         {% if add_graph_form %}
-                        <form method="POST" action="{% url 'analytics_dashboard_page' %}">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="title" class="col-form-label">Title:</label>
-                                <span><div id="title">{{ add_graph_form.title }}</div></span>
-                            </div>
-                            <div>
+                            <form method="POST" id="btn-form" action="{% url 'analytics_dashboard_page' %}">
+                                {% csrf_token %}
                                 <div class="form-group">
-                                    <label for="x-axis" class="col-form-label">X-axis:</label>
-                                    <span><div id="x-axis">{{ add_graph_form.xaxis }}</div></span>
+                                    <label for="title" class="col-form-label">Title:</label>
+                                    <span><div id="title">{{ add_graph_form.title }}</div></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="y-axis" class="col-form-label">Y-axis:</label>
-                                    <span><div id="y-axis">{{ add_graph_form.yaxis }}</div></span>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="x-axis" class="col-form-label">X-axis:</label>
+                                        <span><div id="x-axis">{{ add_graph_form.xaxis }}</div></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="y-axis" class="col-form-label">Y-axis:</label>
+                                        <span><div id="y-axis">{{ add_graph_form.yaxis }}</div></span>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="modal-footer">
-                                <div class="btn-group float-right" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                
+                                <div class="modal-footer">
+                                    <div class="btn-group float-right" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                        </form>
+                                
+                            </form>
                         {% endif %}
                     </div>
 
