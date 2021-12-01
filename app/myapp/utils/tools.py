@@ -32,5 +32,3 @@ def generate_file(path):
     df['numbers'] = numbers
     return df
 
-
-generate_file('../../static/dataset/bank-additional-full.csv').to_csv('../../static/dataset/bank-additional-full-with-names.csv')
