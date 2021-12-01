@@ -44,7 +44,6 @@ ref = {
 
 def get_graph_data(x, y):
   data = readData()
-  print(data)
   x_data = data[x].unique()
   info = {}
   for e in data[y].unique():

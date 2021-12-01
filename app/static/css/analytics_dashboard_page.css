@@ -35,7 +35,7 @@
   border: 1px solid #BFBFBF;
 }
 
-.linechart {
+.chart {
   position: absolute;
 }
 
@@ -53,8 +53,8 @@
 .btn-delete {
   position: absolute;
   z-index: 1;
-  margin-left: 610px;
-  margin-top: 40px;
+  margin-left: 650px;
+  margin-top: 35px;
 }
 
 .btn-add {

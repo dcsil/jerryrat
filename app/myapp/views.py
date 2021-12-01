@@ -96,8 +96,11 @@ def analytics_dashboard_page(request):
         if add_graph_form.is_valid():
             add_graph_form.save()
     all_graphs = Barchart.objects.all()
-    dbc = DoubleBarChart(xaxis="education", title="test")
-    return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc': dbc})
+    client_x = ["age", "job", "marital", "education", "default", "housing", "loan"]
+    dbc_list = []
+    for x in client_x:
+        dbc_list.append(DoubleBarChart(xaxis=x, title=x.capitalize()))
+    return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc_list': dbc_list})
 
 
 def delete_graph(request, id):
@@ -106,6 +109,7 @@ def delete_graph(request, id):
 
 def configure_graph(request, id):
     add_graph_form = AddGraphForm()
+    print("configure_graph")
     new_xaxis, new_yaxis, new_title = None, None, None
     if request.method == "POST":
         add_graph_form = AddGraphForm(request.POST or None)
