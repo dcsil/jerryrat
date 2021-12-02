@@ -21,8 +21,8 @@ class TestIntegrity(TestCase, Client):
     def test_fileupload(self):
         raised = False
         try:
-            uploadFileToDB("./static/dataset/testdatabase.csv")
-            uploadFileToDB("./static/dataset/testdatabase.xlsx")
+            uploadFileToDB("./static/dataset/testdatabase-with-names.csv")
+            #uploadFileToDB("./static/dataset/testdatabase.xlsx")
         except Exception as e:
             print("@fileUpload")
             print(e)
@@ -33,7 +33,7 @@ class TestIntegrity(TestCase, Client):
     def test_filetransfer(self):
         raised = False
         try:
-            csvToXlsx("./static/dataset/testdatabase.csv", True)
+            csvToXlsx("./static/dataset/testdatabase-with-names.csv", True)
         except Exception as e:
             print("@fileTransfer")
             print(e)
