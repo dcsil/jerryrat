@@ -1,7 +1,7 @@
 import pandas as pd
 import xgboost as xgb
 
-from app.myapp.pred.preprocess import numeralizeCategory, binarizePrediction
+from myapp.pred.preprocess import numeralizeCategory, binarizePrediction
 
 def predict(model, usedataset=False, threshold=0.5, runtimePred=False, feedData=None):
     result = None

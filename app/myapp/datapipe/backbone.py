@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import time
 
-from myapp.readData import readDataSpark, readDataMySQLConn
+from myapp.datapipe.readData import readDataSpark, readDataMySQLConn
 from myapp.pred.entity import Entity
 
 class createBackBone:

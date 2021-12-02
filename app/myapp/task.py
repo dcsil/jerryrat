@@ -10,7 +10,7 @@ data center running: Heroku
 from logging import getLogger
 import time
 
-from app.myapp.datapipe.backbone import createBackBone
+from myapp.datapipe.backbone import createBackBone
 
 logger = getLogger(__name__)
 
