@@ -52,19 +52,9 @@
 						<a class="nav-link" href="/model_controlls_page" onclick="changeActive(event)">Model Controlls</a>
 					{% endif %}
 
-					{% if current == 'campaign_customization_page' %}
-						<a class="nav-link active" href="/campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
-					{% else %}
-						<a class="nav-link" href="/campaign_customization_page" onclick="changeActive(event)">Campaign Customization</a>
-					{% endif %}
 				{% endif %}
 
 				{% if request.user.is_authenticated %}
-					{% if current == 'change_password' %}
-						<a class="nav-link active" href="/change/password" onclick="changeActive(event)">Change password</a>
-					{% else %}
-						<a class="nav-link" href="/change/password" onclick="changeActive(event)">Change password</a>
-					{% endif %}
 
 					{% if current == 'logout' %}
 						<a class="nav-link active" href="/logout" onclick="changeActive(event)">Log out</a>
