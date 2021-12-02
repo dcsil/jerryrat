@@ -1,7 +1,7 @@
 import os
 import json
 
-from customize_config import customize_config
+from app.myapp.pred.customize_config import customize_config
 from app.myapp.pred.load_model import load_model
 from app.myapp.pred.load_config import load_config
 from app.myapp.pred.predict import predict

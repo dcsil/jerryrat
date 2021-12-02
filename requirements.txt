@@ -35,4 +35,4 @@ scikit-learn>=1.0.1
 django-bootstrap4>=0.1.0
 
 # django-background-tasks>=1.2.5
-mysql-connector>=2.2.9
+mysql-connector-python>=8.0.27
