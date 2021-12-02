@@ -1,5 +1,6 @@
-from app.myapp.pred.preprocess import numeralizeCategory
+from myapp.pred.preprocess import numeralizeCategory
 import pandas as pd
+import numpy as np
 
 def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
@@ -76,6 +77,29 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     if preprocess:
         df = numeralizeCategory(df)
     return df
+
+ref = {
+    'age': 2, 'job': 3, 'marital': 4, 'education': 5, 'default': 6, 'housing': 7, 'loan': 8,
+    'month': 10, 'day_of_week': 11, 'campaign': 13, 'pdays': 14, 'previous': 15, 'poutcome': 16
+}
+
+def get_graph_data(x, y):
+  data = readDataMySQLConn(numRows=-1, preprocess=False)
+  print(data)
+  x_data = data[x].unique()
+  info = {}
+  for e in data[y].unique():
+    info[e] = [0 for _ in range(len(data[x].unique()))]
+  for i, e in enumerate(data[y]):
+    key = data[y][i]
+    x_val = data[x][i]
+    x_idx = np.where(x_data == x_val)[0][0]
+    info[key][x_idx] += 1
+  return x_data, info
+
+def get_metric_idx(metric):
+  return ref[metric]
+
 
 if __name__ == "__main__":
     # Some connection info:
