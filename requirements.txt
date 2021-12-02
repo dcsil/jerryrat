@@ -34,4 +34,5 @@ scikit-learn>=1.0.1
 
 django-bootstrap4>=0.1.0
 
-celery>=5.2.1
+# django-background-tasks>=1.2.5
+mysql-connector>=2.2.9
