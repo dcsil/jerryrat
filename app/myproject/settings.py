@@ -257,6 +257,7 @@ TEMPLATES = [
     },
 ]
 
+"""
 # logger from: https://github.com/collinmutembei/django-background-tasks-example/blob/master/project/project/settings.py
 LOGGING = {
     'version': 1,
@@ -301,6 +302,7 @@ LOGGING = {
         },
     },
 }
+"""
 
 
 # Activate Django-Heroku.
