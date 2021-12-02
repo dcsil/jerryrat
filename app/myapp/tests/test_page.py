@@ -22,7 +22,7 @@ class TestIntegrity(TestCase, Client):
         raised = False
         try:
             uploadFileToDB("./static/dataset/testdatabase-with-names.csv")
-            #uploadFileToDB("./static/dataset/testdatabase.xlsx")
+            uploadFileToDB("./static/dataset/testdatabase-with-names.xlsx")
         except Exception as e:
             print("@fileUpload")
             print(e)

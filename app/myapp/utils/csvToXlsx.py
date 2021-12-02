@@ -13,3 +13,4 @@ def csvToXlsx(csvfile, testMode=False):
 if __name__ == "__main__":
     os.chdir("../../..")
     csvToXlsx("app/static/dataset/testdatabase.csv")
+    csvToXlsx("app/static/dataset/testdatabase-with-names.csv")
