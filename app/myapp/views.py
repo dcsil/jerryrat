@@ -98,6 +98,7 @@ def delete_graph(request, id):
     Barchart.objects.filter(id=id).delete()
     return redirect(reverse('analytics_dashboard_page'))
 
+
 def configure_graph(request, id):
     add_graph_form = AddGraphForm()
     print("configure_graph")
@@ -123,7 +124,7 @@ def calling_operations_page(request):
     types = os.listdir(path)
     data = {}
     for i in types:
-        data[i] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
+        data[i.split('.')[0]] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
 
     print(data)
     context = {'current': 'calling_operations_page', 'data': data, 'types': types}
