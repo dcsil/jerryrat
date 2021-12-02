@@ -19,10 +19,10 @@ def main():
     try:
         execute_from_command_line(sys.argv)
     except django.db.utils.OperationalError as dbError:
-        if str(dbError) != str((1050, "Table 'userdata' already exists")):
-            raise dbError
-        else:
+        if "1050" in str(dbError):
             pass
+        else:
+            raise dbError
 
 
 if __name__ == '__main__':
