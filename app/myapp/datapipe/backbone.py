@@ -3,8 +3,8 @@ import os
 from pathlib import Path
 import time
 
-from .readData import readDataSpark, readDataMySQLConn
-from app.myapp.pred.entity import Entity
+from myapp.readData import readDataSpark, readDataMySQLConn
+from myapp.pred.entity import Entity
 
 class createBackBone:
     def __init__(self, init=False):

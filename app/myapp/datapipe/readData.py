@@ -1,4 +1,4 @@
-from app.myapp.pred.preprocess import numeralizeCategory
+from myapp.pred.preprocess import numeralizeCategory
 import pandas as pd
 import numpy as np
 
