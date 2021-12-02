@@ -1,5 +1,4 @@
 {
 "numFetchRows": 100,
-"period": 10,
-"startdataid": 0
+"period": 1
 }

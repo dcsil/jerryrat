@@ -6,8 +6,8 @@ import pandas as pd
 from pathlib import Path
 import time
 
-from app.myapp.pred.load_model import load_model
-from app.myapp.pred.preprocess import numeralizeCategory
+from myapp.pred.load_model import load_model
+from myapp.pred.preprocess import numeralizeCategory
 
 
 def train(model=None, params=None, useDataset=False, steps=20, model_init=False, savemodel=True, feedData=None):

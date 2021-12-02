@@ -1,12 +1,12 @@
 import os
 import json
 
-from customize_config import customize_config
-from app.myapp.pred.load_model import load_model
-from app.myapp.pred.load_config import load_config
-from app.myapp.pred.predict import predict
-from app.myapp.pred.test import test
-from app.myapp.pred.train import train
+from myapp.pred.customize_config import customize_config
+from myapp.pred.load_model import load_model
+from myapp.pred.load_config import load_config
+from myapp.pred.predict import predict
+from myapp.pred.test import test
+from myapp.pred.train import train
 from pathlib import Path
 
 # interface of the model

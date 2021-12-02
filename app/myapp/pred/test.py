@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-from app.myapp.pred.preprocess import numeralizeCategory
-from app.myapp.pred.predict import predict
+from myapp.pred.preprocess import numeralizeCategory
+from myapp.pred.predict import predict
 
 def test(model, usedataset=False, threshold=0.5, feedData=None):
     result = predict(model, usedataset, threshold, False, feedData)

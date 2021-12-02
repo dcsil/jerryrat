@@ -1,7 +1,7 @@
 import pandas as pd
 import xgboost as xgb
 
-from app.myapp.pred.preprocess import numeralizeCategory, binarizePrediction
+from myapp.pred.preprocess import numeralizeCategory, binarizePrediction
 
 def predict(model, usedataset=False, threshold=0.5, runtimePred=False, feedData=None):
     result = None
@@ -27,7 +27,10 @@ def predict_locally(model, threshold):
 def predict_database(model, threshold, feedData):
     assert (not (feedData is None))
 
-    D_pred = xgb.DMatrix(feedData.drop(columns=["y"]), enable_categorical=True)
+    if 'y' in feedData.columns:
+        D_pred = xgb.DMatrix(feedData.drop(columns=["y"]), enable_categorical=True)
+    else:
+        D_pred = xgb.DMatrix(feedData, enable_categorical=True)
     result = model.predict(D_pred)
     result = binarizePrediction(result, threshold)
     return result

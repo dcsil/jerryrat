@@ -43,10 +43,11 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     import mysql.connector
 
     mydb = mysql.connector.connect(
-      host=host,
-      user=user,
-      password=password,
-      database=database
+        host=host,
+        user=user,
+        password=password,
+        database=database,
+        auth_plugin='mysql_native_password'
     )
     conn = mydb.cursor()
     if numRows != 'all' and numRows != -1:

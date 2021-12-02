@@ -12,7 +12,7 @@ class createBackBone:
         if init:
             if not os.path.exists(config_path.resolve()):
                 os.makedirs(config_path.resolve())
-            configs = {"numFetchRows": 100, "period": 10, "startdataid": 0}
+            configs = {"numFetchRows": 100, "period": 1}
             with open((config_path / Path("config_init.json")).resolve(), "w") as fp:
                 json.dump(configs, fp, indent=0)
             with open((config_path / Path("config.json")).resolve(), "w") as fp:
@@ -22,7 +22,6 @@ class createBackBone:
             configs = json.load(fp)
         self.numFetchRows = configs["numFetchRows"]
         self.period = configs["period"]
-        self.startdataid = configs["startdataid"]
 
     def readData(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
