@@ -4,7 +4,7 @@ import json
 # the input should be a dictionary with configurations
 def customize_config(customized_configs, user):
     # reads and clear file
-    path = './users/' + user + '/config.json'
+    path = './users/' + user + '/config/config.json'
     try:
         with open(path, "r") as fp:
             configs = json.load(fp)
