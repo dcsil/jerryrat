@@ -13,3 +13,12 @@ def binarizePrediction(prediction, threshold):
     prediction[prediction>=threshold] = 1
     prediction[prediction<threshold] = 0
     return prediction
+
+def dropUserContactInfo(df):
+    if 'first_name' in df.columns:
+        df = df.drop(columns=['first_name'])
+    if 'last_name' in df.columns:
+        df = df.drop(columns=['last_name'])
+    if 'numbers' in df.columns:
+        df = df.drop(columns=['numbers'])
+    return df
