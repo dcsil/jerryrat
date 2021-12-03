@@ -31,12 +31,6 @@ def train(model=None, params=None, useDataset=False, steps=20, model_init=False,
             t = time.localtime()
             current_time = time.strftime("%H:%M:%S", t)
 
-            # continue training the model and update by checkpoint + 1
-            # checkpoint_path = "../../../future/checkpoint/checkpoint.json"
-            # if not os.path.exists(checkpoint_path):
-            #     with open(checkpoint_path, "w") as fp:
-            #         checkpoint = {"checkpoint": checkpoint}
-            #         json.dump(checkpoint, fp, indent=0)
         print("model saved at time {}".format(current_time))
     return model
 
