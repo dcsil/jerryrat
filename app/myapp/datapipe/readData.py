@@ -79,9 +79,12 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
         df = numeralizeCategory(df)
     return df
 
-def readDataLocally(table_path):
+def readDataLocally(table_path=None, preprocess=True):
     assert (not (table_path is None))
     df = pd.read_csv(table_path, index_col=False)
+    # return a numeralized data
+    if preprocess:
+        df = numeralizeCategory(df)
     return df
 
 ref = {
