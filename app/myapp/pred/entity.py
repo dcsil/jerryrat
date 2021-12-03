@@ -15,8 +15,6 @@ class Entity:
         self.model = None
         self.params = None
 
-        # if not os.path.exists("../../../future/checkpoint"):
-        #     os.makedirs("../../../future/checkpoint")
         model_path = Path.joinpath(Path(__file__).parent, Path("models/exec/model.json")).resolve()
         config_path = Path.joinpath(Path(__file__).parent, Path("configs/config.json")).resolve()
 
