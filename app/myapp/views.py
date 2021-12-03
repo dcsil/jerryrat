@@ -22,13 +22,16 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, FormView
 from django.conf import settings
 import pandas
+import os
+
 from .datapipe import customize_config
 from .models import *
 from .forms import *
 from .utils.tableUploader import *
 from .utils.userAccountUtils import *
-import os
+from .utils.task import CreateTrainModelPeriodicallyThread
 
+CreateTrainModelPeriodicallyThread().start()
 
 def data_entry_page(request):
     # get into the user's folder
