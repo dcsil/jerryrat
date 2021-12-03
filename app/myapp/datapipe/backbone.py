@@ -105,10 +105,11 @@ class createBackBone:
 
 if __name__ == "__main__":
     backbone = createBackBone(init=True)
+    '''
     df = backbone.readData(user="root", password="zjm19990118", host="localhost",
                            database="jerryratdb", preprocess=True)
     print(df)
-
+    
     dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
     dataset_path = (dataset_path / Path("testdatabase.csv")).resolve()
     df = backbone.readData(readOption="local", table_path=dataset_path)
@@ -117,12 +118,15 @@ if __name__ == "__main__":
 
     backbone.train_model_database_or_runtime(user="root", password="zjm19990118", host="localhost",
                                        database="jerryratdb", savemodel=True)
+    '''
 
     dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
     dataset_path = (dataset_path / Path("testdatabase.csv")).resolve()
     result = backbone.predict_database_or_runtime(readOption="local", table_path=dataset_path)
     print(result)
 
+    '''
     result = backbone.test_database_or_runtime(user="root", password="zjm19990118", host="localhost",
                            database="jerryratdb", preprocess=True, runtime=True)
     print(result)
+    '''
