@@ -11,11 +11,27 @@
     <head>
         <meta charset="utf-8">
         <title>Log out</title>
+        <style>
+          body {
+              position: relative;
+          }
+          #form-wrapper {
+              width: 300px;
+              height: 200px;
+              position: absolute;
+              top: 250%;
+              left: 50%;
+              margin-top: -100px;
+              margin-left: -150px;
+          }
+        </style>
     </head>
     <body>
-      <h4>{% trans 'Logged out' %}</h4>
-      <p>{% trans 'See you next time.' %}</p>
-      <p><a href="{% url 'login' %}">{% trans 'Log in again' %}</a></p>
+      <div id="form-wrapper">
+        <h4>{% trans 'Logged out' %}</h4>
+        <p>{% trans 'See you next time.' %}</p>
+        <p><a href="{% url 'login' %}">{% trans 'Log in again' %}</a></p>
+      </div>
     </body>
 </html>
 
