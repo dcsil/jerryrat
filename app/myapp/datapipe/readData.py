@@ -1,4 +1,4 @@
-from myapp.pred.preprocess import numeralizeCategory
+from myapp.pred.preprocess import numeralizeCategory, dropUserContactInfo
 import pandas as pd
 import numpy as np
 
@@ -34,6 +34,7 @@ def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database
 
     if preprocess:
         df = numeralizeCategory(df)
+        df = dropUserContactInfo(df)
     return df
 
 def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', user= 'dv9wgfh46sgcyiil',
@@ -77,14 +78,16 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     # return a numeralized data
     if preprocess:
         df = numeralizeCategory(df)
+        df = dropUserContactInfo(df)
     return df
 
-def readDataLocally(table_path=None, preprocess=True):
+def readDataFromRuntimeUpload(table_path=None, preprocess=True):
     assert (not (table_path is None))
     df = pd.read_csv(table_path, index_col=False)
     # return a numeralized data
     if preprocess:
         df = numeralizeCategory(df)
+        df = dropUserContactInfo(df)
     return df
 
 ref = {
