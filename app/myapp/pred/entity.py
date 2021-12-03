@@ -49,13 +49,6 @@ class Entity:
             os.makedirs(Path.joinpath(Path(__file__).parent, Path("models/exec")).resolve())
             os.makedirs(Path.joinpath(Path(__file__).parent, Path("models/schema")).resolve())
 
-        # deal with checkpoint
-        # checkpoint_path = "../../../future/checkpoint/checkpoint.json"
-        # if not os.path.exists("../../../future/checkpoint/checkpoint.json"):
-        #     with open(checkpoint_path, "w") as fp:
-        #         checkpoint = {"checkpoint": 0}
-        #         json.dump(checkpoint, fp, indent=0)
-
         if not self.model:
             self.model = self.train(useDataset=True, model_init=True)
 
