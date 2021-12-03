@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import time
 
-from myapp.datapipe.readData import readDataSpark, readDataMySQLConn, readDataLocally
+from myapp.datapipe.readData import readDataSpark, readDataMySQLConn, readDataFromRuntimeUpload
 from myapp.pred.entity import Entity
 
 class createBackBone:
@@ -34,7 +34,7 @@ class createBackBone:
         elif readOption == "mysql":
             df = readDataMySQLConn(host, user, password, database, table, self.numFetchRows, order, preprocess)
         elif readOption == "local":
-            df = readDataLocally(table_path, preprocess)
+            df = readDataFromRuntimeUpload(table_path, preprocess)
         return df
 
     # database: read data from database
@@ -125,4 +125,9 @@ if __name__ == "__main__":
 
     result = backbone.test_database_or_runtime(user="root", password="zjm19990118", host="localhost",
                            database="jerryratdb", preprocess=True, runtime=True)
+    print(result)
+
+    dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
+    dataset_path = (dataset_path / Path("testdatabase-with-names.csv")).resolve()
+    result = backbone.predict_database_or_runtime(readOption="local", table_path=dataset_path)
     print(result)
