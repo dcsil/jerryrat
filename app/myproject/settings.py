@@ -185,7 +185,9 @@ STATICFILES_DIRS = (
 
 # =================Sentry Monitor===================
 sentry_sdk.init(
-    dsn="https://532d1b512a974195997dd4bf04ac0871@o1052606.ingest.sentry.io/6036387",
+    #dsn="https://532d1b512a974195997dd4bf04ac0871@o1052606.ingest.sentry.io/6036387",
+    dsn="https://02124042647b49c49aa79b449d2e334b@o358880.ingest.sentry.io/5942152",
+    # 55cc9f2a53c811eca3ed06ba1311109a
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
