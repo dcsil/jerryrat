@@ -3,18 +3,17 @@ import xgboost as xgb
 
 from myapp.pred.preprocess import numeralizeCategory, binarizePrediction
 
-def predict(model, usedataset=False, threshold=0.5, runtimePred=False, feedData=None):
+def predict(model, usedataset=False, threshold=0.5, feedData=None):
     result = None
-    if runtimePred:
-        #TODO: predict on user's given data
-        pass
+    if not usedataset:
+        result = predict_database_or_runtime(model, threshold, feedData)
     else:
-        if not usedataset:
-            result = predict_database(model, threshold, feedData)
-        else:
-            result = predict_locally(model, threshold)
+        result = predict_locally(model, threshold)
     return result
 
+
+# NOTE: this function is only used for test purpose by reading the local data
+# and will not be used in runtime
 def predict_locally(model, threshold):
     testData = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/testData.csv"))
 
@@ -24,7 +23,7 @@ def predict_locally(model, threshold):
 
     return result
 
-def predict_database(model, threshold, feedData):
+def predict_database_or_runtime(model, threshold, feedData):
     assert (not (feedData is None))
 
     if 'y' in feedData.columns:
