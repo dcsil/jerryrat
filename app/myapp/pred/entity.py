@@ -62,12 +62,12 @@ class Entity:
         """
         customize_config(configs)
 
-    def predict(self, usedataset=False, threshold=0.5, runtimePred=False, feedData=None):
-        result = predict(self.model, usedataset, threshold, runtimePred, feedData)
+    def predict(self, usedataset=False, threshold=0.5, feedData=None):
+        result = predict(self.model, usedataset, threshold, feedData)
         return result
 
-    def test(self, usedataset=False, threshold=0.5, feedData=None):
-        acc = test(self.model, usedataset, threshold, feedData)
+    def test(self, usedataset=False, threshold=0.5, runTimeTest=False, feedData=None):
+        acc = test(self.model, usedataset, threshold, runTimeTest, feedData)
         return acc
 
 if __name__ == "__main__":

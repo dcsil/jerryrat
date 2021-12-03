@@ -31,6 +31,9 @@ from .utils.tableUploader import *
 from .utils.userAccountUtils import *
 from .utils.task import CreateTrainModelPeriodicallyThread
 
+
+train_t = CreateTrainModelPeriodicallyThread()
+
 def data_entry_page(request):
     # get into the user's folder
     path = './users/' + request.user.get_username() + '/data'
@@ -134,14 +137,31 @@ def calling_operations_page(request):
 
 def model_controlls_page(request):
     user = request.user.get_username()
-    context = {'current': 'model_controlls_page'}
     config = {}
     print(request.user.get_username())
-    if request.method == 'POST':
-        for i in request.POST:
-            config[i] = request.POST[i]
-        customize_config.customize_config(config, request.user.get_username())
+    global train_t
 
+    message = None
+    if train_t.is_alive():
+        message = "<span style='color:red'>The periodic training is working!</span>"
+    else:
+        message = "<span style='color:green'>The periodic training is idle.</span>"
+    context = {'current': 'model_controlls_page', 'message': message}
+
+    if request.method == 'POST':
+        if 'start' in request.POST:
+            if not train_t.is_alive():
+                context['message'] = "<span style='color:red'>The periodic training is working!</span>"
+                train_t.start()
+        elif 'end' in request.POST:
+            if train_t.is_alive():
+                context['message'] = "<span style='color:green'>The periodic training is idle.</span>"
+                train_t.join()
+                train_t = CreateTrainModelPeriodicallyThread()
+        elif 'configure' in request.POST:
+            for i in request.POST:
+                config[i] = request.POST[i]
+            customize_config.customize_config(config, request.user.get_username())
     return render(request, 'model_controlls_page.html', context)
 
 
