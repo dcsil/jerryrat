@@ -24,15 +24,15 @@ def train_model_periodically():
    """
    backbone = createBackBone()
 
-   for i in range(50 // backbone.period):
+   while True:
       time.sleep(backbone.period * 60)
       backbone.train_model_with_database(steps=50)
 
       t = time.localtime()
       current_time = time.strftime("%H:%M:%S", t)
-      logger.debug("Training turn at: ", current_time)
+      # logger.debug("Training turn at: ", current_time)
    print("This training cycle finished")
-   logger.debug("This training cycle finished")
+   # logger.debug("This training cycle finished")
 
 if __name__ == "__main__":
    train_model_periodically()

@@ -79,6 +79,11 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
         df = numeralizeCategory(df)
     return df
 
+def readDataLocally(table_path):
+    assert (not (table_path is None))
+    df = pd.read_csv(table_path, index_col=False)
+    return df
+
 ref = {
     'age': 2, 'job': 3, 'marital': 4, 'education': 5, 'default': 6, 'housing': 7, 'loan': 8,
     'month': 10, 'day_of_week': 11, 'campaign': 13, 'pdays': 14, 'previous': 15, 'poutcome': 16

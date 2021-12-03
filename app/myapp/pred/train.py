@@ -44,12 +44,13 @@ def train(model=None, params=None, useDataset=False, steps=20, model_init=False,
 def train_model(model=None, params=None, useDataset=False, steps=100, feedData=None):
     if not useDataset:
         assert not (feedData is None)
-        model = train_database(model, params, steps, feedData)
+        model = train_database_or_runtime(model, params, steps, feedData)
     else:
         model = train_locally(model, params, steps)
     return model
 
-
+# NOTE: this function is only for initializing the model
+# and will not be used in runtime
 def train_locally(model, params, steps):
     # train the init model on local dataset
     # and split into train, test and validation set
@@ -111,7 +112,7 @@ def train_locally(model, params, steps):
     return model
 
 
-def train_database(model, params, steps, feedData):
+def train_database_or_runtime(model, params, steps, feedData):
     dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
     valData = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valData.csv")).resolve()))
     valTarget = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valTarget.csv")).resolve()))

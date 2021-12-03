@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import time
 
-from myapp.datapipe.readData import readDataSpark, readDataMySQLConn
+from myapp.datapipe.readData import readDataSpark, readDataMySQLConn, readDataLocally
 from myapp.pred.entity import Entity
 
 class createBackBone:
@@ -26,23 +26,26 @@ class createBackBone:
     def readData(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
              connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
-             driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True, useSpark=False):
-        if useSpark:
+             driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True, readOption="mysql",
+                 table_path=None):
+        if readOption == "spark":
             df = readDataSpark(user, password, database, table, host, dbtype, connector, driver, port,
                           self.numFetchRows, order, preprocess)
-        else:
+        elif readOption == "mysql":
             df = readDataMySQLConn(host, user, password, database, table, self.numFetchRows, order, preprocess)
+        elif readOption == "local":
+            df = readDataLocally(table_path)
         return df
 
-    def train_model_with_database(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
+    def train_model_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
                                   database='syh25csvjgoetrln', table="userdata",
                                   host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
                                   connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
-                                  useSpark=False, steps=20, savemodel=True):
+                                  readOption="mysql", table_path=None, steps=20, savemodel=True):
         # checkpoint = getCheckpoint()
         df = self.readData(user, password, database, table, host, dbtype, connector,
-                           driver, port, order, preprocess, useSpark)
+                           driver, port, order, preprocess, readOption, table_path)
         df = df.drop(columns=['dataid'])
         entity = Entity()
         entity.train(steps=steps, savemodel=savemodel, feedData=df, useDataset=False, model_init=False)
@@ -58,5 +61,12 @@ if __name__ == "__main__":
     df = backbone.readData(user="root", password="zjm19990118", host="localhost",
                            database="jerryratdb", preprocess=True)
     print(df)
-    backbone.train_model_with_database(user="root", password="zjm19990118", host="localhost",
+
+    dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
+    dataset_path = (dataset_path / Path("testdatabase.csv")).resolve()
+    df = backbone.readData(readOption="local", table_path=dataset_path)
+    print(df)
+    print(df.columns)
+
+    backbone.train_model_database_or_runtime(user="root", password="zjm19990118", host="localhost",
                                        database="jerryratdb", savemodel=True)
