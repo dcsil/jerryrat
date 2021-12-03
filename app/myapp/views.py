@@ -31,8 +31,6 @@ from .utils.tableUploader import *
 from .utils.userAccountUtils import *
 from .utils.task import CreateTrainModelPeriodicallyThread
 
-CreateTrainModelPeriodicallyThread().start()
-
 def data_entry_page(request):
     # get into the user's folder
     path = './users/' + request.user.get_username() + '/data'
