@@ -113,3 +113,6 @@ app/.idea/misc.xml
 app/.idea/modules.xml
 app/static/results/testUser1/testPred.csv
 app/myapp/utils/tools.py
+app/users/test2@gmail.com/data/test-campaign1.csv
+app/media/test-campaign1_0Z0LiMp.csv
+*.csv

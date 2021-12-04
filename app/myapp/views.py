@@ -30,7 +30,7 @@ from .forms import *
 from .utils.tableUploader import *
 from .utils.userAccountUtils import *
 from .utils.task import CreateTrainModelPeriodicallyThread
-
+from myapp.datapipe.predUploadedFile import predictUploadedFile
 
 train_t = CreateTrainModelPeriodicallyThread()
 
@@ -63,6 +63,9 @@ def data_entry_page(request):
             fs = FileSystemStorage(location=path)
             filename = fs.save(newdoc.name, newdoc)
             uploaded_file_url = fs.url(filename)
+
+            # feed data to model and predict the result
+            predictUploadedFile(request.user.get_username(), newdoc.name)
             return redirect('data_entry_page')
         else:
             message = 'The form is not valid. Fix the following error:'
@@ -129,8 +132,6 @@ def calling_operations_page(request):
     data = {}
     for i in types:
         data[i.split('.')[0]] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
-
-    print(data)
     context = {'current': 'calling_operations_page', 'data': data, 'types': types}
     return render(request, 'calling_operations_page.html', context)
 

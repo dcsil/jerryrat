@@ -1,4 +1,4 @@
-,y,first_name,last_name,numbers
-0,1,Paul,Hardaway,416-0246436
-1,1,Boyd,Francis,289-5854805
-2,0,Mohammad,Gariepy,367-3362174
+,first_name,last_name,numbers,y
+0,Paul,Hardaway,416-0246436,1
+1,Boyd,Francis,289-5854805,0
+2,Mohammad,Gariepy,367-3362174,1
