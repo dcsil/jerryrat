@@ -48,6 +48,8 @@ def data_entry_page(request):
             if form.is_valid():
                 # save to personal folder
                 newdoc = request.FILES['docfile']
+                if 'csv' not in newdoc.name:
+                    raise TypeError
                 if newdoc.name in documents:
                     form = DocumentForm()
                     context = {'documents': documents, 'form': form, 'error': 2, 'current': 'data_entry_page'}
