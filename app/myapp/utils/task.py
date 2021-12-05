@@ -28,7 +28,7 @@ class CreateTrainModelPeriodicallyThread(Thread):
         self._stopevent = Event()
         self._sleepperiod = 1.0
 
-    def run(self, group=None):
+    def run(self):
         self._stopevent.clear()
         backbone = createBackBone()
         try:
