@@ -25,7 +25,7 @@ class createBackBone:
 
     def readData(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-             connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+             connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
              driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True, readOption="mysql",
                  table_path=None):
         if readOption == "spark":
@@ -42,7 +42,8 @@ class createBackBone:
     def train_model_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
                                   database='syh25csvjgoetrln', table="userdata",
                                   host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-                                  connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+                                  connector="myapp/datapipe/mysql-connector-java-8.0.27/" +
+                                            "mysql-connector-java-8.0.27.jar",
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, steps=20, savemodel=True):
         # checkpoint = getCheckpoint()
@@ -63,7 +64,8 @@ class createBackBone:
     def predict_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
                                   database='syh25csvjgoetrln', table="userdata",
                                   host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-                                  connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+                                  connector="myapp/datapipe/mysql-connector-java-8.0.27/" +
+                                            "mysql-connector-java-8.0.27.jar",
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, threshold=0.5):
         # checkpoint = getCheckpoint()
@@ -86,7 +88,8 @@ class createBackBone:
     def test_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
                                   database='syh25csvjgoetrln', table="userdata",
                                   host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-                                  connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+                                  connector="myapp/datapipe/mysql-connector-java-8.0.27/" +
+                                            "mysql-connector-java-8.0.27.jar",
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, threshold=0.5, runtime=True):
         # checkpoint = getCheckpoint()
@@ -130,3 +133,6 @@ if __name__ == "__main__":
                            database="jerryratdb", preprocess=True, runtime=True)
     print(result)
     '''
+    # df = backbone.readData(user="root", password="zjm19990118", host="localhost",
+    #                        database="jerryratdb", preprocess=True, readOption='spark')
+    # print(df)
