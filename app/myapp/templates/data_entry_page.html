@@ -4,47 +4,203 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Data Entry</title>
-        <link rel="stylesheet" href="{% static '/css/data_entry_page.css' %} "/>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" href="{% static '/css/data_entry_page.css' %} "/>
+</head>
 
-    <body>
-       <div style="margin-left: 25pt;">
-           <h4>
-               <strong>Data Entry</strong>
-           </h4>
-       </div>
-        <div class="content">
-            {% if documents %}
-                All of User {{request.user.get_username}}'s data in DataBase:
-                <ul>
-                    {% for document in documents %}
-                        <li><a href="/media/{{document}}">{{ document}}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No documents.</p>
-            {% endif %}
+<body>
+<div style="margin-left: 25pt;">
+    <h4>
+        <strong>Data Entry</strong>
+    </h4>
+</div>
+<div class="content">
+    {% if documents %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"><h5>All of User <strong>{{request.user.get_username}}</strong>'s data in DataBase:</h5></th>
+        </tr>
+        </thead>
+        <ul>
 
-            <form action="{% url 'data_entry_page' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p>{{ notice|linebreaksbr }}</p>
-                <p>{{ message }}</p>
-                <p>{{ form.non_field_errors }}</p>
+            {% for document in documents %}
+            <tbody>
+            <td scope="roll">
+                <li><a href="/media/{{document}}">{{document}}</a></li>
+            </td>
+            </tbody>
+            {% endfor %}
+        </ul>
+    </table>
+    {% else %}
+    <p>No documents.</p>
+    {% endif %}
 
-                <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+    <form action="{% url 'data_entry_page' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Upload your files here &#8595</p>
+        <p>{{ form.non_field_errors }}</p>
 
-                <p>
-                    {{ form.docfile.errors }}
-                    {{ form.docfile }}
-                </p>
+        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
 
-                <p><input type="submit" value="Upload"/></p>
-            </form>
-        </div>
-    </body>
+        <p>
+            {{ form.docfile.errors }}
+            {{ form.docfile }}
+        </p>
+        {% if error == 1 %}
+        <p>There's an error while uploading, make sure the uploaded file is CSV and satisfies the format.</p>
+        {% endif %}
+        {% if error == 2 %}
+        <p>This file is already in your repo!</p>
+        {% endif %}
+        <p>
+            <button class="btn btn-success" type="submit" value="Upload">Upload File</button>
+        </p>
+    </form>
+
+    <h5>Please Make Sure the Input File is a CSV File in the Format Defined Below:</h5>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Data Type</th>
+            <th scope="col">Explanation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td scope="roll"><strong>age</strong></td>
+        <td scope="roll">Age of the client.</td>
+        </tbody>
+        <tbody>
+        <td scope="roll"><strong>job</strong></td>
+        <td scope="roll">Type of client's job. (categorical:
+            ‘admin.’,’blue-collar’,’entrepreneur’,’housemaid’,’management’,’retired’,’self-employed’,’services’,’student’,’technician’,’unemployed’,’unknown’)
+        </td>
+        </tbody>
+        <tbody>
+        <td scope="roll"><strong>marital</strong></td>
+        <td scope="roll">Client's marital status. (categorical: ‘divorced’,’married’,’single’,’unknown’; note:
+            ‘divorced’ means divorced or widowed)
+        </td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>education</strong></td>
+        <td scope="roll">Client's educational level. (categorical:
+            ‘basic.4y’,’basic.6y’,’basic.9y’,’high.school’,’illiterate’,’professional.course’,’university.degree’,’unknown’)
+        </td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>default</strong></td>
+        <td scope="roll">If client has credit in default? (categorical: ‘no’,’yes’,’unknown’)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>housing</strong></td>
+        <td scope="roll">If client has housing loan? (categorical: ‘no’,’yes’,’unknown’)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>loan</strong></td>
+        <td scope="roll">If client has has personal loan? (categorical: ‘no’,’yes’,’unknown’)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>contact</strong></td>
+        <td scope="roll">How the client is communicated? (categorical: ‘cellular’,’telephone’)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>month</strong></td>
+        <td scope="roll">Last month when the client is contact if applicable. (categorical: ‘jan’, ‘feb’, ‘mar’, …,
+            ‘nov’, ‘dec’)
+        </td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>day_of_week</strong></td>
+        <td scope="roll">Last contact day of the week if applicable. (categorical: ‘mon’,’tue’,’wed’,’thu’,’fri’)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>duration</strong></td>
+        <td scope="roll">Duration of last contact with the client if applicable.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>campaign</strong></td>
+        <td scope="roll">number of contacts performed on this client. (0 if not contacted)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>pdays</strong></td>
+        <td scope="roll">Number of days that passed by after the client was last contacted. (999 if never contacted
+            previously)/td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>previous</strong></td>
+        <td scope="roll">Number of contacts performed before this campaign and for this client. (0 if none)</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>poutcome</strong></td>
+        <td scope="roll">Outcome of the previous marketing campaign on this client. (categorical:
+            ‘failure’,’nonexistent’,’success’)
+        </td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>emp.var.rate</strong></td>
+        <td scope="roll">Client's employment variation rate.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>cons.price.idx</strong></td>
+        <td scope="roll">Average of Consumer price index.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>cons.conf.idx</strong></td>
+        <td scope="roll">Average of Consumer confidence index.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>euribor3m</strong></td>
+        <td scope="roll">Average of Euribor rate for 3 month.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>nr.employed</strong></td>
+        <td scope="roll">Average of total number of employed citizens.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>y</strong></td>
+        <td scope="roll">Enter 'null' for a place holder.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>first_name</strong></td>
+        <td scope="roll">Client's first name.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>last_name</strong></td>
+        <td scope="roll">Client's last name.</td>
+        </tbody>
+
+        <tbody>
+        <td scope="roll"><strong>number</strong></td>
+        <td scope="roll">Client's contact number.</td>
+        </tbody>
+    </table>
+
+</div>
+</body>
 </html>
 
 {% endblock %}
