@@ -24,11 +24,11 @@ class CreateTrainModelPeriodicallyThread(Thread):
     periodically train the model
     """
     def __init__(self):
-        Thread.__init__(self)
+        super(CreateTrainModelPeriodicallyThread, self).__init__()
         self._stopevent = Event()
         self._sleepperiod = 1.0
 
-    def run(self):
+    def run(self, group=None):
         self._stopevent.clear()
         backbone = createBackBone()
         try:
