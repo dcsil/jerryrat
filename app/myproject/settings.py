@@ -139,15 +139,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # ======================= User Accounts Settings =======================
 
 # ENABLE_USER_ACTIVATION = False
-# DISABLE_USERNAME = False
+DISABLE_USERNAME = False
 LOGIN_VIA_EMAIL = True
 # LOGIN_VIA_EMAIL_OR_USERNAME = False
 LOGIN_REDIRECT_URL = 'analytics_dashboard_page'
 LOGIN_URL = 'login'
 USE_REMEMBER_ME = True
 
-RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
-ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE = True
+# RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
+# ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE = True
 
 SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 # if DISABLE_USERNAME:

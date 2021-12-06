@@ -114,7 +114,6 @@ def calling_operations_page(request):
     for i in types:
         data[i.split('.')[0]] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
 
-    print(data)
     context = {'current': 'calling_operations_page', 'data': data, 'types': types}
     return render(request, 'calling_operations_page.html', context)
 
@@ -200,11 +199,11 @@ class LogIn(FormView):
 
         login(request, form.user_cache)
 
-        redirect_to = request.POST.get(REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
-        url_is_safe = is_safe_url(redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())
+        # redirect_to = request.POST.get(REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
+        # url_is_safe = is_safe_url(redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())
 
-        if url_is_safe:
-            return redirect(redirect_to)
+        # if url_is_safe:
+        #     return redirect(redirect_to)
 
         return redirect(settings.LOGIN_REDIRECT_URL)
 
