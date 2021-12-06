@@ -2,6 +2,14 @@ from myapp.pred.preprocess import numeralizeCategory, dropUserContactInfo
 import pandas as pd
 import numpy as np
 
+
+def helper(df):
+    df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
+    df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
+    df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
+    df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
+    df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+
 def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
              connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
@@ -26,11 +34,7 @@ def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database
     df = sparkdf.toPandas()
 
     if table == 'userdata':
-        df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
-        df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
-        df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
-        df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
-        df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+        helper(df)
 
     if preprocess:
         df = numeralizeCategory(df)
@@ -70,11 +74,7 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     df.columns = field_names
 
     if table == "userdata":
-        df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
-        df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
-        df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
-        df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
-        df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+        helper(df)
 
     # return a numeralized data
     if preprocess:
