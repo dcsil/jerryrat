@@ -1,4 +1,8 @@
 version: "2"
+checks:
+  argument-count:
+    config:
+      threshold: 20
 exclude_patterns:
   - "app/static"
   - "app/staticfiles"

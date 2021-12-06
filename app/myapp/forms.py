@@ -17,7 +17,9 @@ class AddGraphForm(ModelForm):
         fields = '__all__'
         exclude = ['created_at']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': "Please enter the title of the new graph", 'style': 'width: 400px', 'class': 'form-control'})
+            'title': forms.TextInput(
+                attrs={'placeholder': "Please enter the title of the new graph", 'style': 'width: 400px',
+                       'class': 'form-control'})
             # 'graph_type': forms.TextInput(attrs={'placeholder': "Please enter the type of the new graph"})
         }
 
