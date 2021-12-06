@@ -1,6 +1,7 @@
 tools:
   exceptions: https://sentry.io/organizations/jerryrat/issues/?project=6036387
   ci: ../github/workflows/CI-test.yml
+  logging: https://app.logdna.com/549d30bc0b/logs/view
 
 services:
   production: https://herokujerryratapp.herokuapp.com/
@@ -12,6 +13,4 @@ commands:
   bootstrap: script/bootstrap
   database: en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
   server: cd app; python3 manage.py runserver
-  
-test:
-  cd app; python3 manage.py test  
+  test: cd app; python3 manage.py test  
