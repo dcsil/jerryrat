@@ -3,7 +3,7 @@ checks:
   argument-count:
     config:
       threshold: 12
-   method-complexity:
+  method-complexity:
     config:
       threshold: 10
 exclude_patterns:
