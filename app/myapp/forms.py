@@ -70,30 +70,6 @@ class SignInForm(UserCacheMixin, forms.Form):
         return password
 
 
-class SignInViaUsernameForm(SignInForm):
-    username = forms.CharField(label=_('Username'))
-
-    @property
-    def field_order(self):
-        if settings.USE_REMEMBER_ME:
-            return ['username', 'password', 'remember_me']
-        return ['username', 'password']
-
-    def clean_username(self):
-        username = self.cleaned_data['username']
-
-        user = User.objects.filter(username=username).first()
-        if not user:
-            raise ValidationError(_('You entered an invalid username.'))
-
-        if not user.is_active:
-            raise ValidationError(_('This account is not active.'))
-
-        self.user_cache = user
-
-        return username
-
-
 class SignInViaEmailForm(SignInForm):
     email = forms.EmailField(label=_('Email'))
 
