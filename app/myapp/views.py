@@ -26,7 +26,6 @@ from .datapipe import customize_config
 from .models import *
 from .forms import *
 from .utils.tableUploader import *
-from .utils.userAccountUtils import *
 import os
 
 
@@ -226,20 +225,6 @@ class LogIn(FormView):
 
 class LogOut(LoginRequiredMixin, BaseLogoutView):
     template_name = 'logout.html'
-
-
-class ChangePassword(BasePasswordChangeView):
-    template_name = 'change_password.html'
-
-    def form_valid(self, form):
-        # Change the password
-        user = form.save()
-
-        # Re-authentication
-        login(self.request, user)
-
-        messages.success(self.request, _('Your password was changed.'))
-        return redirect('change_password')
 
 
 # ==============================================================================================================
