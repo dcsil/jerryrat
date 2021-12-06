@@ -174,10 +174,7 @@ class LogIn(FormView):
 
     @staticmethod
     def get_form_class(**kwargs):
-        if settings.DISABLE_USERNAME or settings.LOGIN_VIA_EMAIL:
-            return SignInViaEmailForm
-
-        return SignInViaUsernameForm
+        return SignInViaEmailForm
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
