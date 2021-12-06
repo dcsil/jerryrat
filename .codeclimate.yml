@@ -3,9 +3,6 @@ checks:
   argument-count:
     config:
       threshold: 12
-  complex-logic:
-    config:
-      threshold: 10
 exclude_patterns:
   - "app/static"
   - "app/staticfiles"
