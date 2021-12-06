@@ -68,17 +68,6 @@ def data_entry_page(request):
     return render(request, 'data_entry_page.html', context)
 
 
-def campaign_customization_page(request):
-    combo1 = CampaignComboContent(title="P1", description="P1 desc")
-    combo2 = CampaignComboContent(title="P2", description="P2 desc")
-    combo3 = CampaignComboContent(title="P3", description="P3 desc")
-    combo4 = CampaignComboContent(title="P4", description="P4 desc")
-    combo5 = CampaignComboContent(title="P5", description="P5 desc")
-    combos = [combo1, combo2, combo3, combo4, combo5]
-    context = {"combos": combos, 'current': 'campaign_customization_page'}
-    return render(request, 'campaign_customization_page.html', context)
-
-
 def analytics_dashboard_page(request):
     add_graph_form = AddGraphForm()
     if request.method == "POST":
