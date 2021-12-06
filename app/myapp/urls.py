@@ -14,7 +14,6 @@ urlpatterns = [
     path('logout/', LogOut.as_view(), name='logout'),
 
     path('data_entry_page/', data_entry_page, name='data_entry_page'),
-    path('data_entry_page/', data_entry_page, name='data_entry_page'),
     path('analytics_dashboard_page/', analytics_dashboard_page, name='analytics_dashboard_page'),
     path('delete_graph/<int:id>/', delete_graph, name='delete_graph'),
     path('calling_operations_page/', calling_operations_page, name='calling_operations_page'),
