@@ -4,7 +4,7 @@ import numpy as np
 
 def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-             connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+             connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
              driver="com.mysql.cj.jdbc.Driver", port=3306, numRows=5, order='desc', preprocess=True):
 
     from pyspark.sql import SparkSession
@@ -35,6 +35,7 @@ def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database
     if preprocess:
         df = numeralizeCategory(df)
         df = dropUserContactInfo(df)
+    spark.stop()
     return df
 
 def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', user= 'dv9wgfh46sgcyiil',
@@ -79,6 +80,10 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     if preprocess:
         df = numeralizeCategory(df)
         df = dropUserContactInfo(df)
+
+    mydb.commit()
+    conn.close()
+    mydb.close()
     return df
 
 def readDataFromRuntimeUpload(table_path=None, preprocess=True):
