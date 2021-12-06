@@ -242,35 +242,4 @@ class ChangePassword(BasePasswordChangeView):
         return redirect('change_password')
 
 
-class RemindUsername(FormView):
-    template_name = 'remind_username.html'
-    form_class = RemindUsernameForm
-
-    def form_valid(self, form):
-        user = form.user_cache
-        send_forgotten_username_email(user.email, user.username)
-        messages.success(self.request, _('Your username has been successfully sent to your email.'))
-        return redirect('remind_username')
-
-
-class RetrievePassword(FormView):
-    template_name = 'retrieve_password.html'
-
-    @staticmethod
-    def get_form_class(**kwargs):
-        return RestorePasswordForm
-
-    def form_valid(self, form):
-        user = form.user_cache
-        token = default_token_generator.make_token(user)
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-
-        if isinstance(uid, bytes):
-            uid = uid.decode()
-
-        send_reset_password_email(self.request, user.email, token, uid)
-
-        return redirect('retrieve_password')
-
-
 # ==============================================================================================================
