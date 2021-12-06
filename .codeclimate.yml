@@ -3,6 +3,9 @@ checks:
   argument-count:
     config:
       threshold: 12
+   method-complexity:
+    config:
+      threshold: 10
 exclude_patterns:
   - "app/static"
   - "app/staticfiles"
