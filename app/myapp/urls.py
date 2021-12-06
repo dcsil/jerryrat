@@ -5,8 +5,7 @@ from .views import *
 page_names = ['data_entry_page',
               'analytics_dashboard_page',
               'calling_operations_page',
-              'model_controlls_page',
-              'campaign_customization_page']
+              'model_controlls_page']
 
 urlpatterns = [
     path('', LogIn.as_view(), name='login'),
