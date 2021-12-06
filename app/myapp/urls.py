@@ -13,13 +13,7 @@ urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
     path('login/', LogIn.as_view(), name='login'),
     path('logout/', LogOut.as_view(), name='logout'),
-
-    path('remind_username', RemindUsername.as_view(), name='remind_username'),
-    path('change/password/', ChangePassword.as_view(), name='change_password'),
-    path('retrieve/password/', RetrievePassword.as_view(), name='retrieve_password'),
-    path('retrieve/<uidb64>/<token>/', RestorePasswordConfirm.as_view(), name='retrieve_password_confirm'),
-    path('retrieve/password/done', RetrievePasswordDone.as_view(), name='retrieve_password_done'),
-
+    
     path('data_entry_page/', data_entry_page, name='data_entry_page'),
     path('data_entry_page/', data_entry_page, name='data_entry_page'),
     path('analytics_dashboard_page/', analytics_dashboard_page, name='analytics_dashboard_page'),
