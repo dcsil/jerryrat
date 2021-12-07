@@ -6,7 +6,6 @@ from pathlib import Path
 def customize_config(customized_configs):
     # reads and clear file
     path = (Path(__file__).parent / Path("config/config.json")).resolve()
-    print(path)
     try:
         with open(path, "r") as fp:
             configs = json.load(fp)

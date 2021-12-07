@@ -7,9 +7,9 @@
 Icon
 
 # model and configs
-./app/myapp/pred/models/
-./app/myapp/pred/configs/
-./app/myapp/datapipe/config/
+app/myapp/pred/models/
+app/myapp/pred/configs/
+app/myapp/datapipe/config/
 
 
 # Thumbnails
