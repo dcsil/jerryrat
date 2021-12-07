@@ -9,6 +9,12 @@ from myapp.datapipe import *
 from myapp.datapipe.backbone import createBackBone
 from myapp.pred import *
 from django.urls import reverse, resolve
+
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 # Create your tests here.
 
 
@@ -28,8 +34,8 @@ class TestIntegrity(TestCase, Client):
             uploadFileToDB("./static/dataset/testdatabase-with-names.csv")
             uploadFileToDB("./static/dataset/testdatabase-with-names.xlsx")
         except Exception as e:
-            print("@fileUpload")
-            print(e)
+            logger.error("@fileUpload")
+            logger.error(e)
             raised = True
         finally:
             self.assertEqual(raised, False)
@@ -39,8 +45,8 @@ class TestIntegrity(TestCase, Client):
         try:
             csvToXlsx("./static/dataset/testdatabase-with-names.csv", True)
         except Exception as e:
-            print("@fileTransfer")
-            print(e)
+            logger.error("@fileTransfer")
+            logger.error(e)
             raised = True
         finally:
             self.assertEqual(raised, False)
@@ -51,7 +57,7 @@ class TestIntegrity(TestCase, Client):
             backbone = createBackBone()
             train_model_periodically(backbone)
         except Exception as e:
-            print(e)
+            logger.error(e)
             raised = True
         finally:
             self.assertEqual(raised, False)
@@ -63,7 +69,7 @@ class TestIntegrity(TestCase, Client):
             t.start()
             t.join()
         except Exception as e:
-            print(e)
+            logger.error(e)
             raised = True
         finally:
             self.assertEqual(raised, False)
