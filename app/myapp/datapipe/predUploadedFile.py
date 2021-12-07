@@ -6,18 +6,18 @@ from pathlib import Path
 
 def predictUploadedFile(username, filename):
     backbone = createBackBone(init=True)
-    dataset_path = Path(__file__).parent.parent.parent / Path("users/" + username + "/data/" + filename).resolve()
-
-    result_path = Path(__file__).parent.parent.parent / Path("users/" + username + "/result").resolve()
-    cleaned_dataset_path = Path(__file__).parent.parent.parent / Path("users/" + username + "/cleaned_data").resolve()
+    userRepo = "./users/" + username
+    dataset_path = userRepo + "/data/" + filename
+    result_path = userRepo + "/result"
+    cleaned_dataset_path = userRepo + "/cleaned_data"
 
     if not os.path.exists(cleaned_dataset_path):
         os.makedirs(cleaned_dataset_path)
     if not os.path.exists(result_path):
         os.makedirs(result_path)
 
-    cleaned_dataset_path = Path(__file__).parent.parent.parent / Path("users/" + username + "/cleaned_data/" + filename).resolve()
-    result_path = Path(__file__).parent.parent.parent / Path("users/" + username + "/result/" + filename).resolve()
+    cleaned_dataset_path = cleaned_dataset_path + "/" + filename
+    result_path = result_path + "/" + filename
 
     # Start preprocess
     df = pandas.read_csv(dataset_path, index_col=[0])

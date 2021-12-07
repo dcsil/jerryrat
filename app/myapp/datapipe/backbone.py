@@ -7,7 +7,10 @@ from myapp.datapipe.readData import readDataSpark, readDataMySQLConn, readDataFr
 from myapp.pred.entity import Entity
 
 class createBackBone:
-    def __init__(self, init=False):
+    def __init__(self, init=False, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
+             table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
+             connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+             driver="com.mysql.cj.jdbc.Driver", port=3306):
         config_path = Path.joinpath(Path(__file__).parent, Path("config"))
         if init:
             if not os.path.exists(config_path.resolve()):
@@ -22,17 +25,23 @@ class createBackBone:
             configs = json.load(fp)
         self.numFetchRows = configs["numFetchRows"]
         self.period = configs["period"]
+        self.user = user
+        self.password = password
+        self.database = database
+        self.table = table
+        self.host = host
+        self.dbtype = dbtype
+        self.connector = connector
+        self.driver = driver
+        self.port = port
 
-    def readData(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
-             table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-             connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
-             driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True, readOption="mysql",
-                 table_path=None):
+    def readData(self, order='desc', preprocess=True, readOption="mysql", table_path=None):
         if readOption == "spark":
-            df = readDataSpark(user, password, database, table, host, dbtype, connector, driver, port,
-                          self.numFetchRows, order, preprocess)
+            df = readDataSpark(self.user, self.password, self.database, self.table, self.host, self.dbtype,
+                               self.connector, self.driver, self.port, self.numFetchRows, order, preprocess)
         elif readOption == "mysql":
-            df = readDataMySQLConn(host, user, password, database, table, self.numFetchRows, order, preprocess)
+            df = readDataMySQLConn(self.host, self.user, self.password, self.database, self.table,
+                                   self.numFetchRows, order, preprocess)
         elif readOption == "local":
             df = readDataFromRuntimeUpload(table_path, preprocess)
         return df

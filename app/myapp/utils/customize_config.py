@@ -3,9 +3,9 @@ from pathlib import Path
 
 
 # the input should be a dictionary with configurations
-def customize_config(customized_configs):
+def customize_config(customized_configs, config_path):
     # reads and clear file
-    path = (Path(__file__).parent / Path("configs/config.json")).resolve()
+    path = (Path(__file__).parent.parent / Path(config_path)).resolve()
     try:
         with open(path, "r") as fp:
             configs = json.load(fp)

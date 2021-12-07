@@ -24,3 +24,18 @@ Roadmap
 ---
 
 The short, medium, and long term goals for project development are written in the [Milestone](https://github.com/dcsil/jerryrat/milestones) of GitHub issues.
+
+Tutorials
+---
+### Sign Up
+
+### Log In
+
+### Data Entry Page
+
+### Analytics Dashboard
+
+### Calling Operations
+
+### Model Controls
+

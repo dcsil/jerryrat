@@ -1,7 +1,6 @@
 import os
 import json
 
-from myapp.pred.customize_config import customize_config
 from myapp.pred.load_model import load_model
 from myapp.pred.load_config import load_config
 from myapp.pred.predict import predict
@@ -55,12 +54,6 @@ class Entity:
         model = train(self.model, self.params, useDataset, steps, model_init, savemodel, feedData)
         # setCheckpoint(checkpoint + 1)
         self.model = model
-
-    def customize_config(self, configs={}):
-        """
-        use this method to customize the model
-        """
-        customize_config(configs)
 
     def predict(self, usedataset=False, threshold=0.5, feedData=None):
         result = predict(self.model, usedataset, threshold, feedData)
