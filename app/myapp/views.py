@@ -167,7 +167,7 @@ def model_controlls_page(request):
         elif 'configure' in request.POST:
             for i in request.POST:
                 config[i] = request.POST[i]
-            customize_config.customize_config(config, request.user.get_username())
+            customize_config.customize_config(config)
 
     return render(request, 'model_controlls_page.html', context)
 
@@ -245,7 +245,6 @@ class LogIn(FormView):
 
         # if url_is_safe:
         #     return redirect(redirect_to)
-
         return redirect(settings.LOGIN_REDIRECT_URL)
 
 
