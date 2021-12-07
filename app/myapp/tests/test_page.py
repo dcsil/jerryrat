@@ -4,6 +4,9 @@ from myapp.models import *
 from myapp import urls
 from myapp.utils.tableUploader import uploadFileToDB
 from myapp.utils.csvToXlsx import csvToXlsx
+from myapp.utils.task import *
+from myapp.datapipe import *
+from myapp.pred import *
 from django.urls import reverse, resolve
 # Create your tests here.
 
@@ -40,3 +43,27 @@ class TestIntegrity(TestCase, Client):
             raised = True
         finally:
             self.assertEqual(raised, False)
+
+    def test_task_train_periodically(self):
+        raised = False
+        try:
+            backbone = createBackBone()
+            train_model_periodically(backbone)
+        except Exception as e:
+            print(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
+    def test_task_create_thread(self):
+        raised = False
+        try:
+            t = CreateTrainModelPeriodicallyThread()
+            t.start()
+            t.join()
+        except Exception as e:
+            print(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
