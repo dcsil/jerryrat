@@ -121,5 +121,4 @@ app/media/test-campaign1_0Z0LiMp.csv
 *.csv
 app/users/test1/result/test-campaign1.csv
 *.json
-app/myapp/datapipe/config/config.json
-app/myapp/datapipe/config/config.json
+
