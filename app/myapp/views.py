@@ -73,14 +73,17 @@ def data_entry_page(request):
 
                 # feed data to model and predict the result
 
-                predictUploadedFile(request.user.get_username(), newdoc.name)
+                predictUploadedFile(request.user.get_username(), filename)
                 print('==========')
                 print("Predicted...")
                 print('==========')
                 return redirect('data_entry_page')
             else:
                 message = 'The form is not valid. Fix the following error:'
-        except:
+        except Exception as e:
+            print('====ERROR====')
+            print(e)
+            print('============')
             form = DocumentForm()
             context = {'documents': documents, 'form': form, 'error': 1, 'current': 'data_entry_page'}
             return render(request, 'data_entry_page.html', context)
