@@ -28,8 +28,8 @@ def train(model=None, params=None, useDataset=False, steps=20, model_init=False,
             model.dump_model(Path.joinpath(Path(__file__).parent,
                                            Path("models/schema/model_schema.json.json")).resolve())
 
-            t = time.localtime()
-            current_time = time.strftime("%H:%M:%S", t)
+        t = time.localtime()
+        current_time = time.strftime("%H:%M:%S", t)
 
         print("model saved at time {}".format(current_time))
     return model
