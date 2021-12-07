@@ -6,6 +6,10 @@ from django.contrib.auth.views import (
     LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
     PasswordResetDoneView as BasePasswordResetDoneView, PasswordResetConfirmView as BasePasswordResetConfirmView,
 )
+from .utils.task import CreateTrainModelPeriodicallyThread
+from myapp.datapipe.predUploadedFile import predictUploadedFile
+import os
+from django.contrib import messages
 from django.core.files.storage import default_storage
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import redirect, render, get_object_or_404, reverse, HttpResponseRedirect
@@ -27,6 +31,11 @@ from .models import *
 from .forms import *
 from .utils.tableUploader import *
 import os
+from myapp.datapipe.predUploadedFile import predictUploadedFile
+from .utils.task import CreateTrainModelPeriodicallyThread
+
+
+train_t = CreateTrainModelPeriodicallyThread()
 
 
 def data_entry_page(request):
@@ -35,36 +44,50 @@ def data_entry_page(request):
     if not os.path.exists(path):
         os.makedirs(path)
     documents = os.listdir(path)
-    message = 'Please upload your files'
-    notice = "Allowing file types: xlsx, xlsm, xlsb, xls, csv\n\n" + \
-             "File must be in specific formats, please see the following for the column specifications:\n" + \
-             "<strong>Contact<i> [String]</i></strong>: The mobile/other phone number of the client\n" + \
-             "<span class='thick'>First Name <i>[String](Optional)</i></span>: The first name of the client\n" + \
-             "<strong>Last Name <i>[String](Optional)</i></strong>: The last name of the client\n" + \
-             "<strong>Age <i>[int]</i></strong>: The numeric integer to represent the client's age\n" + \
-             "<strong>Job <i>[String]</i></strong>: The categorical label to mark the position/employment status of the client, available values:\n" + \
-             "......"
-    notice = mark_safe(notice)
+    error = 0
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
-            # upload to db for future training
-            uploadFileToDB(newdoc.get_file_path())
+        try:
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                # save to personal folder
+                newdoc = request.FILES['docfile']
+                if '.csv' not in newdoc.name:
+                    raise TypeError
+                if newdoc.name in documents:
+                    form = DocumentForm()
+                    context = {'documents': documents, 'form': form, 'error': 2, 'current': 'data_entry_page'}
+                    return render(request, 'data_entry_page.html', context)
+                fs = FileSystemStorage(location=path)
+                filename = fs.save(newdoc.name, newdoc)
+                uploaded_file_url = fs.url(filename)
 
-            # save to personal folder
-            newdoc = request.FILES['docfile']
-            fs = FileSystemStorage(location=path)
-            filename = fs.save(newdoc.name, newdoc)
-            uploaded_file_url = fs.url(filename)
-            return redirect('data_entry_page')
+                # upload to db for future training
+                newdoc = Document(docfile=request.FILES['docfile'])
+                newdoc.save()
+                print('==========')
+                print("Saving to DB...")
+                print('==========')
+                uploadFileToDB(newdoc.get_file_path())
+
+                # feed data to model and predict the result
+
+                predictUploadedFile(request.user.get_username(), newdoc.name)
+                print('==========')
+                print("Predicted...")
+                print('==========')
+                return redirect('data_entry_page')
+            else:
+                message = 'The form is not valid. Fix the following error:'
+        except:
+            form = DocumentForm()
+            context = {'documents': documents, 'form': form, 'error': 1, 'current': 'data_entry_page'}
+            return render(request, 'data_entry_page.html', context)
         else:
             message = 'The form is not valid. Fix the following error:'
     else:
         form = DocumentForm()
     # get this user's documents
-    context = {'documents': documents, 'form': form, 'message': message, 'notice': notice, 'current': 'data_entry_page'}
+    context = {'documents': documents, 'form': form, 'error': 0, 'current': 'data_entry_page'}
     return render(request, 'data_entry_page.html', context)
 
 
@@ -79,7 +102,8 @@ def analytics_dashboard_page(request):
     dbc_list = []
     for x in client_x:
         dbc_list.append(DoubleBarChart(xaxis=x, title=x.capitalize()))
-    return render(request, 'analytics_dashboard_page.html', {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc_list': dbc_list})
+    return render(request, 'analytics_dashboard_page.html',
+                  {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc_list': dbc_list})
 
 
 def delete_graph(request, id):
@@ -98,9 +122,9 @@ def configure_graph(request, id):
             new_yaxis = add_graph_form.cleaned_data.get('yaxis')
             new_title = add_graph_form.cleaned_data.get('title')
     Barchart.objects.filter(id=id).update(
-        xaxis = new_xaxis,
-        yaxis = new_yaxis,
-        title = new_title
+        xaxis=new_xaxis,
+        yaxis=new_yaxis,
+        title=new_title
     )
     return redirect(reverse('analytics_dashboard_page'))
 
@@ -113,8 +137,6 @@ def calling_operations_page(request):
     data = {}
     for i in types:
         data[i.split('.')[0]] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
-
-    print(data)
     context = {'current': 'calling_operations_page', 'data': data, 'types': types}
     return render(request, 'calling_operations_page.html', context)
 
@@ -124,10 +146,28 @@ def model_controlls_page(request):
     context = {'current': 'model_controlls_page'}
     config = {}
     print(request.user.get_username())
+    global train_t
+    message = None
+    if train_t.is_alive():
+        message = "<span style='color:red'>The periodic training is working!</span>"
+    else:
+        message = "<span style='color:green'>The periodic training is idle.</span>"
+    context = {'current': 'model_controlls_page', 'message': message}
+
     if request.method == 'POST':
-        for i in request.POST:
-            config[i] = request.POST[i]
-        customize_config.customize_config(config, request.user.get_username())
+        if 'start' in request.POST:
+            if not train_t.is_alive():
+                context['message'] = "<span style='color:red'>The periodic training is working!</span>"
+                train_t.start()
+        elif 'end' in request.POST:
+            if train_t.is_alive():
+                context['message'] = "<span style='color:green'>The periodic training is idle.</span>"
+                train_t.join()
+                train_t = CreateTrainModelPeriodicallyThread()
+        elif 'configure' in request.POST:
+            for i in request.POST:
+                config[i] = request.POST[i]
+            customize_config.customize_config(config, request.user.get_username())
 
     return render(request, 'model_controlls_page.html', context)
 
@@ -214,6 +254,5 @@ class LogIn(FormView):
 
 class LogOut(LoginRequiredMixin, BaseLogoutView):
     template_name = 'logout.html'
-
 
 # ==============================================================================================================

@@ -116,3 +116,4 @@ app/myapp/utils/tools.py
 app/users/test2@gmail.com/data/test-campaign1.csv
 app/media/test-campaign1_0Z0LiMp.csv
 *.csv
+app/users/test1/result/test-campaign1.csv
