@@ -122,3 +122,6 @@ app/media/test-campaign1_0Z0LiMp.csv
 app/users/test1/result/test-campaign1.csv
 *.json
 
+/app/myapp/pred/models/
+/app/myapp/pred/configs/
+/app/myapp/datapipe/config/
