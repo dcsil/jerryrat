@@ -16,10 +16,10 @@ class createBackBone:
             if not os.path.exists(config_path.resolve()):
                 os.makedirs(config_path.resolve())
             configs = {"numFetchRows": 100, "period": 1}
-            with open((config_path / Path("config_init.json")).resolve(), "w") as fp:
-                json.dump(configs, fp, indent=0)
-            with open((config_path / Path("config.json")).resolve(), "w") as fp:
-                json.dump(configs, fp, indent=0)
+            with open((config_path / Path("config_init.json")).resolve(), "w") as fp1:
+                json.dump(configs, fp1, indent=0)
+            with open((config_path / Path("config.json")).resolve(), "w") as fp2:
+                json.dump(configs, fp2, indent=0)
 
         with open((config_path / Path("config.json")).resolve()) as fp:
             configs = json.load(fp)
