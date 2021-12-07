@@ -8,8 +8,9 @@ page_names = ['data_entry_page',
               'calling_operations_page',
               'model_controlls_page']
 
+
 urlpatterns = [
-    path('', LogIn.as_view(), name='login'),
+    path('', data_entry_page, name='data_entry_page'),
     path('signup/', SignUp.as_view(), name='signup'),
     path('login/', LogIn.as_view(), name='login'),
     path('logout/', LogOut.as_view(), name='logout'),
