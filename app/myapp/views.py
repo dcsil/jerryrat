@@ -16,6 +16,7 @@ from django.shortcuts import redirect, render, get_object_or_404, reverse, HttpR
 from django.utils.safestring import mark_safe
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.utils.http import is_safe_url
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -38,7 +39,7 @@ from .utils.task import CreateTrainModelPeriodicallyThread
 
 train_t = CreateTrainModelPeriodicallyThread()
 
-
+@login_required
 def data_entry_page(request):
     # get into the user's folder
     path = './users/' + request.user.get_username() + '/data'
@@ -92,6 +93,7 @@ def data_entry_page(request):
     return render(request, 'data_entry_page.html', context)
 
 
+@login_required
 def analytics_dashboard_page(request):
     add_graph_form = AddGraphForm()
     if request.method == "POST":
@@ -130,6 +132,7 @@ def configure_graph(request, id):
     return redirect(reverse('analytics_dashboard_page'))
 
 
+@login_required
 def calling_operations_page(request):
     path = './users/' + request.user.get_username() + '/result'
     if not os.path.exists(path):
@@ -142,6 +145,7 @@ def calling_operations_page(request):
     return render(request, 'calling_operations_page.html', context)
 
 
+@login_required
 def model_controlls_page(request):
     user = request.user.get_username()
     context = {'current': 'model_controlls_page'}
