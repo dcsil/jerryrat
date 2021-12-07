@@ -42,6 +42,7 @@ class CreateTrainModelPeriodicallyThread(Thread):
     def join(self, timeout=None):
         """ Stop the thread. """
         self._stopevent.set()
+        print("Start ending the training cycle.")
         Thread.join(self, timeout)
         print("This training cycle finished")
 

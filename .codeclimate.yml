@@ -1,0 +1,14 @@
+version: "2"
+checks:
+  argument-count:
+    config:
+      threshold: 12
+  method-complexity:
+    config:
+      threshold: 10
+exclude_patterns:
+  - "app/static"
+  - "app/staticfiles"
+  - "app/myapp/datapipe/mysql-connector-java-8.0.27"
+  - "app/myapp/datapipe/__pycache__"
+  - "app/myapp/migrations"
