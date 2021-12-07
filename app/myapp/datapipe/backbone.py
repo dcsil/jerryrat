@@ -56,8 +56,7 @@ class createBackBone:
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, steps=20, savemodel=True):
         # checkpoint = getCheckpoint()
-        df = self.readData(user, password, database, table, host, dbtype, connector,
-                           driver, port, order, preprocess, readOption, table_path)
+        df = self.readData(order, preprocess, readOption, table_path)
         if 'dataid' in df.columns:
             df = df.drop(columns=['dataid'])
         entity = Entity()
@@ -78,8 +77,7 @@ class createBackBone:
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, threshold=0.5):
         # checkpoint = getCheckpoint()
-        df = self.readData(user, password, database, table, host, dbtype, connector,
-                           driver, port, order, preprocess, readOption, table_path)
+        df = self.readData(order, preprocess, readOption, table_path)
         if 'dataid' in df.columns:
             df = df.drop(columns=['dataid'])
         entity = Entity()
@@ -102,8 +100,7 @@ class createBackBone:
                                   driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, threshold=0.5, runtime=True):
         # checkpoint = getCheckpoint()
-        df = self.readData(user, password, database, table, host, dbtype, connector,
-                           driver, port, order, preprocess, readOption, table_path)
+        df = self.readData(order, preprocess, readOption, table_path)
         if 'dataid' in df.columns:
             df = df.drop(columns=['dataid'])
         entity = Entity()
