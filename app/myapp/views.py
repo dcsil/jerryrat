@@ -26,7 +26,8 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, FormView
 from django.conf import settings
 import pandas
-from .datapipe import customize_config
+from .pred import customize_config as pred_customize_config
+from .datapipe import customize_config as datapipe_customize_config
 from .models import *
 from .forms import *
 from .utils.tableUploader import *
@@ -144,7 +145,8 @@ def calling_operations_page(request):
 def model_controlls_page(request):
     user = request.user.get_username()
     context = {'current': 'model_controlls_page'}
-    config = {}
+    config_model = {}
+    config_datapipe = {}
     print(request.user.get_username())
     global train_t
     message = None
@@ -166,8 +168,12 @@ def model_controlls_page(request):
                 train_t = CreateTrainModelPeriodicallyThread()
         elif 'configure' in request.POST:
             for i in request.POST:
-                config[i] = request.POST[i]
-            customize_config.customize_config(config, request.user.get_username())
+                if i == "eta" or i == "max_depth":
+                    config_model[i] = request.POST[i]
+                elif i == "numFetchRows" or i == "period":
+                    config_datapipe[i] = request.POST[i]
+            pred_customize_config.customize_config(config_model)
+            datapipe_customize_config.customize_config(config_datapipe)
 
     return render(request, 'model_controlls_page.html', context)
 

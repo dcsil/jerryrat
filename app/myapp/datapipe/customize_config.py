@@ -1,10 +1,12 @@
 import json
+from pathlib import Path
 
 
 # the input should be a dictionary with configurations
-def customize_config(customized_configs, user):
+def customize_config(customized_configs):
     # reads and clear file
-    path = './users/' + user + '/config/config.json'
+    path = (Path(__file__).parent / Path("config/config.json")).resolve()
+    print(path)
     try:
         with open(path, "r") as fp:
             configs = json.load(fp)

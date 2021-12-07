@@ -1,8 +1,20 @@
 import json
+from pathlib import Path
 
+
+# the input should be a dictionary with configurations
 def customize_config(customized_configs):
-    with open("./config/config.json", "r+") as fp:
-        configs = json.load(fp)
-        for attr, param in configs:
-            configs[attr] = param
-        json.dump(configs)
+    # reads and clear file
+    path = (Path(__file__).parent / Path("configs/config.json")).resolve()
+    print(path)
+    try:
+        with open(path, "r") as fp:
+            configs = json.load(fp)
+            for settings in configs:
+                if settings in customized_configs:
+                    if customized_configs[settings] != "":
+                        configs[settings] = customized_configs[settings]
+        with open(path, "w+") as fp:
+            json.dump(configs, fp)
+    except KeyError:
+        print('Incorrect configuration data! Please check if the configurations are updated...')

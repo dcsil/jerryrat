@@ -1,9 +1,1 @@
-{
-"eta": 0.3,
-"gamma": 0,
-"objective": "binary:logistic",
-"max_depth": 6,
-"nthread": 4,
-"eval_metric": "auc",
-"lambda": 1
-}
+{"eta": "0.3", "gamma": 0, "objective": "binary:logistic", "max_depth": "10", "nthread": 4, "eval_metric": "auc", "lambda": 1}
