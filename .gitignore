@@ -1,11 +1,15 @@
 ### OSX ###
 .DS_Store
-<<<<<<< HEAD
 .AppleDouble
 .LSOverride
 
 # Icon must end with two \r
 Icon
+
+# model and configs
+app/myapp/pred/models/
+app/myapp/pred/configs/
+app/myapp/datapipe/config/
 
 
 # Thumbnails
@@ -104,7 +108,6 @@ app/myproject/__pycache__/urls.cpython-39.pyc
 app/myproject/__pycache__/wsgi.cpython-39.pyc
 *.pyc
 *.xlsx
->>>>>>> aa0012f2349fbf87f579a88bc490ea52b7601333
 app/.idea/vcs.xml
 app/.idea/app.iml
 app/.idea/inspectionProfiles/profiles_settings.xml
@@ -116,3 +119,9 @@ app/myapp/utils/tools.py
 app/users/test2@gmail.com/data/test-campaign1.csv
 app/media/test-campaign1_0Z0LiMp.csv
 *.csv
+app/users/test1/result/test-campaign1.csv
+app/myapp/datapipe/config/config.json
+app/myapp/pred/configs/config.json
+app/myapp/pred/configs/config.json
+app/myapp/datapipe/config/config.json
+*.json
