@@ -73,23 +73,23 @@ class TestIntegrity(TestCase, Client):
         finally:
             self.assertEqual(raised, False)
 
-    def test_train_periodically(self):
-        raised = False
-        try:
-            backbone = createBackBone()
-            train_model_periodically(backbone)
-        except Exception as e:
-            logger.error(e)
-            raised = True
-        finally:
-            self.assertEqual(raised, False)
-
     def test_task_create_thread(self):
         raised = False
         try:
             t = CreateTrainModelPeriodicallyThread()
             t.start()
             t.join()
+        except Exception as e:
+            logger.error(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
+    def test_train_periodically(self):
+        raised = False
+        try:
+            backbone = createBackBone()
+            train_model_periodically(backbone)
         except Exception as e:
             logger.error(e)
             raised = True

@@ -1,5 +1,6 @@
 import pandas as pd
 import xgboost as xgb
+from pathlib import Path
 
 from myapp.pred.preprocess import numeralizeCategory, binarizePrediction
 
@@ -15,7 +16,8 @@ def predict(model, usedataset=False, threshold=0.5, feedData=None):
 # NOTE: this function is only used for test purpose by reading the local data
 # and will not be used in runtime
 def predict_locally(model, threshold):
-    testData = numeralizeCategory(pd.read_csv("../../static/dataset/mvptest/testData.csv"))
+    dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
+    testData = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/testData.csv")).resolve()))
 
     D_test = xgb.DMatrix(testData, enable_categorical=True)
     result = model.predict(D_test)
