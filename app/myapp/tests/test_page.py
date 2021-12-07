@@ -62,6 +62,19 @@ class TestIntegrity(TestCase, Client):
         finally:
             self.assertEqual(raised, False)
 
+    def test_task_create_thread(self):
+        raised = False
+        try:
+            t = CreateTrainModelPeriodicallyThread()
+            t.start()
+            t.join()
+        except Exception as e:
+            logger.error(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+            
+'''
     def test_task_train_periodically(self):
         print("\n======================" + "Testing Periodical Train" + "===========================")
         raised = False
@@ -74,15 +87,5 @@ class TestIntegrity(TestCase, Client):
         finally:
             self.assertEqual(raised, False)
             print("========================================================================\n")
+'''
 
-    def test_task_create_thread(self):
-        raised = False
-        try:
-            t = CreateTrainModelPeriodicallyThread()
-            t.start()
-            t.join()
-        except Exception as e:
-            logger.error(e)
-            raised = True
-        finally:
-            self.assertEqual(raised, False)
