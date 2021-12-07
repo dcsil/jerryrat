@@ -214,10 +214,7 @@ class LogIn(FormView):
 
     @staticmethod
     def get_form_class(**kwargs):
-        if settings.DISABLE_USERNAME or settings.LOGIN_VIA_EMAIL:
-            return SignInViaEmailForm
-
-        return SignInViaUsernameForm
+        return SignInViaEmailForm
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
@@ -243,11 +240,11 @@ class LogIn(FormView):
 
         login(request, form.user_cache)
 
-        redirect_to = request.POST.get(REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
-        url_is_safe = is_safe_url(redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())
+        # redirect_to = request.POST.get(REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
+        # url_is_safe = is_safe_url(redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())
 
-        if url_is_safe:
-            return redirect(redirect_to)
+        # if url_is_safe:
+        #     return redirect(redirect_to)
 
         return redirect(settings.LOGIN_REDIRECT_URL)
 

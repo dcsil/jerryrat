@@ -102,7 +102,6 @@ ref = {
 
 def get_graph_data(x, y):
   data = readDataMySQLConn(numRows=-1, preprocess=False)
-  print(data)
   x_data = data[x].unique()
   info = {}
   for e in data[y].unique():
