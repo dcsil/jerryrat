@@ -1,10 +1,18 @@
-from myapp.pred.preprocess import numeralizeCategory
+from myapp.pred.preprocess import numeralizeCategory, dropUserContactInfo
 import pandas as pd
 import numpy as np
 
+
+def helper(df):
+    df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
+    df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
+    df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
+    df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
+    df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+
 def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-             connector="mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
+             connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",
              driver="com.mysql.cj.jdbc.Driver", port=3306, numRows=5, order='desc', preprocess=True):
 
     from pyspark.sql import SparkSession
@@ -26,14 +34,12 @@ def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database
     df = sparkdf.toPandas()
 
     if table == 'userdata':
-        df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
-        df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
-        df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
-        df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
-        df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+        helper(df)
 
     if preprocess:
         df = numeralizeCategory(df)
+        df = dropUserContactInfo(df)
+    spark.stop()
     return df
 
 def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', user= 'dv9wgfh46sgcyiil',
@@ -68,15 +74,25 @@ def readDataMySQLConn(host= 'en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazona
     df.columns = field_names
 
     if table == "userdata":
-        df["emp.var.rate"] = pd.to_numeric(df["emp.var.rate"], downcast="float")
-        df["cons.price.idx"] = pd.to_numeric(df["cons.price.idx"], downcast="float")
-        df["cons.conf.idx"] = pd.to_numeric(df["cons.conf.idx"], downcast="float")
-        df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
-        df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
+        helper(df)
 
     # return a numeralized data
     if preprocess:
         df = numeralizeCategory(df)
+        df = dropUserContactInfo(df)
+
+    mydb.commit()
+    conn.close()
+    mydb.close()
+    return df
+
+def readDataFromRuntimeUpload(table_path=None, preprocess=True):
+    assert (not (table_path is None))
+    df = pd.read_csv(table_path, index_col=False)
+    # return a numeralized data
+    if preprocess:
+        df = numeralizeCategory(df)
+        df = dropUserContactInfo(df)
     return df
 
 ref = {
@@ -86,7 +102,6 @@ ref = {
 
 def get_graph_data(x, y):
   data = readDataMySQLConn(numRows=-1, preprocess=False)
-  print(data)
   x_data = data[x].unique()
   info = {}
   for e in data[y].unique():

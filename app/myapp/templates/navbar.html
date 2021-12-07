@@ -62,7 +62,7 @@
 						<a class="nav-link" href="/logout" onclick="changeActive(event)">Log out</a>
 					{% endif %}
 
-					<a style="right: 20px; position: fixed;" class="nav-link" >Hi! {{ request.user.get_username}}!</a>
+					<a style="left: 900px; position: relative;" class="nav-link" >Hi! {{ request.user.get_username}}!</a>
 
 				{% else %}
 					{% if current == 'login' %}

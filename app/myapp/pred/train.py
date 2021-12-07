@@ -31,12 +31,6 @@ def train(model=None, params=None, useDataset=False, steps=20, model_init=False,
             t = time.localtime()
             current_time = time.strftime("%H:%M:%S", t)
 
-            # continue training the model and update by checkpoint + 1
-            # checkpoint_path = "../../../future/checkpoint/checkpoint.json"
-            # if not os.path.exists(checkpoint_path):
-            #     with open(checkpoint_path, "w") as fp:
-            #         checkpoint = {"checkpoint": checkpoint}
-            #         json.dump(checkpoint, fp, indent=0)
         print("model saved at time {}".format(current_time))
     return model
 
@@ -44,12 +38,13 @@ def train(model=None, params=None, useDataset=False, steps=20, model_init=False,
 def train_model(model=None, params=None, useDataset=False, steps=100, feedData=None):
     if not useDataset:
         assert not (feedData is None)
-        model = train_database(model, params, steps, feedData)
+        model = train_database_or_runtime(model, params, steps, feedData)
     else:
         model = train_locally(model, params, steps)
     return model
 
-
+# NOTE: this function is only for initializing the model
+# and will not be used in runtime
 def train_locally(model, params, steps):
     # train the init model on local dataset
     # and split into train, test and validation set
@@ -111,7 +106,7 @@ def train_locally(model, params, steps):
     return model
 
 
-def train_database(model, params, steps, feedData):
+def train_database_or_runtime(model, params, steps, feedData):
     dataset_path = Path(__file__).parent.parent.parent / Path("static/dataset")
     valData = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valData.csv")).resolve()))
     valTarget = numeralizeCategory(pd.read_csv((dataset_path / Path("mvptest/valTarget.csv")).resolve()))

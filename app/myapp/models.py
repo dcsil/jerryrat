@@ -7,9 +7,20 @@ import plotly.graph_objs as go
 from random import uniform
 from .datapipe.readData import *
 
-X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'), ('housing', 'housing'), ('loan', 'loan'))
-Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'), ('previous', 'previous'), ('poutcome', 'poutcome'))
+X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'),
+          ('housing', 'housing'), ('loan', 'loan'))
+Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'),
+          ('previous', 'previous'), ('poutcome', 'poutcome'))
 CHART_TYPES = (('Line Chart', 'Line Chart'), ('Bar Chart', 'Bar Chart'), ('Pie Chart', 'Pie Chart'))
+
+
+def getTitle(self):
+    title = {
+        'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
+                'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+        'x': 0.1
+    }
+    return title
 
 
 class Linechart(models.Model):
@@ -36,11 +47,7 @@ class Linechart(models.Model):
         fig.layout.update(
             xaxis_title=self.xaxis,
             yaxis_title=self.yaxis,
-            title={
-                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
-                        'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
-                'x': 0.1
-            },
+            title=getTitle(self),
             xaxis=dict(
                 rangeslider=dict(
                     visible=True,
@@ -51,12 +58,12 @@ class Linechart(models.Model):
             ),
             font=dict(size=12, color="gray")
         )
-        plot_div = plot(fig, output_type='div', auto_open=False, 
+        plot_div = plot(fig, output_type='div', auto_open=False,
                         config=dict(
                             displayModeBar=True,
                             displaylogo=False,
                         )
-                    )
+                        )
         return plot_div
 
 
@@ -82,19 +89,15 @@ class Barchart(models.Model):
         fig.layout.update(
             xaxis_title=self.xaxis,
             yaxis_title=self.yaxis,
-            title={
-                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
-                        'Stack Bar Chart for ' + self.yaxis + ' vs ' + self.xaxis,
-                'x': 0.1
-            },
+            title=getTitle(self),
             font=dict(size=12, color="gray")
         )
-        plot_div = plot(fig, output_type='div', auto_open=False, 
+        plot_div = plot(fig, output_type='div', auto_open=False,
                         config=dict(
                             displayModeBar=True,
                             displaylogo=False,
                         )
-                    )
+                        )
         return plot_div
 
 
@@ -138,15 +141,14 @@ class DoubleBarChart(models.Model):
             },
             font=dict(size=12, color="gray")
         )
-        plot_div = plot(fig, output_type='div', auto_open=False, 
+        plot_div = plot(fig, output_type='div', auto_open=False,
                         config=dict(
                             displayModeBar=True,
                             displaylogo=False,
                         )
-                    )
+                        )
         return plot_div
 
-        
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
@@ -198,16 +200,21 @@ class Userdata(models.Model):
     pdays = models.IntegerField()
     previous = models.IntegerField()
     poutcome = models.CharField(max_length=255)
-    emp_var_rate = models.DecimalField(db_column='emp.var.rate', max_digits=4, decimal_places=1)  # Field renamed to remove unsuitable characters.
-    cons_price_idx = models.DecimalField(db_column='cons.price.idx', max_digits=5, decimal_places=3)  # Field renamed to remove unsuitable characters.
-    cons_conf_idx = models.DecimalField(db_column='cons.conf.idx', max_digits=3, decimal_places=1)  # Field renamed to remove unsuitable characters.
+    emp_var_rate = models.DecimalField(db_column='emp.var.rate', max_digits=4,
+                                       decimal_places=1)  # Field renamed to remove unsuitable characters.
+    cons_price_idx = models.DecimalField(db_column='cons.price.idx', max_digits=5,
+                                         decimal_places=3)  # Field renamed to remove unsuitable characters.
+    cons_conf_idx = models.DecimalField(db_column='cons.conf.idx', max_digits=3,
+                                        decimal_places=1)  # Field renamed to remove unsuitable characters.
     euribor3m = models.DecimalField(max_digits=4, decimal_places=3)
-    nr_employed = models.DecimalField(db_column='nr.employed', max_digits=5, decimal_places=1)  # Field renamed to remove unsuitable characters.
+    nr_employed = models.DecimalField(db_column='nr.employed', max_digits=5,
+                                      decimal_places=1)  # Field renamed to remove unsuitable characters.
     y = models.CharField(max_length=5, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'userdata'
+
 
 class Userinfo(models.Model):
     dataid = models.AutoField(primary_key=True)
