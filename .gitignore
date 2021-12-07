@@ -7,9 +7,9 @@
 Icon
 
 # model and configs
-app/myapp/pred/models/
-app/myapp/pred/configs/
-app/myapp/datapipe/config/
+app/myapp/pred/models/*
+app/myapp/pred/configs/*
+app/myapp/datapipe/config/*
 
 
 # Thumbnails
@@ -120,8 +120,4 @@ app/users/test2@gmail.com/data/test-campaign1.csv
 app/media/test-campaign1_0Z0LiMp.csv
 *.csv
 app/users/test1/result/test-campaign1.csv
-app/myapp/datapipe/config/config.json
-app/myapp/pred/configs/config.json
-app/myapp/pred/configs/config.json
-app/myapp/datapipe/config/config.json
 *.json

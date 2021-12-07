@@ -4,8 +4,9 @@ from myapp.models import *
 from myapp import urls
 from myapp.utils.tableUploader import uploadFileToDB
 from myapp.utils.csvToXlsx import csvToXlsx
-from myapp.utils.task import *
+from myapp.utils.task import CreateTrainModelPeriodicallyThread, train_model_periodically
 from myapp.datapipe import *
+from myapp.datapipe.backbone import createBackBone
 from myapp.pred import *
 from django.urls import reverse, resolve
 # Create your tests here.
