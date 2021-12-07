@@ -1,1 +1,4 @@
-{"numFetchRows": "250", "period": "5"}
+{
+"numFetchRows": 100,
+"period": 1
+}
