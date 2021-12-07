@@ -48,13 +48,8 @@ class createBackBone:
 
     # database: read data from database
     # runtime: read data given by customer
-    def train_model_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
-                                  database='syh25csvjgoetrln', table="userdata",
-                                  host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-                                  connector="myapp/datapipe/mysql-connector-java-8.0.27/" +
-                                            "mysql-connector-java-8.0.27.jar",
-                                  driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
-                                  readOption="mysql", table_path=None, steps=20, savemodel=True):
+    def train_model_database_or_runtime(self, order='desc', preprocess=True, readOption="mysql", table_path=None,
+                                        steps=20, savemodel=True):
         # checkpoint = getCheckpoint()
         df = self.readData(order, preprocess, readOption, table_path)
         if 'dataid' in df.columns:
@@ -69,13 +64,8 @@ class createBackBone:
 
     # database: read data from database
     # runtime: read data given by customer
-    def predict_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
-                                  database='syh25csvjgoetrln', table="userdata",
-                                  host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-                                  connector="myapp/datapipe/mysql-connector-java-8.0.27/" +
-                                            "mysql-connector-java-8.0.27.jar",
-                                  driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
-                                  readOption="mysql", table_path=None, threshold=0.5):
+    def predict_database_or_runtime(self, order='desc', preprocess=True, readOption="mysql", table_path=None,
+                                    threshold=0.5):
         # checkpoint = getCheckpoint()
         df = self.readData(order, preprocess, readOption, table_path)
         if 'dataid' in df.columns:
@@ -92,12 +82,7 @@ class createBackBone:
     # runtime: read data given by customer
     # runtime parameter: if make test by data from customer or database,
     # if not, make test by local dataset
-    def test_database_or_runtime(self, user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd',
-                                  database='syh25csvjgoetrln', table="userdata",
-                                  host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
-                                  connector="myapp/datapipe/mysql-connector-java-8.0.27/" +
-                                            "mysql-connector-java-8.0.27.jar",
-                                  driver="com.mysql.cj.jdbc.Driver", port=3306, order='desc', preprocess=True,
+    def test_database_or_runtime(self, order='desc', preprocess=True,
                                   readOption="mysql", table_path=None, threshold=0.5, runtime=True):
         # checkpoint = getCheckpoint()
         df = self.readData(order, preprocess, readOption, table_path)
