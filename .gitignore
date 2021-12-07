@@ -125,3 +125,4 @@ app/myapp/pred/configs/config.json
 app/myapp/pred/configs/config.json
 app/myapp/datapipe/config/config.json
 *.json
+app/myapp/datapipe/config/config.json
