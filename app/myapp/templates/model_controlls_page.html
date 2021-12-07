@@ -43,21 +43,36 @@
             <p>Please stop training before submitting your new configurations.</p>
             <div class="data-tab">
                 <label>Number of Rows Fetched</label>
+                <ul style="color: gray">
+                    <li> The number of data to train the model in one cycle.</li>
+                    <li> More data mean higher accuracy, but training might be slower.</li>
+                </ul>
                 <input type="number" class="form-control" name="numFetchRows" placeholder="Suggested Rows 50 ~ 500...">
             </div>
 
             <div class="data-tab">
                 <label>Update Period</label>
+                 <ul style="color: gray">
+                    <li> Period of time to train the model once.</li>
+                </ul>
                 <input type="number" class="form-control" name="period" placeholder="Period...">
             </div>
 
             <div class="data-tab">
                 <label>Learning Rate</label>
+                <ul style="color: gray">
+                    <li> Learning rate for our model.</li>
+                    <li> High learning rate means slow training but high accuracy.</li>
+                </ul>
                 <input type="number" step="0.0001" class="form-control" name="eta"
                        placeholder="Suggested Rate 0.005 ~ 0.5...">
             </div>
             <div class="data-tab">
                 <label>Max Decision Tree Depth</label>
+                <ul style="color: gray">
+                    <li> If the depth is too high, the tree loses the generalization ability to new data.</li>
+                    <li> If the depth is too low, the tree cannot be trained well on the new input data.</li>
+                </ul>
                 <input type="number" class="form-control" name="max_depth" placeholder="Suggested Depth 5 ~ 500...">
             </div>
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;" name="configure">Submit</button>

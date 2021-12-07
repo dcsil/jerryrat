@@ -7,6 +7,13 @@ from threading import Thread, Event
 
 from myapp.datapipe.backbone import createBackBone
 
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+# Create your tests here.
+
 
 def train_model_periodically(backbone):
     time.sleep(backbone.period * 60)
@@ -37,7 +44,7 @@ class CreateTrainModelPeriodicallyThread(Thread):
                 train_model_periodically(backbone)
                 self._stopevent.wait(self._sleepperiod)
         except Exception as e:
-            print(e)
+            logger.error(e)
 
     def join(self, timeout=None):
         """ Stop the thread. """
