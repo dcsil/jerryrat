@@ -1,34 +1,20 @@
-from django.contrib import messages
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
-from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
-    LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
-    PasswordResetDoneView as BasePasswordResetDoneView, PasswordResetConfirmView as BasePasswordResetConfirmView,
-)
-from .utils.task import CreateTrainModelPeriodicallyThread
-from myapp.datapipe.predUploadedFile import predictUploadedFile
-import os
+    LogoutView as BaseLogoutView, )
 from django.contrib import messages
-from django.core.files.storage import default_storage
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import redirect, render, get_object_or_404, reverse, HttpResponseRedirect
-from django.utils.safestring import mark_safe
+from django.shortcuts import redirect, render, reverse
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.utils.http import is_safe_url
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import View, FormView
-from django.conf import settings
+from django.views.generic import FormView
 import pandas
-from .pred import customize_config as pred_customize_config
-from .datapipe import customize_config as datapipe_customize_config
+from .utils import customize_config
 from .models import *
 from .forms import *
 from .utils.tableUploader import *
@@ -179,8 +165,8 @@ def model_controlls_page(request):
                     config_model[i] = request.POST[i]
                 elif i == "numFetchRows" or i == "period":
                     config_datapipe[i] = request.POST[i]
-            pred_customize_config.customize_config(config_model)
-            datapipe_customize_config.customize_config(config_datapipe)
+            customize_config.customize_config(config_model, "pred/configs/config.json")
+            customize_config.customize_config(config_datapipe, "datapipe/config/config.json")
 
     return render(request, 'model_controlls_page.html', context)
 

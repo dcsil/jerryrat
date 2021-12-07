@@ -51,12 +51,34 @@ class TestIntegrity(TestCase, Client):
             self.assertEqual(raised, False)
             print("========================================================================\n")
 
+    def testCreateDataPipe(self):
+        raised = False
+        try:
+            backbone = createBackBone(init=True)
+        except Exception as e:
+            logger.error("@createDataPipe")
+            logger.error(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
     def test_filetransfer(self):
         raised = False
         try:
             csvToXlsx("./static/dataset/testdatabase-with-names.csv", True)
         except Exception as e:
             logger.error("@fileTransfer")
+            logger.error(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
+    def test_train_periodically(self):
+        raised = False
+        try:
+            backbone = createBackBone()
+            train_model_periodically(backbone)
+        except Exception as e:
             logger.error(e)
             raised = True
         finally:
