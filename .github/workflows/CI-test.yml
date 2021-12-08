@@ -17,7 +17,7 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     services:
       mysql:
@@ -63,7 +63,10 @@ jobs:
         cd app
         python manage.py makemigrations
         python manage.py migrate
-
+    - name Run tests
+      run: |
+        cd app
+        python manage.py test myapp
     - name: Upload coverage to CodeClimate
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
@@ -74,4 +77,4 @@ jobs:
         ./cc-test-reporter before-build
         coverage run manage.py test myapp --keepdb --parallel
         coverage report && coverage xml && coverage json
-        ./cc-test-reporter after-build --debug --exit-code $? --id $CC_TEST_REPORTER_ID
+        ./cc-test-reporter after-build --id $CC_TEST_REPORTER_ID
