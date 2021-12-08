@@ -250,4 +250,4 @@ class TestIntegrity(TestCase, Client):
         invalid_path = Path.joinpath(Path(__file__).parent, Path("invalid.json")).resolve()
         with self.assertRaises(ModelNotFoundError, msg="The model invalid.json is not found."):
             load_model(invalid_path)
-'''
+    '''
