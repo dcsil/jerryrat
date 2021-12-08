@@ -63,10 +63,10 @@ jobs:
         cd app
         python manage.py makemigrations
         python manage.py migrate
-    - name Run tests
+    - name: Run tests
       run: |
         cd app
-        python manage.py test myapp
+        python manage.py test myapp --keepdb --parallel
     - name: Upload coverage to CodeClimate
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
