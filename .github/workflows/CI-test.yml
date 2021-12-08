@@ -63,8 +63,12 @@ jobs:
         cd app
         python manage.py makemigrations
         python manage.py migrate
+    - name: Coverage Report
+      run: |
+        cd app
+        coverage run manage.py test myapp --keepdb --parallel
+        coverage report && coverage json && coverage xml
     - name: Run Tests
       run: |
         cd app
-        coverage ./manage.py test myapp --keepdb --parallel
-        coverage report && coverage json && coverage xml
+        python manage.py test myapp --keepdb --parallel
