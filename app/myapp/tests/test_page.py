@@ -6,13 +6,17 @@ from myapp import urls
 from myapp.utils.tableUploader import uploadFileToDB
 from myapp.utils.csvToXlsx import csvToXlsx
 from myapp.utils.task import CreateTrainModelPeriodicallyThread, train_model_periodically
+from myapp.utils.customize_config import customize_config
 from myapp.datapipe import *
 from myapp.datapipe.backbone import createBackBone
 from myapp.pred import *
+from myapp.pred.entity import Entity
 from django.urls import reverse, resolve
 
 # import the logging library
 import logging
+from pathlib import Path
+import json
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -62,6 +66,77 @@ class TestIntegrity(TestCase, Client):
         finally:
             self.assertEqual(raised, False)
 
+    def testCreateModel(self):
+        raised = False
+        try:
+            entity = Entity()
+        except Exception as e:
+            logger.error("@createModel")
+            logger.error(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
+    def testMLtrain(self):
+        raised = False
+        try:
+            entity = Entity()
+            entity.train(usedataset=True, model_init=True)
+        except Exception as e:
+            logger.error("@TrainModel")
+            logger.error(e)
+            raised = True
+        finally:
+            self.assertEqual(raised, False)
+
+    def testMLtest(self):
+        raised = False
+        error = None
+        try:
+            entity = Entity()
+            entity.test(usedataset=True)
+        except Exception as e:
+            logger.error("@TestModel")
+            logger.error(e)
+            raised = True
+        finally:
+            if error:
+                print(error)
+            self.assertEqual(raised, False)
+
+    def testMLPred(self):
+        raised = False
+        error = None
+        try:
+            entity = Entity()
+            entity.predict(usedataset=True)
+        except Exception as e:
+            logger.error("@ModelPrediction")
+            logger.error(e)
+            raised = True
+            error = e
+        finally:
+            if error:
+                print(error)
+            self.assertEqual(raised, False)
+
+    def testDataPipeReadData(self):
+        raised = False
+        error = None
+        try:
+            backbone = createBackBone()
+            backbone.readData(preprocess=False)
+        except Exception as e:
+            logger.error("@BackBonereadData")
+            logger.error(e)
+            raised = True
+            error = e
+        finally:
+            if error:
+                print(error)
+            self.assertEqual(raised, False)
+
+
     def test_filetransfer(self):
         raised = False
         try:
@@ -96,18 +171,10 @@ class TestIntegrity(TestCase, Client):
         finally:
             self.assertEqual(raised, False)
             
-'''
-    def test_task_train_periodically(self):
-        print("\n======================" + "Testing Periodical Train" + "===========================")
-        raised = False
-        try:
-            backbone = createBackBone()
-            train_model_periodically(backbone)
-        except Exception as e:
-            logger.error(e)
-            raised = True
-        finally:
-            self.assertEqual(raised, False)
-            print("========================================================================\n")
-'''
-
+    def test_customize_config(self):
+        config_path = Path.joinpath(Path(__file__).parent, Path("test.json")).resolve()
+        customize_config({'test': 0}, config_path)
+        with open(config_path, 'r') as fp:
+            config = json.load(fp)
+        customize_config({'test': 1}, config_path)
+        self.assertEqual(config['test'], 0)
