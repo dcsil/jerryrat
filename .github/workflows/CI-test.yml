@@ -68,7 +68,7 @@ jobs:
         cd app
         python manage.py test myapp --keepdb --parallel
   coverage:
-    needs: [ test ]
+    needs: [ tests ]
     name: coverage
     runs-on: ubuntu-latest
     steps:
