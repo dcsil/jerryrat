@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.views import *
+
+from myapp.datapipe.predUploadedFile import predictUploadedFile
 from myapp.models import *
 from myapp import urls
 from myapp.utils.tableUploader import uploadFileToDB
@@ -16,6 +18,8 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
+
 # Create your tests here.
 
 
@@ -25,7 +29,6 @@ class TestIntegrity(TestCase, Client):
     def setUp(self):
         User = get_user_model()
         user = User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
-
 
     def test_page(self):
         client = Client()
@@ -95,7 +98,21 @@ class TestIntegrity(TestCase, Client):
             raised = True
         finally:
             self.assertEqual(raised, False)
-            
+
+    def test_predUploadFile(self):
+        raised = False
+        try:
+            predictUploadedFile('temporary', 'test-campaign1.csv')
+        except Exception as e:
+            logger.error(e)
+            raised = True
+        self.assertEqual(raised,False)
+
+
+
+
+
+
 '''
     def test_task_train_periodically(self):
         print("\n======================" + "Testing Periodical Train" + "===========================")

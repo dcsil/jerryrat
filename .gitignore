@@ -125,3 +125,5 @@ app/users/test1/result/test-campaign1.csv
 /app/myapp/pred/models/
 /app/myapp/pred/configs/
 /app/myapp/datapipe/config/
+app/myapp/pred/models/exec/model.json
+*.json

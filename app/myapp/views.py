@@ -140,7 +140,6 @@ def model_controlls_page(request):
     context = {'current': 'model_controlls_page'}
     config_model = {}
     config_datapipe = {}
-    print(request.user.get_username())
     global train_t
     message = None
     if train_t.is_alive():
