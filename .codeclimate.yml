@@ -12,3 +12,4 @@ exclude_patterns:
   - "app/myapp/datapipe/mysql-connector-java-8.0.27"
   - "app/myapp/datapipe/__pycache__"
   - "app/myapp/migrations"
+  - "app/myapp/tests"
