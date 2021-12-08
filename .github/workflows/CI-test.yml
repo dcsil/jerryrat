@@ -77,5 +77,7 @@ jobs:
         cd app
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
-        ./cc-test-reporter format-coverage -t simplecov
+        mv coverage.json ./cc-test-reporter
+        mv coverage.xml ./cc-test-reporter
+        ./cc-test-reporter format-coverage 
         ./cc-test-reporter upload-coverage --id $CC_TEST_REPORTER_ID
