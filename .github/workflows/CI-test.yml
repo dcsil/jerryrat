@@ -64,12 +64,12 @@ jobs:
         python manage.py makemigrations
         python manage.py migrate          
     - name: Coverage Report
-      uses: paambaati/codeclimate-action@v3.0.0
+      uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
       with:
         workingDirectory: ./app
-        coverageCommand: python -m pipenv run invoke coverage run manage.py test myapp --keepdb --parallel
+        coverageCommand: coverage run manage.py test myapp --keepdb --parallel
       
     
 
