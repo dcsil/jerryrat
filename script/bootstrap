@@ -15,4 +15,6 @@ cd app
 echo "Starting Server..."
 python3 manage.py makemigrations
 python3 manage.py migrate
-python3 manage.py runserver
+
+# run server by using this command
+# python3 manage.py runserver
