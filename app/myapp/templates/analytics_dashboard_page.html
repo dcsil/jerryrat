@@ -30,10 +30,6 @@
                 {% for graph in all_graphs %}
                     <div class="wrapper">
                         <div class="chart">{{ graph.get_barchart | safe }}</div>
-                        <!-- <button type="button" class="btn-change btn-config btn btn-outline-success btn-sm" data-toggle="modal" data-target="#configureGraph">
-                            {% csrf_token %}
-                            <strong>Configure</strong>
-                        </button> -->
                         <a href="{% url 'delete_graph' graph.pk %}" type="button" class="btn-delete btn btn-outline-danger btn-sm">
                             <strong>X</strong>
                         </a>

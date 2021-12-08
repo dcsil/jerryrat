@@ -1,5 +1,4 @@
 from django.urls import path
-from django.conf import settings
 from .views import *
 
 # for the purpose of testing page integrity
