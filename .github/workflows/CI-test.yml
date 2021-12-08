@@ -67,13 +67,14 @@ jobs:
     - name: Run-tests
       run: |
         cd app
-        coverage run ./manage.py test myapp --keepdb --parallel
+        coverage run ../manage.py test myapp --keepdb --parallel
         coverage report && coverage json && coverage xml
     
     - name: "Upload to CodeClimate"
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
       run: |
+        cd app
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter format-coverage -t simplecov
