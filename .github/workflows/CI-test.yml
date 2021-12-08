@@ -68,7 +68,7 @@ jobs:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
       with:
         workingDirectory: ./app
-        coverageCommand: coverage run manage.py test myapp --keepdb --parallel
+        coverageCommand: coverage run manage.py test myapp --keepdb --parallel && coverage report && coverage json && coverage xml
     - name: "Upload to CodeClimate"
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
