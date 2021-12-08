@@ -1,10 +1,6 @@
 from django.db import models
-from django import forms
 from plotly.offline import plot
-# from django.contrib.postgres.fields import ArrayField
-from django.forms import ModelForm
 import plotly.graph_objs as go
-from random import uniform
 from .datapipe.readData import *
 
 X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 'education'), ('default', 'default'),
@@ -19,50 +15,6 @@ def getTitle(self, type, title, xaxis, yaxis):
         'x': 0.1
     }
     return title
-
-
-# class Linechart(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
-#     yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
-#     title = models.CharField(max_length=64)
-#     created_at = models.DateTimeField(auto_now=True)
-
-#     class Meta:
-#         ordering = ("created_at",)
-
-#     def set_axis(self, x, y):
-#         self.x, self.y = x, y
-
-#     @property
-#     def line_chart(self):
-#         x, y = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
-#         self.set_axis(x, y)
-#         fig = go.Figure()
-#         fig.add_trace(go.Scatter(x=self.x, y=self.y))
-
-#         fig.layout.update(title=self.title)
-#         fig.layout.update(
-#             xaxis_title=self.xaxis,
-#             yaxis_title=self.yaxis,
-#             title=getTitle(self),
-#             xaxis=dict(
-#                 rangeslider=dict(
-#                     visible=True,
-#                     autorange=True,
-#                     range=[min(self.x), max(self.x)]
-#                 ),
-#                 type="linear"
-#             ),
-#             font=dict(size=12, color="gray")
-#         )
-#         plot_div = plot(fig, output_type='div', auto_open=False,
-#                         config=dict(
-#                             displayModeBar=True,
-#                             displaylogo=False,
-#                         )
-#                         )
-#         return plot_div
 
 
 class Barchart(models.Model):
@@ -109,7 +61,6 @@ class DoubleBarChart(models.Model):
 
     @property
     def get_double_barchart(self):
-        # x = get_metric_idx(self.xaxis)
         x_data, info = get_graph_data(self.xaxis, "y")
         fig = go.Figure()
         if "yes" in info:
