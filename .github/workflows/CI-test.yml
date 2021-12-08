@@ -76,7 +76,7 @@ jobs:
       run: |
         cd app
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
+        chmod 777 ./cc-test-reporter
         mv coverage.json ./cc-test-reporter
         mv coverage.xml ./cc-test-reporter
         ./cc-test-reporter format-coverage 
