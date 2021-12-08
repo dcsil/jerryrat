@@ -47,7 +47,6 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
-        curl -L -O https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
@@ -63,13 +62,22 @@ jobs:
         mysql --version
         cd app
         python manage.py makemigrations
-        python manage.py migrate          
+        python manage.py migrate
     - uses: paambaati/codeclimate-action@v2.7.1
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
       with:
         workingDirectory: ./app
         coverageCommand: coverage run manage.py test myapp --keepdb --parallel
+    - name: "Upload to CodeClimate"
+      env:
+        CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
+      run: |
+        export GIT_BRANCH="${GITHUB_REF##*/}"
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+        ./cc-test-reporter format-coverage -t simplecov
+        ./cc-test-reporter upload-coverage --id $CC_TEST_REPORTER_ID
       
     
 
