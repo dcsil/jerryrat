@@ -72,7 +72,7 @@ jobs:
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         GIT_BRANCH=master ./cc-test-reporter before-build
-        coverage run manage.py myapp test --keepdb --parallel
+        coverage run manage.py test myapp --keepdb --parallel
         coverage report && coverage xml && coverage json
         ls
         ls ..
