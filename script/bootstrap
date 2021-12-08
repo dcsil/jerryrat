@@ -1,10 +1,10 @@
 set -x
-
+sudo apt-get update
 sudo apt install libpq-dev python3-dev
 sudo apt-get install build-essential
 sudo apt-get install libssl-dev
 sudo apt install libmysqlclient-dev
-
+sudo apt-get install python3.7
 # install requirements
 echo "Installing Requirments..."
 pip3 install -r ../requirements.txt
