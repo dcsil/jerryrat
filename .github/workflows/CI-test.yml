@@ -71,9 +71,7 @@ jobs:
         cd app
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
-        GIT_BRANCH=master ./cc-test-reporter before-build
+        ./cc-test-reporter before-build
         coverage run manage.py test myapp --keepdb --parallel
         coverage report && coverage xml && coverage json
-        ls
-        ls ..
-        GIT_BRANCH=master ./cc-test-reporter after-build --debug --exit-code $? --id $CC_TEST_REPORTER_ID
+        ./cc-test-reporter after-build --debug --exit-code $? --id $CC_TEST_REPORTER_ID
