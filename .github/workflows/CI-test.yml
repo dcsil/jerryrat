@@ -1,5 +1,5 @@
 name: Django CI
-
+ 
 env:
   DB_HOST: localhost
   DB_DATABASE: jerryratdb
