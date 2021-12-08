@@ -1,5 +1,5 @@
 name: Django CI
- 
+
 env:
   DB_HOST: localhost
   DB_DATABASE: jerryratdb
@@ -74,6 +74,3 @@ jobs:
       uses: paambaati/codeclimate-action@v2.7.1
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
-      
-    
-
