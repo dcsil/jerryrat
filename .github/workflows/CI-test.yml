@@ -46,7 +46,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Test bootstrap
-      working-directory: .
       run: |
         chmod +x script/bootstrap
         sudo script/bootstrap
@@ -62,15 +61,15 @@ jobs:
       run: apt-get install libomp-dev
       if: matrix.os == 'ubuntu-20.04'
     - name: Migrations
-      working-directory: ./app
       run: |
         python -m pip install tblib
         mysql --version
+        cd app
         python manage.py makemigrations
         python manage.py migrate
     - name: Run tests
-      working-directory: ./app
       run: |
+        cd app
         python manage.py test myapp --keepdb --parallel
     - name: Upload coverage to CodeClimate
       env:
