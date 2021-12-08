@@ -17,7 +17,7 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     services:
       mysql:
@@ -56,17 +56,21 @@ jobs:
       run: apt-get install libomp-dev
       if: matrix.os == 'ubuntu-20.04'
     - name: Migrations
+      working-directory: ./app/
       run: |
         python -m pip install tblib
         mysql --version
-        cd app
         python manage.py makemigrations
         python manage.py migrate
+    - name: Run test
+      working-directory: ./app/
+      run: |
+        python manage.py test myapp --keepdb --parallel
     - name: Upload coverage to CodeClimate
+      working-directory: ./app/
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
       run: |
-        cd app
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
