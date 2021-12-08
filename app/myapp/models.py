@@ -11,60 +11,58 @@ X_AXES = (('age', 'age'), ('job', 'job'), ('marital', 'marital'), ('education', 
           ('housing', 'housing'), ('loan', 'loan'))
 Y_AXES = (('month', 'month'), ('day_of_week', 'day_of_week'), ('campaign', 'campaign'), ('pdays', 'pdays'),
           ('previous', 'previous'), ('poutcome', 'poutcome'))
-CHART_TYPES = (('Line Chart', 'Line Chart'), ('Bar Chart', 'Bar Chart'), ('Pie Chart', 'Pie Chart'))
 
-
-def getTitle(self):
+def getTitle(self, type, title, xaxis, yaxis):
     title = {
-        'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
-                'Line Chart for ' + self.yaxis + ' vs ' + self.xaxis,
+        'text': '<span style="font-size: 20px;"><b>' + title + '</b></span>' + '<br>' + \
+                type + ' for ' + yaxis + ' vs ' + xaxis,
         'x': 0.1
     }
     return title
 
 
-class Linechart(models.Model):
-    id = models.AutoField(primary_key=True)
-    xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
-    yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
-    title = models.CharField(max_length=64)
-    created_at = models.DateTimeField(auto_now=True)
+# class Linechart(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     xaxis = models.CharField(max_length=32, choices=X_AXES, default=X_AXES[0][0])
+#     yaxis = models.CharField(max_length=32, choices=Y_AXES, default=Y_AXES[0][0])
+#     title = models.CharField(max_length=64)
+#     created_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ("created_at",)
+#     class Meta:
+#         ordering = ("created_at",)
 
-    def set_axis(self, x, y):
-        self.x, self.y = x, y
+#     def set_axis(self, x, y):
+#         self.x, self.y = x, y
 
-    @property
-    def line_chart(self):
-        x, y = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
-        self.set_axis(x, y)
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=self.x, y=self.y))
+#     @property
+#     def line_chart(self):
+#         x, y = [i for i in range(50)], [uniform(0, 50) for _ in range(50)]
+#         self.set_axis(x, y)
+#         fig = go.Figure()
+#         fig.add_trace(go.Scatter(x=self.x, y=self.y))
 
-        fig.layout.update(title=self.title)
-        fig.layout.update(
-            xaxis_title=self.xaxis,
-            yaxis_title=self.yaxis,
-            title=getTitle(self),
-            xaxis=dict(
-                rangeslider=dict(
-                    visible=True,
-                    autorange=True,
-                    range=[min(self.x), max(self.x)]
-                ),
-                type="linear"
-            ),
-            font=dict(size=12, color="gray")
-        )
-        plot_div = plot(fig, output_type='div', auto_open=False,
-                        config=dict(
-                            displayModeBar=True,
-                            displaylogo=False,
-                        )
-                        )
-        return plot_div
+#         fig.layout.update(title=self.title)
+#         fig.layout.update(
+#             xaxis_title=self.xaxis,
+#             yaxis_title=self.yaxis,
+#             title=getTitle(self),
+#             xaxis=dict(
+#                 rangeslider=dict(
+#                     visible=True,
+#                     autorange=True,
+#                     range=[min(self.x), max(self.x)]
+#                 ),
+#                 type="linear"
+#             ),
+#             font=dict(size=12, color="gray")
+#         )
+#         plot_div = plot(fig, output_type='div', auto_open=False,
+#                         config=dict(
+#                             displayModeBar=True,
+#                             displaylogo=False,
+#                         )
+#                         )
+#         return plot_div
 
 
 class Barchart(models.Model):
@@ -79,7 +77,6 @@ class Barchart(models.Model):
 
     @property
     def get_barchart(self):
-        # x, y = get_metric_idx(self.xaxis), get_metric_idx(self.yaxis)
         x_data, info = get_graph_data(self.xaxis, self.yaxis)
         fig = go.Figure(data=[
             go.Bar(name=str(k), x=x_data, y=info[k]) for _, k in enumerate(info)
@@ -89,7 +86,7 @@ class Barchart(models.Model):
         fig.layout.update(
             xaxis_title=self.xaxis,
             yaxis_title=self.yaxis,
-            title=getTitle(self),
+            title=getTitle(self, 'Stacked Barchart', self.title, self.xaxis, self.yaxis),
             font=dict(size=12, color="gray")
         )
         plot_div = plot(fig, output_type='div', auto_open=False,
@@ -134,11 +131,7 @@ class DoubleBarChart(models.Model):
         fig.layout.update(
             xaxis_title=self.xaxis,
             yaxis_title="results",
-            title={
-                'text': '<span style="font-size: 20px;"><b>' + self.title + '</b></span>' + '<br>' + \
-                        'Stack Bar Chart for ' + 'results' + ' vs ' + self.xaxis,
-                'x': 0.1
-            },
+            title=getTitle(self, 'Double Barchart', self.title, self.xaxis, 'Outcome'),
             font=dict(size=12, color="gray")
         )
         plot_div = plot(fig, output_type='div', auto_open=False,

@@ -1,6 +1,6 @@
 from django import forms
 from datetime import timedelta
-from myapp.models import Barchart, Linechart
+from myapp.models import Barchart
 
 from django.forms import ValidationError, ModelForm
 from django.conf import settings
