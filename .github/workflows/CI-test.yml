@@ -74,7 +74,6 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
       run: |
-        export GIT_BRANCH="${GITHUB_REF##*/}"
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter format-coverage ./app/coverage.xml -t simplecov
