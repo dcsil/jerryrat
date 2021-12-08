@@ -66,4 +66,5 @@ jobs:
     - name: Run Tests
       run: |
         cd app
-        python manage.py test myapp --keepdb --parallel
+        coverage ./manage.py test myapp --keepdb --parallel
+        coverage report && coverage json && coverage xml
