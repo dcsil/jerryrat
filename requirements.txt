@@ -5,6 +5,7 @@ sentry-sdk>=1.4.0
 cryptography>=35.0.0
 pipenv
 coverage>=6.2
+pytest>=6.2.5
 
 asgiref==3.4.1
 backports.entry-points-selectable==1.1.0
