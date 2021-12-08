@@ -55,7 +55,7 @@ class createBackBone:
         if 'dataid' in df.columns:
             df = df.drop(columns=['dataid'])
         entity = Entity()
-        entity.train(steps=steps, savemodel=savemodel, feedData=df, useDataset=False, model_init=False)
+        entity.train(steps=steps, savemodel=savemodel, feedData=df, usedataset=False, model_init=False)
         acc = entity.test(usedataset=False, feedData=df)
 
         t = time.localtime()

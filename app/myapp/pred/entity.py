@@ -49,9 +49,9 @@ class Entity:
         if not self.model:
             self.model = self.train(useDataset=True, model_init=True)
 
-    def train(self, useDataset=False, steps=20, model_init=False, savemodel=True, feedData=None):
+    def train(self, usedataset=False, steps=20, model_init=False, savemodel=True, feedData=None):
         # checkpoint = getCheckpoint()
-        model = train(self.model, self.params, useDataset, steps, model_init, savemodel, feedData)
+        model = train(self.model, self.params, usedataset, steps, model_init, savemodel, feedData)
         # setCheckpoint(checkpoint + 1)
         self.model = model
 
@@ -65,6 +65,6 @@ class Entity:
 
 if __name__ == "__main__":
     entity = Entity()
-    entity.train(useDataset=True, model_init=True)
+    entity.train(usedataset=True, model_init=True)
     print(entity.predict(usedataset=True))
     print(entity.test(usedataset=True))
