@@ -28,20 +28,20 @@ The short, medium, and long term goals for project development are written in th
 Tutorials
 ---
 ### Sign Up
-<img src="docs/imgs/signup.png" width="300" height="475" />
+<img src="docs/imgs/signup.png" size="50%" />
 
 ### Log In
-<img src="docs/imgs/login.png" width="300" height="475" />
+<img src="docs/imgs/login.png" size="50%" />
 
 ### Data Entry Page
-<img src="docs/imgs/data entry page.png" width="300" height="475" />
+<img src="docs/imgs/data entry page.png" size="50%" />
 
 ### Analytics Dashboard
-<img src="docs/imgs/analytics dashboard 1.png" width="300" height="475" />
-<img src="docs/imgs/analytics dashboard 2.png" width="300" height="475" />
+<img src="docs/imgs/analytics dashboard 1.png" size="50%" />
+<img src="docs/imgs/analytics dashboard 2.png" size="50%" />
 
 ### Calling Operations
-<img src="docs/imgs/calling operation.png" width="300" height="475" />
+<img src="docs/imgs/calling operation.png" size="50%" />
 
 ### Model Controls
-<img src="docs/imgs/model controls.png" width="300" height="475" />
+<img src="docs/imgs/model controls.png" size="50%" />
