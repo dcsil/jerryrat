@@ -21,10 +21,14 @@ class createBackBone:
             with open((config_path / Path("config.json")).resolve(), "w") as fp2:
                 json.dump(configs, fp2, indent=0)
 
-        with open((config_path / Path("config.json")).resolve()) as fp:
-            configs = json.load(fp)
-        self.numFetchRows = configs["numFetchRows"]
-        self.period = configs["period"]
+        config_path = (config_path / Path("config.json")).resolve()
+        if os.path.exists(config_path):
+            with open(config_path, "r") as fp:
+                configs = json.load(fp)
+            self.numFetchRows = configs["numFetchRows"]
+            self.period = configs["period"]
+        else:
+            print("backbone config does not exist")
         self.user = user
         self.password = password
         self.database = database

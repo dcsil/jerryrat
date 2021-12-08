@@ -13,6 +13,8 @@ from myapp.datapipe import *
 from myapp.datapipe.backbone import createBackBone
 from myapp.pred import *
 from myapp.pred.entity import Entity
+from myapp.pred.load_config import load_config, ConfigNotFoundError
+from myapp.pred.load_model import load_model, ModelNotFoundError
 from django.urls import reverse, resolve
 
 # import the logging library
@@ -84,7 +86,7 @@ class TestIntegrity(TestCase, Client):
         raised = False
         try:
             entity = Entity()
-            entity.train(usedataset=True, model_init=True)
+            entity.train(usedataset=True, model_init=True, savemodel=False)
         except Exception as e:
             logger.error("@TrainModel")
             logger.error(e)
@@ -139,6 +141,53 @@ class TestIntegrity(TestCase, Client):
                 print(error)
             self.assertEqual(raised, False)
 
+    def testDataPipeRuntimeTrain(self):
+        raised = False
+        error = None
+        try:
+            backbone = createBackBone()
+            backbone.train_model_database_or_runtime(savemodel=False)
+        except Exception as e:
+            logger.error("@BackBoneRuntimeTrain")
+            logger.error(e)
+            raised = True
+            error = e
+        finally:
+            if error:
+                print(error)
+            self.assertEqual(raised, False)
+
+    def testDataPipeRuntimePred(self):
+        raised = False
+        error = None
+        try:
+            backbone = createBackBone()
+            backbone.predict_database_or_runtime()
+        except Exception as e:
+            logger.error("@BackBoneRuntimePred")
+            logger.error(e)
+            raised = True
+            error = e
+        finally:
+            if error:
+                print(error)
+            self.assertEqual(raised, False)
+
+    def testDataPipeRuntimeTest(self):
+        raised = False
+        error = None
+        try:
+            backbone = createBackBone()
+            backbone.test_database_or_runtime()
+        except Exception as e:
+            logger.error("@BackBoneRuntimeTest")
+            logger.error(e)
+            raised = True
+            error = e
+        finally:
+            if error:
+                print(error)
+            self.assertEqual(raised, False)
 
     def test_filetransfer(self):
         raised = False
@@ -167,7 +216,7 @@ class TestIntegrity(TestCase, Client):
         raised = False
         try:
             backbone = createBackBone()
-            train_model_periodically(backbone)
+            train_model_periodically(backbone, False, 50)
         except Exception as e:
             logger.error(e)
             raised = True
@@ -191,20 +240,12 @@ class TestIntegrity(TestCase, Client):
         customize_config({'test': 1}, config_path)
         self.assertEqual(config['test'], 0)
 
+    def test_load_config_not_found(self):
+        invalid_path = Path.joinpath(Path(__file__).parent, Path("invalid.json")).resolve()
+        with self.assertRaises(ConfigNotFoundError, msg="The config invalid.json is not found."):
+            load_config(invalid_path)
 
-
-
-'''
-    def test_task_train_periodically(self):
-        print("\n======================" + "Testing Periodical Train" + "===========================")
-        raised = False
-        try:
-            backbone = createBackBone()
-            train_model_periodically(backbone)
-        except Exception as e:
-            logger.error(e)
-            raised = True
-        finally:
-            self.assertEqual(raised, False)
-            print("========================================================================\n")
-'''
+    def test_load_model_not_found(self):
+        invalid_path = Path.joinpath(Path(__file__).parent, Path("invalid.json")).resolve()
+        with self.assertRaises(ModelNotFoundError, msg="The model invalid.json is not found."):
+            load_model(invalid_path)
