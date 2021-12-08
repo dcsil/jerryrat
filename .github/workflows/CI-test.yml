@@ -63,12 +63,12 @@ jobs:
         cd app
         python manage.py makemigrations
         python manage.py migrate
-    - name: change working directory
-      run: |
-        cd app
     - name: Run Tests
       uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: 7b50e852a72a132e3feddef5aae9a33aa2080e13e637685441dd83debc1ff7e1
+      run: |
+        cd app
+        echo $PWD
       with:
         coverageCommand: coverage run ./manage.py test myapp --keepdb --parallel
