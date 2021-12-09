@@ -24,6 +24,8 @@ It’s the user’s responsibility to update the information and upload a new cs
    - Since we are not allowed to purchase a higher level JawsDB plan due to their strange policy (a user can't choose a plan for more than 10$ if he/she hasn't made a payment before), please make sure the uploaded file is not too big (which may possibly exceeds the allowed limit!)
 
 ### 3. Calling Operation Page:
+<img src="imgs/calling operation.png" size="40%" />
+
    - The prediction is reflected here. The user can check a piece of data simply by clicking it.
    - If the user wants, he/she can download that specific campaign prediction by clicking the "Download CSV" button.
    
@@ -37,6 +39,8 @@ It’s the user’s responsibility to update the information and upload a new cs
    - For each graph, users could toggle the legend to make designated labels visible/invisible. There are also some small add-ons in the bottom widgets, including saving the graph, general zoom-in/zoom-out, box select, reset axes, etc. Users could also see the detail (x, y) values by hovering the cursor on the graph. Whiling deleting a graph, just click on the red “X” button on the upper right corner.
    
 ### 5. Model Control:
+<img src="imgs/model controls.png" size="40%" />
+
    - User can change machine learning model's configurations here.
    - User can retrain the model with his/her own configuration here.
 
