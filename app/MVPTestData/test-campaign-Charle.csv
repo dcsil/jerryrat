@@ -1,3 +1,4 @@
+age,job,marital,education,default,housing,loan,contact,month,day_of_week,duration,campaign,pdays,previous,poutcome,emp.var.rate,cons.price.idx,cons.conf.idx,euribor3m,nr.employed,y,first_name,last_name,numbers
 48,technician,married,professional.course,no,yes,yes,cellular,dec,mon,122,3,999,0,nonexistent,-3,92.713,-33,0.715,5023.5,no,Lacey,Boyd,867-8880171
 74,retired,divorced,high.school,no,yes,yes,telephone,dec,mon,88,6,999,0,nonexistent,-3,92.713,-33,0.715,5023.5,no,David,Smith,343-5004648
 18,student,single,basic.9y,no,yes,no,cellular,dec,mon,446,2,999,0,nonexistent,-3,92.713,-33,0.715,5023.5,no,Victoria,Harris,416-8243536

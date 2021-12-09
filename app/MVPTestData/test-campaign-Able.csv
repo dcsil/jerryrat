@@ -1,3 +1,4 @@
+age,job,marital,education,default,housing,loan,contact,month,day_of_week,duration,campaign,pdays,previous,poutcome,emp.var.rate,cons.price.idx,cons.conf.idx,euribor3m,nr.employed,y,first_name,last_name,numbers
 30,admin.,married,high.school,no,yes,no,cellular,jul,fri,362,2,999,0,nonexistent,1.4,93.918,-42.7,4.957,5228.1,no,Daniel,Durham,306-5600826
 26,blue-collar,married,basic.9y,no,no,no,cellular,jul,fri,199,1,999,0,nonexistent,1.4,93.918,-42.7,4.957,5228.1,no,Patsy,Hawn,249-5025465
 46,blue-collar,married,basic.4y,no,yes,no,cellular,jul,fri,342,1,999,0,nonexistent,1.4,93.918,-42.7,4.957,5228.1,no,Tina,Beighley,780-8416514
