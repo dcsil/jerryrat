@@ -28,6 +28,14 @@ Roadmap
 
 The short, medium, and long term goals for project development are written in the [Milestone](https://github.com/dcsil/jerryrat/milestones) of GitHub issues.
 
+URL
+---
+https://herokujerryratapp.herokuapp.com
+
+Write up
+---
+Please click [here](./docs/Final_Software_Writeup.md) for step-by-step instructions.
+
 Tutorials
 ---
 JerryUp Campainging Master helps you find out the best candidate clients to call in your campaigns, and give clear views on the client population.
