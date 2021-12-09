@@ -130,7 +130,7 @@ def calling_operations_page(request):
     data = {}
     for i in types:
         data[i.split('.')[0]] = pandas.read_csv(path + '/' + i).to_numpy().tolist()
-    context = {'current': 'calling_operations_page', 'data': data, 'types': types}
+    context = {'current': 'calling_operations_page', 'data': data, 'types': types, 'user_name': request.user.get_username()}
     return render(request, 'calling_operations_page.html', context)
 
 

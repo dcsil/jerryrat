@@ -76,4 +76,4 @@ jobs:
         ./cc-test-reporter before-build
         coverage run manage.py test myapp --keepdb --parallel
         coverage report && coverage xml && coverage json
-        ./cc-test-reporter after-build --debug --exit-code $? --id $CC_TEST_REPORTER_ID
+        ./cc-test-reporter after-build -d --id $CC_TEST_REPORTER_ID
