@@ -32,6 +32,11 @@ URL
 ---
 https://herokujerryratapp.herokuapp.com
 
+Sample Heroku logs
+---
+<img src="docs/imgs/background_training_log.png" size="50%" />
+This logs show a user start training the model, one cycle of training finishes, and then end training the model. Later the model is saved and the new accuracy is computed. This happens all in the background, and the training process will not be shown in the front end.
+
 Write up
 ---
 Please click [here](./docs/Final_Software_Writeup.md) for step-by-step instructions.
