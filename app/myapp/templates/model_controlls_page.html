@@ -26,8 +26,15 @@
     {% csrf_token %}
         <div style="margin-top: 10px; margin-left: 25pt; margin-bottom: 40pt;" class="periodical-train">
             <h5>Automatic Model Training</h5>
-            <strong>After you end training, the training process will terminate in less than 1 training cycle time
-                but not immediately, you can just leave this page safely.</strong>
+            <ol>
+                <li><strong>After you end training, the training process will terminate in less than 1 training cycle
+                    time but not immediately, you can just leave this page safely.</strong></li>
+                <li><strong>Please do not end training if you start training immediately, or the application may
+                    crash (Heroku and Database Problem).You can refresh the page if you meet this
+                    problem.</strong></li>
+                <li><strong>Please wait at least 10 seconds after you start training if you want
+                to stop.</strong></li>
+            </ol>
             <p>{{ message|safe }}</p>
             <div name="period-train">
                 <button type="submit" class="btn btn-primary" style="margin-top: 5px; margin-right: 5px" name="start">
