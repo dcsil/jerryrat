@@ -145,7 +145,6 @@ LOGIN_URL = 'login'
 USE_REMEMBER_ME = True
 SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 # ======================================================================
