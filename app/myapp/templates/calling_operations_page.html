@@ -3,63 +3,97 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Calling Operations</title>
-    <script>
-        document.addEventListener('click', function(event) {
-            id = event.target.getAttribute('class') + '_col4'
-            console.log(id)
-            if(document.getElementById(id).innerHTML.trim().slice(-1) === '✔'){
-                document.getElementById(id).innerHTML = '';
-            }else{
-                document.getElementById(id).innerHTML = '&#10004';
+    <head>
+        <meta charset="utf-8">
+        <title>Calling Operations</title>
+        <script>
+            // document.addEventListener('click', function(event) {
+            //     id = event.target.getAttribute('class') + '_col4'
+            //     console.log(id)
+            //     if(document.getElementById(id).innerHTML.trim().slice(-1) === '✔'){
+            //         document.getElementById(id).innerHTML = '';
+            //     }else{
+            //         document.getElementById(id).innerHTML = '&#10004';
+            //     }
+            // }, false);
+
+            document.getElementById('btn-download').addEventListener("click", function () {
+                console.log("Here");
+                var html = document.querySelector("table").outerHTML;
+                console.log("after selecor");
+                htmlToCSV(html, "test.csv");
+            });
+
+            function htmlToCSV(html, filename) {
+                var data = [];
+                var headers = document.querySelectorAll(".table thead tr");
+                var rows = document.querySelectorAll(".table tbody");
+                
+                for (var i = 0; i < rows.length; i++) {
+                    var row = [], cols = rows[i].querySelectorAll("td, th");
+                    for (var j = 0; j < cols.length; j++) {
+                        row.push(cols[j].innerText);
+                    }
+                    data.push(row.join(",")); 		
+                }
+
+                downloadCSVFile(data.join("\n"), filename);
             }
-        }, false);
 
-    </script>
-</head>
-<body>
-<div style="margin-left: 25pt;">
-    <h4>
-        <strong>Call Operations: Worthy Client Lists</strong>
-    </h4>
-</div>
-{% for campaign, info in data.items %}
+            function downloadCSVFile(csv, filename) {
+                var csv_file, download_link;
 
-<div style="margin-left: 20pt;">
-    <h5 style="display: inline-block">Campaign Name: {{campaign}}</h5>
-    <div style="display: inline-block; margin-left: 20px; padding-bottom: 10px;">
-        <button class="btn btn-success" type="submit" value="Upload"> Download </button>
-    </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Number</th>
-            <th scope="col">Checked</th>
-        </tr>
-        </thead>
-        {% for p in info %}
-        {% if p.4 == 1%}
-        <tbody>
-        <th scope="row" class="{{campaign}}_{{p.0}}">{{ p.0 }}</th>
-        <td class="{{campaign}}_{{p.0}}">{{ p.1 }}</td>
-        <td class="{{campaign}}_{{p.0}}">{{ p.2 }}</td>
-        <td class="{{campaign}}_{{p.0}}">{{ p.3 }}</td>
-        <td class="{{campaign}}_{{p.0}}" id="{{campaign}}_{{p.0}}_col4"></td>
-        </tbody>
-        {% endif %}
+                csv_file = new Blob([csv], {type: "text/csv"});
+                download_link = document.createElement("a");
+                download_link.download = filename;
+                download_link.href = window.URL.createObjectURL(csv_file);
+                download_link.style.display = "none";
+                document.body.appendChild(download_link);
+                download_link.click();
+            }
+        </script>
+    </head>
+
+    <body>
+        <div style="margin-left: 25pt;">
+            <h4>
+                <strong>Call Operations: Worthy Client Lists</strong>
+            </h4>
+        </div>
+        {% for campaign, info in data.items %}
+
+        <div style="margin-left: 20pt;">
+            <h5 style="display: inline-block">Campaign Name: {{campaign}}</h5>
+            <div style="display: inline-block; margin-left: 20px; padding-bottom: 10px;">
+                <button class="btn btn-success" id="btn-download" type="submit" value="Upload"> Download </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Checked</th>
+                    </tr>
+                </thead>
+                {% for p in info %}
+                    {% if p.4 == 1%}
+                        <tbody>
+                            <th scope="row" class="{{campaign}}_{{p.0}}">{{ p.0 }}</th>
+                            <td class="{{campaign}}_{{p.0}}">{{ p.1 }}</td>
+                            <td class="{{campaign}}_{{p.0}}">{{ p.2 }}</td>
+                            <td class="{{campaign}}_{{p.0}}">{{ p.3 }}</td>
+                            <td class="{{campaign}}_{{p.0}}" id="{{campaign}}_{{p.0}}_col4"></td>
+                        </tbody>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
         {% endfor %}
-    </table>
-</div>
 
-{% endfor %}
-
-
-</body>
+    </body>
 </html>
 
 {% endblock %}
