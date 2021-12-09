@@ -22,14 +22,16 @@
                 if (id == "btn-download") {
                     var html = document.querySelector("table").outerHTML;
                     console.log("after selecor");
-                    htmlToCSV(html, "test.csv");
+                    var campaign_name = document.getElementById("campaign-name").innerText.split(":")[1].trim();
+                    htmlToCSV(html, "{{ user_name }}-" + campaign_name);
                 }
             });
 
             function htmlToCSV(html, filename) {
                 var data = [];
-                var headers = document.querySelectorAll(".table thead tr");
+                var header = ["#", "First", "Last", "Number", "Checked"];
                 var rows = document.querySelectorAll(".table tbody");
+                data.push(header.join(","));
                 
                 for (var i = 0; i < rows.length; i++) {
                     var row = [], cols = rows[i].querySelectorAll("td, th");
@@ -65,7 +67,7 @@
         {% for campaign, info in data.items %}
 
         <div style="margin-left: 20pt;">
-            <h5 style="display: inline-block">Campaign Name: {{campaign}}</h5>
+            <h5 id="campaign-name" style="display: inline-block">Campaign Name: {{campaign}}</h5>
             <div style="display: inline-block; margin-left: 20px; padding-bottom: 10px;">
                 <button class="btn btn-success" id="btn-download" type="submit" value="Upload"> Download </button>
             </div>
