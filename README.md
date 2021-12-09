@@ -28,9 +28,13 @@ Roadmap
 
 The short, medium, and long term goals for project development are written in the [Milestone](https://github.com/dcsil/jerryrat/milestones) of GitHub issues.
 
+URL
+---
+https://herokujerryratapp.herokuapp.com
+
 Write up
 ---
-Please click [here](./doces/Final_Software_Writeup.md) for step-by-step instructions.
+Please click [here](./docs/Final_Software_Writeup.md) for step-by-step instructions.
 
 Tutorials
 ---
