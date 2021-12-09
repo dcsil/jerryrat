@@ -39,6 +39,14 @@ def data_entry_page(request):
         try:
             form = DocumentForm(request.POST, request.FILES)
             if form.is_valid():
+                # upload to db for future training
+                newdoc = Document(docfile=request.FILES['docfile'])
+                newdoc.save()
+                print('==========')
+                print("Saving to DB...")
+                print('==========')
+                uploadFileToDB(newdoc.get_file_path())
+
                 # save to personal folder
                 newdoc = request.FILES['docfile']
                 if '.csv' not in newdoc.name:
@@ -51,13 +59,7 @@ def data_entry_page(request):
                 filename = fs.save(newdoc.name, newdoc)
                 uploaded_file_url = fs.url(filename)
 
-                # upload to db for future training
-                newdoc = Document(docfile=request.FILES['docfile'])
-                newdoc.save()
-                print('==========')
-                print("Saving to DB...")
-                print('==========')
-                uploadFileToDB(newdoc.get_file_path())
+
 
                 # feed data to model and predict the result
 
