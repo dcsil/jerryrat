@@ -42,7 +42,7 @@ It’s the user’s responsibility to update the information and upload a new cs
 <img src="imgs/model_control.png" size="40%" />
 
    - User can retrain the model with his/her own configuration here.
-   - When user clicks "start training" button, the automatic training will begin, and there is a line of red text above notifies the user the model is training, when user clicks "end training" button, the automatic training will end, and there is a line of green text above notifies the user the model is not training.
+   - When user clicks "start training" button, the automatic training will begin, and there is a line of red text above (with the content “The periodic training is working!”) notifies the user the model is training, when user clicks "end training" button, the automatic training will end, and there is a line of green text above (with the content “The periodic training is idle.”) notifies the user the model is not training.
    - User can see all current model configurations in the table.
-   - User can change machine learning model's configurations (period of training, number of rows for training, learning rate, decision tree depth) below.
+   - User can change machine learning model's configurations (period of training, number of rows for training, learning rate, decision tree depth) below. The suggestion values are placeholders in the fields and the descriptions of each variable are provided.
    - After inputting new values, click "submit" to update settings, and then the table gets refreshed.
