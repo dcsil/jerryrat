@@ -97,7 +97,7 @@ def analytics_dashboard_page(request):
     for x in client_x:
         dbc_list.append(DoubleBarChart(xaxis=x, title=x.capitalize()))
     return render(request, 'analytics_dashboard_page.html',
-                  {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc_list': dbc_list})
+                  {'add_graph_form': add_graph_form, 'all_graphs': all_graphs, 'dbc_list': dbc_list, 'current': 'analytics_dashboard_page'})
 
 
 def delete_graph(request, id):
