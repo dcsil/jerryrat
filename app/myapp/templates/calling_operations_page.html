@@ -17,11 +17,13 @@
             //     }
             // }, false);
 
-            document.getElementById('btn-download').addEventListener("click", function () {
-                console.log("Here");
-                var html = document.querySelector("table").outerHTML;
-                console.log("after selecor");
-                htmlToCSV(html, "test.csv");
+            document.addEventListener('click', function(event) {
+                id = event.target.getAttribute('id')
+                if (id == "btn-download") {
+                    var html = document.querySelector("table").outerHTML;
+                    console.log("after selecor");
+                    htmlToCSV(html, "test.csv");
+                }
             });
 
             function htmlToCSV(html, filename) {
