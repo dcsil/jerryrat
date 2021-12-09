@@ -28,7 +28,10 @@
 {% for campaign, info in data.items %}
 
 <div style="margin-left: 20pt;">
-    <h5>Campaign Name: {{campaign}}</h5>
+    <h5 style="display: inline-block">Campaign Name: {{campaign}}</h5>
+    <div style="display: inline-block; margin-left: 20px; padding-bottom: 10px;">
+        <button class="btn btn-success" type="submit" value="Upload"> Download </button>
+    </div>
     <table class="table">
         <thead>
         <tr>
