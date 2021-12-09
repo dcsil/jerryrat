@@ -8,11 +8,10 @@
         <title>Calling Operations</title>
         <script>
             document.addEventListener('click', function(event) {
-                id = event.target.getAttribute('class') + '_col4'
-                console.log(id)
-                if(document.getElementById(id).innerHTML.trim().slice(-1) === '✔'){
+                id = event.target.getAttribute('class') + '_col4';
+                if(document.getElementById(id).innerHTML.trim().slice(-1) === '✔') {
                     document.getElementById(id).innerHTML = '';
-                }else{
+                } else {
                     document.getElementById(id).innerHTML = '&#10004';
                 }
             }, false);
