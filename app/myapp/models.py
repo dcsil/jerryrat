@@ -39,14 +39,15 @@ class Barchart(models.Model):
             xaxis_title=self.xaxis,
             yaxis_title=self.yaxis,
             title=getTitle(self, 'Stacked Barchart', self.title, self.xaxis, self.yaxis),
-            font=dict(size=12, color="gray")
+            font=dict(size=12, color="gray"),
+            showlegend=True
         )
         plot_div = plot(fig, output_type='div', auto_open=False,
                         config=dict(
                             displayModeBar=True,
                             displaylogo=False,
                         )
-                        )
+                    )
         return plot_div
 
 
@@ -83,14 +84,15 @@ class DoubleBarChart(models.Model):
             xaxis_title=self.xaxis,
             yaxis_title="results",
             title=getTitle(self, 'Double Barchart', self.title, self.xaxis, 'Outcome'),
-            font=dict(size=12, color="gray")
+            font=dict(size=12, color="gray"),
+            showlegend=True
         )
         plot_div = plot(fig, output_type='div', auto_open=False,
                         config=dict(
                             displayModeBar=True,
                             displaylogo=False,
                         )
-                        )
+                    )
         return plot_div
 
 
