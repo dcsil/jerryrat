@@ -14,6 +14,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView
 import pandas
+import json
+from pathlib import Path
 from .utils import customize_config
 from .models import *
 from .forms import *
@@ -136,7 +138,17 @@ def calling_operations_page(request):
 
 @login_required
 def model_controlls_page(request):
-    user = request.user.get_username()
+    def show_configuration_table(context):
+        with open((Path(__file__).parent / Path("datapipe/config/config.json")).resolve()) as fp1:
+            pipe_config_curr = json.load(fp1)
+        with open((Path(__file__).parent / Path("pred/configs/config.json")).resolve()) as fp2:
+            model_config_curr = json.load(fp2)
+
+        context['numFetchRows'] = pipe_config_curr['numFetchRows']
+        context['period'] = pipe_config_curr['period']
+        context['eta'] = model_config_curr['eta']
+        context['max_depth'] = model_config_curr['max_depth']
+
     context = {'current': 'model_controlls_page'}
     config_model = {}
     config_datapipe = {}
@@ -147,6 +159,7 @@ def model_controlls_page(request):
     else:
         message = "<span style='color:green'>The periodic training is idle.</span>"
     context = {'current': 'model_controlls_page', 'message': message}
+    show_configuration_table(context)
 
     if request.method == 'POST':
         if 'start' in request.POST:
@@ -166,6 +179,7 @@ def model_controlls_page(request):
                     config_datapipe[i] = request.POST[i]
             customize_config.customize_config(config_model, "pred/configs/config.json")
             customize_config.customize_config(config_datapipe, "datapipe/config/config.json")
+            show_configuration_table(context)
 
     return render(request, 'model_controlls_page.html', context)
 

@@ -12408,3 +12408,179 @@ booster[768]:
 0:leaf=-3.10956083e-09
 booster[769]:
 0:leaf=-3.10956083e-09
+booster[770]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0665279552
+	2:leaf=0.0183989834
+booster[771]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0649558827
+	2:leaf=0.017699929
+booster[772]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0634324774
+	2:leaf=0.0170287434
+booster[773]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0619564168
+	2:leaf=0.0163841601
+booster[774]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0605262406
+	2:leaf=0.0157649871
+booster[775]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0591404215
+	2:leaf=0.0151701188
+booster[776]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0577974059
+	2:leaf=0.0145984869
+booster[777]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0564956293
+	2:leaf=0.0140491035
+booster[778]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0552335456
+	2:leaf=0.0135210129
+booster[779]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0540096425
+	2:leaf=0.0130133219
+booster[780]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0528224632
+	2:leaf=0.0125251804
+booster[781]:
+0:[age<50] yes=1,no=2,missing=1
+	1:leaf=0.00930549484
+	2:leaf=-0.0562373474
+booster[782]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0510698073
+	2:leaf=0.0127213253
+booster[783]:
+0:[age<50] yes=1,no=2,missing=1
+	1:leaf=0.00982012413
+	2:leaf=-0.0543125384
+booster[784]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0494271815
+	2:leaf=0.0128696412
+booster[785]:
+0:[age<50] yes=1,no=2,missing=1
+	1:leaf=0.0102582267
+	2:leaf=-0.0525205061
+booster[786]:
+0:[age<50] yes=1,no=2,missing=1
+	1:leaf=0.00982580986
+	2:leaf=-0.0512420237
+booster[787]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.04742622
+	2:leaf=0.0135481423
+booster[788]:
+0:[age<50] yes=1,no=2,missing=1
+	1:leaf=0.010195449
+	2:leaf=-0.0496395305
+booster[789]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0460199155
+	2:leaf=0.0135851996
+booster[790]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0450683683
+	2:leaf=0.0130845057
+booster[791]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0441432633
+	2:leaf=0.0126026981
+booster[792]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0432436652
+	2:leaf=0.0121390121
+booster[793]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0423687026
+	2:leaf=0.0116927233
+booster[794]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0415175445
+	2:leaf=0.0112631358
+booster[795]:
+0:[duration<831] yes=1,no=2,missing=1
+	1:leaf=-0.0406894125
+	2:leaf=0.0108495988
+booster[796]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000156742739
+	2:leaf=-0.0272320826
+booster[797]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000151220986
+	2:leaf=-0.0263716821
+booster[798]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000145897138
+	2:leaf=-0.0255398303
+booster[799]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000140757111
+	2:leaf=-0.0247354936
+booster[800]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000135800568
+	2:leaf=-0.0239576846
+booster[801]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000131019711
+	2:leaf=-0.0232054498
+booster[802]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000126405299
+	2:leaf=-0.022477882
+booster[803]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000121954901
+	2:leaf=-0.0217741057
+booster[804]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000117660646
+	2:leaf=-0.021093281
+booster[805]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000113514747
+	2:leaf=-0.0204346068
+booster[806]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000109519162
+	2:leaf=-0.0197973046
+booster[807]:
+0:[job<3] yes=1,no=2,missing=1
+	1:leaf=0.000105661282
+	2:leaf=-0.019180635
+booster[808]:
+0:leaf=-0.012261075
+booster[809]:
+0:leaf=-0.0117217228
+booster[810]:
+0:leaf=-0.0112055168
+booster[811]:
+0:leaf=-0.0107115144
+booster[812]:
+0:leaf=-0.0102388039
+booster[813]:
+0:leaf=-0.00978650991
+booster[814]:
+0:leaf=-0.00935378484
+booster[815]:
+0:leaf=-0.00893981475
+booster[816]:
+0:leaf=-0.00854382105
+booster[817]:
+0:leaf=-0.00816504657
+booster[818]:
+0:leaf=-0.00780277699
+booster[819]:
+0:leaf=-0.00745630916
