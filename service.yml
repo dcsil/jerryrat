@@ -1,7 +1,7 @@
 tools:
   exceptions: https://sentry.io/organizations/jerryrat/issues/?project=6036387
   ci: ../github/workflows/CI-test.yml
-  logging: https://app.logdna.com/549d30bc0b/logs/view
+  logging: https://app.logdna.com/9740900287/logs/view
 
 services:
   production: https://herokujerryratapp.herokuapp.com/
