@@ -68,5 +68,10 @@ Worthy Client List is a list of clients that have higher probabilities to subscr
 
 ### Model Controls
 <img src="docs/imgs/model_control.png" size="50%" />
-In the model control page, you can configure your model performance based on your demands like your user data size. You can input the learning rate of the model, the maximum decision tree size of the model (ourmachine learning model is decision tree based), the number of rows of data used to train the model per cycle, and the period to train the model once. All the settings are shown in the table, once you submit a new set of settings, the table will be updated. And you can also start training your model automatically and periodically in the background. To start training, click the button "start training", there is a reminder (red color text) tells you it is get trained at now. To end training, click the button "end training", there is a reminder (green color text) tells you it is not get trained yet.
+In the model control page, you can configure your model performance based on your demands like your user data size. You can input the learning rate of the model, the maximum decision tree size of the model (ourmachine learning model is decision tree based), the number of rows of data used to train the model per cycle, and the period to train the model once. All the settings are shown in the table, once you submit a new set of settings, the table will be updated. And you can also start training your model automatically and periodically in the background. To start training, click the button "start training", there is a reminder (red color text) tells you it is get trained at now. To end training, click the button "end training", there is a reminder (green color text) tells you it is not get trained yet. 
+
+The Heroku has some problem with Python threading, so the content of the colored reminder might be wrong, but if you click “start training”，the model will be trained automatically. If you stop traing and click “stop training”, the automatic training will be stopped in a period and then the page crashes, you can just refresh the page and work as usual. For more instructions for this, please read the description in model control page.
+
+
+
 
