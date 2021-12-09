@@ -5,7 +5,7 @@
 
    - This is where the user uploads his/her data for the machine learning model to make prediction with.
    - The uploaded data will be automatically fed to the pretrained Machine Learning model.
-   - Currently the app only takes data with a fixed format shown in the description, a set of test dataset is provided for you for testing purpose in the MVP-Test folder.
+   - Currently the app only takes data with a fixed format shown in the description, a set of test dataset is provided for you for testing purpose in the MVPTestData folder.
    - Currently the app only accepts a csv file as input.
    - Since we are not allowed to purchase a higher level JawsDB plan due to their strange policy (a user can't choose a plan for more than 10$ if he/she hasn't made a payment before), please make sure the uploaded file is not too big (which may possibly exceeds the allowed limit!)
 
