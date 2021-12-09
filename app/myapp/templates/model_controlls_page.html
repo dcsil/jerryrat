@@ -38,6 +38,32 @@
                 </button>
             </div>
         </div>
+        <div>
+            <table class="table" style="color: blue; text-align: center; margin-bottom: 40pt;">
+                <thead>
+                    <tr>
+                        <th scope="col"># Rows to fetch</th>
+                        <th scope="col">period of training</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <td>{{ numFetchRows }}</td>
+                    <td>{{ period }} minutes</td>
+                </tbody>
+
+                <thead>
+                    <th scope="col">learning rate</th>
+                    <th scope="col">decision tree depth</th>
+                </thead>
+
+                <tbody>
+                    <td>{{ eta }}</td>
+                    <td>{{ max_depth }} layers</td>
+                </tbody>
+
+            </table>
+        </div>
         <div style="margin-left: 25pt;" class="form-group">
             <h5>Model Adjustment</h5>
             <p>Please stop training before submitting your new configurations.</p>
