@@ -46,3 +46,4 @@ It’s the user’s responsibility to update the information and upload a new cs
    - User can see all current model configurations in the table.
    - User can change machine learning model's configurations (period of training, number of rows for training, learning rate, decision tree depth) below. The suggestion values are placeholders in the fields and the descriptions of each variable are provided.
    - After inputting new values, click "submit" to update settings, and then the table gets refreshed.
+   - The Heroku has some problem with Python threading, so the content of the colored reminder might be wrong, but if you click “start training”，the model will be trained automatically. If you stop traing and click “stop training”, the automatic training will be stopped in a period and then the page crashes, you can just refresh the page and work as usual. For more instructions for this, please read the description in model control page.
