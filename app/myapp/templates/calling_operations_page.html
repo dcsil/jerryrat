@@ -19,18 +19,16 @@
 
             document.addEventListener('click', function(event) {
                 id = event.target.getAttribute('id')
-                if (id == "btn-download") {
-                    var html = document.querySelector("table").outerHTML;
-                    console.log("after selecor");
-                    var campaign_name = document.getElementById("campaign-name").innerText.split(":")[1].trim();
-                    htmlToCSV(html, "{{ user_name }}-" + campaign_name);
+                if (id.split("-")[1] == "download") {
+                    var campaign_name = id.substring(13);
+                    htmlToCSV(campaign_name, "{{ user_name }}-" + campaign_name);
                 }
             });
 
-            function htmlToCSV(html, filename) {
+            function htmlToCSV(campaign_name, filename) {
                 var data = [];
                 var header = ["#", "First", "Last", "Number", "Checked"];
-                var rows = document.querySelectorAll(".table tbody");
+                var rows = document.querySelectorAll("#table-" + campaign_name + " tbody");
                 data.push(header.join(","));
                 
                 for (var i = 0; i < rows.length; i++) {
@@ -69,9 +67,9 @@
         <div style="margin-left: 20pt;">
             <h5 id="campaign-name" style="display: inline-block">Campaign Name: {{campaign}}</h5>
             <div style="display: inline-block; margin-left: 20px; padding-bottom: 10px;">
-                <button class="btn btn-success" id="btn-download" type="submit" value="Upload"> Download </button>
+                <button class="btn btn-success" id="btn-download-{{campaign}}" type="submit" value="Upload"> Download CSV </button>
             </div>
-            <table class="table">
+            <table class="table" id="table-{{campaign}}">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
