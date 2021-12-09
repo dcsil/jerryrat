@@ -1,6 +1,7 @@
 # JerryRat
 
 ![Team Logo](docs/imgs/logo.png)
+
 JerryRat's URL: https://herokujerryratapp.herokuapp.com/
 JerryRat provides marketing solutions to various industry unicorns across the globe. Your products matter and clients are also important to us, why not kick-start the journey with us in furthering enchanting campaigns that best fit to your blueprint? It's our duty to be with you, on the road to success! 
 
@@ -12,6 +13,7 @@ Introduction
 - [People](./docs/team/)
 - [Diversity](./docs/diversity.md)
 - [Team Principles](./docs/team_principles.md)
+- [WriteUp](./docs/Final_Software_Writeup.md)
 - Architecture
 
 <img src=".\docs\imgs\architecture.png" alt="architecture"  />
