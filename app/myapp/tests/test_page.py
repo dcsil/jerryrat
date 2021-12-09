@@ -51,7 +51,7 @@ class TestIntegrity(TestCase, Client):
         raised = False
         try:
             uploadFileToDB("./static/dataset/testdatabase-with-names.csv")
-            uploadFileToDB("./static/dataset/testdatabase-with-names.xlsx")
+            # uploadFileToDB("./static/dataset/testdatabase-with-names.xlsx")
         except Exception as e:
             logger.error("@fileUpload")
             logger.error(e)
