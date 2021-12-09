@@ -60,7 +60,7 @@ class createBackBone:
             df = df.drop(columns=['dataid'])
         entity = Entity()
         entity.train(steps=steps, savemodel=savemodel, feedData=df, usedataset=False, model_init=False)
-        acc = entity.test(usedataset=False, feedData=df)
+        acc = entity.test(usedataset=False, feedData=df, runTimeTest=True)
 
         t = time.localtime()
         current_time = time.strftime("%H:%M:%S", t)
