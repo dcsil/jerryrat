@@ -51,4 +51,6 @@ There are 7+n graphs in our analytics dashboard. All graphs are bar charts, and 
 Worthy Client List is a list of clients that have higher probabilities to subscribe to the products as evaluated by the model, and they are the prospective targets to be contacted. The page will show the client numbers, their names and numbers. Users could select the clients they want to call and dispatch the tasks to the call center. (Just a button indicating an imaginary connection, need external API to connect to the cal center)
 
 ### Model Controls
-<img src="docs/imgs/model controls.png" size="50%" />
+<img src="docs/imgs/model_control.png" size="50%" />
+In the model control page, you can configure your model performance based on your demands like your user data size. You can input the learning rate of the model, the maximum decision tree size of the model (ourmachine learning model is decision tree based), the number of rows of data used to train the model per cycle, and the period to train the model once. All the settings are shown in the table, once you submit a new set of settings, the table will be updated. And you can also start training your model automatically and periodically in the background. To start training, click the button "start training", there is a reminder (red color text) tells you it is training at now. To end training, click the button "end training", there is a reminder (green color text) tells you it is not training yet.
+
