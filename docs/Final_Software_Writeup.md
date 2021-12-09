@@ -39,8 +39,10 @@ It’s the user’s responsibility to update the information and upload a new cs
    - For each graph, users could toggle the legend to make designated labels visible/invisible. There are also some small add-ons in the bottom widgets, including saving the graph, general zoom-in/zoom-out, box select, reset axes, etc. Users could also see the detail (x, y) values by hovering the cursor on the graph. Whiling deleting a graph, just click on the red “X” button on the upper right corner.
    
 ### 5. Model Control:
-<img src="imgs/model controls.png" size="40%" />
+<img src="imgs/model_control.png" size="40%" />
 
-   - User can change machine learning model's configurations here.
    - User can retrain the model with his/her own configuration here.
-
+   - When user clicks "start training" button, the automatic training will begin, and there is a line of red text above notifies the user the model is training, when user clicks "end training" button, the automatic training will end, and there is a line of green text above notifies the user the model is not training.
+   - User can see all current model configurations in the table.
+   - User can change machine learning model's configurations (period of training, number of rows for training, learning rate, decision tree depth) below.
+   - After inputting new values, click "submit" to update settings, and then the table gets refreshed.
