@@ -1,5 +1,7 @@
 ## General Workflow
 
+**Note**: When you are running our app for the first time, you may need to wait for a few seconds. Please be patient.
+
 The user can log into the app and upload the existing client information, and the app will store these client data into our database and do an immediate prediction. The User could go to the Model Control page to adjust the training parameters and control the training process, where the app trains a model based on the current data. Prospective clients will be listed on the Calling Operations page. The user could select all or part of prospective clients in the CO page, and then download them as csv files. 
 
 In the real life (the following is beyond our app), these output csvs are sent to the call centers for actual campaign. After some period of time, there may be calls that lead to real successful subscription to the products, or those that fail to convert clients. These real outputs will be the new ground truths, and they should be combined to the old client base for further training and preiction.
