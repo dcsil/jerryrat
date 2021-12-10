@@ -10,6 +10,8 @@ def helper(df):
     df["euribor3m"] = pd.to_numeric(df["euribor3m"], downcast="float")
     df["nr.employed"] = pd.to_numeric(df["nr.employed"], downcast="float")
 
+# you cannot use spark for now because the package PySpark is too large for Heroku to download
+# but you can use it locally by installing PySpark (you can uncomment PySpark installation in requirements.txt)
 def readDataSpark(user='dv9wgfh46sgcyiil', password='p23it7lf9zqfh3yd', database='syh25csvjgoetrln',
              table="userdata", host='en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', dbtype="mysql",
              connector="myapp/datapipe/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar",

@@ -40,6 +40,8 @@ class createBackBone:
         self.port = port
 
     def readData(self, order='desc', preprocess=True, readOption="mysql", table_path=None):
+        # you cannot use spark for now because the package PySpark is too large for Heroku to download
+        # but you can use it locally by installing PySpark (you can uncomment PySpark installation in requirements.txt)
         if readOption == "spark":
             df = readDataSpark(self.user, self.password, self.database, self.table, self.host, self.dbtype,
                                self.connector, self.driver, self.port, self.numFetchRows, order, preprocess)
