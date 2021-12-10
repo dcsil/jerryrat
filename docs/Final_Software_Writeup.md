@@ -1,5 +1,7 @@
 ## General Workflow
 
+**Note**: When you are running our app for the first time, you may need to wait for a few seconds. Please be patient.
+
 The user can log into the app and upload the existing client information, and the app will store these client data into our database and do an immediate prediction. The User could go to the Model Control page to adjust the training parameters and control the training process, where the app trains a model based on the current data. Prospective clients will be listed on the Calling Operations page. The user could select all or part of prospective clients in the CO page, and then download them as csv files. 
 
 In the real life (the following is beyond our app), these output csvs are sent to the call centers for actual campaign. After some period of time, there may be calls that lead to real successful subscription to the products, or those that fail to convert clients. These real outputs will be the new ground truths, and they should be combined to the old client base for further training and preiction.
@@ -46,3 +48,4 @@ It’s the user’s responsibility to update the information and upload a new cs
    - User can see all current model configurations in the table.
    - User can change machine learning model's configurations (period of training, number of rows for training, learning rate, decision tree depth) below. The suggestion values are placeholders in the fields and the descriptions of each variable are provided.
    - After inputting new values, click "submit" to update settings, and then the table gets refreshed.
+   - The Heroku has some problem with Python threading, so the content of the colored reminder might be wrong, but if you click “start training”，the model will be trained automatically. If you stop traing and click “stop training”, the automatic training will be stopped in a period and then the page crashes, you can just refresh the page and work as usual. For more instructions for this, please read the description in model control page.
