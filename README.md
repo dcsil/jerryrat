@@ -2,7 +2,8 @@
 
 ![Team Logo](docs/imgs/logo.png)
 
-**JerryRat's URL: https://herokujerryratapp.herokuapp.com/**
+**JerryRat's URL: https://herokujerryratapp.herokuapp.com/**<br>
+**Note**: When you are running our app for the first time, you may need to wait for a few seconds. Please be patient.
 
 JerryRat provides marketing solutions to various industry unicorns across the globe. Your products matter and clients are also important to us, why not kick-start the journey with us in furthering enchanting campaigns that best fit to your blueprint? It's our duty to be with you, on the road to success! 
 
@@ -30,7 +31,8 @@ The short, medium, and long term goals for project development are written in th
 
 URL
 ---
-https://herokujerryratapp.herokuapp.com
+https://herokujerryratapp.herokuapp.com<br>
+**Note**: When you are running our app for the first time, you may need to wait for a few seconds. Please be patient.
 
 Sample Heroku logs
 ---
